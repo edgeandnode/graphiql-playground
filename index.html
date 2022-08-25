@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>⚙️</text></svg>"
+    />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GraphiQL Example</title>
+    <style>
+      #root {
+        height: 100vh;
+      }
+    </style>
+
+    <link rel="stylesheet" href="@graphiql/react/font/fira-code.css" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module">
+      import { createElement as h, StrictMode } from "react";
+      import { createRoot } from "react-dom/client";
+      import { ThemeProvider } from "@edgeandnode/components";
+
+      import { GraphProtocolGraphiQL } from "./src";
+
+      const url =
+        "https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet-staging";
+
+      const defaultQuery = `
+{
+  subgraphs(first: 5, orderBy: createdAt, orderDirection: desc) {
+    displayName
+  }
+}`;
+
+      createRoot(document.getElementById("root")).render(
+        h(
+          StrictMode,
+          {},
+          h(
+            ThemeProvider,
+            {},
+            h(GraphProtocolGraphiQL, {
+              fetcher: { url },
+              defaultQuery,
+            })
+          )
+        )
+      );
+    </script>
+  </body>
+</html>
