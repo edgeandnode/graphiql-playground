@@ -1,0 +1,14 @@
+/* Hide line numbers */
+.CodeMirror-linenumbers,
+.CodeMirror-linenumber,
+.CodeMirror-gutter-elt {
+  display: none;
+}
+
+.CodeMirror-sizer {
+  margin-left: 16px !important;
+}
+
+.CodeMirror-lines {
+  padding: 0 !important;
+}

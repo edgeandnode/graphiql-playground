@@ -1,0 +1,87 @@
+.cm-s-graphula .CodeMirror-gutters,
+.cm-s-graphula.CodeMirror {
+  color: #f8f8f2 !important;
+}
+.cm-s-graphula.CodeMirror-wrap {
+  border-left: 1px solid var(--theme-ui-colors-White8);
+}
+.cm-s-graphula .CodeMirror-gutters {
+  background-color: transparent;
+}
+.cm-s-graphula .CodeMirror-cursor {
+  border-left: solid thin #f8f8f0;
+}
+.cm-s-graphula .CodeMirror-linenumber {
+  color: #6d8a88;
+}
+.cm-s-graphula .CodeMirror-selected {
+  background: rgba(255, 255, 255, 0.1);
+}
+.cm-s-graphula .CodeMirror-line::selection,
+.cm-s-graphula .CodeMirror-line > span::selection,
+.cm-s-graphula .CodeMirror-line > span > span::selection {
+  background: rgba(255, 255, 255, 0.1);
+}
+.cm-s-graphula .CodeMirror-line::-moz-selection,
+.cm-s-graphula .CodeMirror-line > span::-moz-selection,
+.cm-s-graphula .CodeMirror-line > span > span::-moz-selection {
+  background: rgba(255, 255, 255, 0.1);
+}
+.cm-s-graphula span.cm-comment {
+  color: #6272a4;
+}
+.cm-s-graphula span.cm-string,
+.cm-s-graphula span.cm-string-2 {
+  color: #f1fa8c;
+}
+.cm-s-graphula span.cm-number {
+  color: #bd93f9;
+}
+.cm-s-graphula span.cm-variable {
+  color: #50fa7b;
+}
+.cm-s-graphula span.cm-variable-2 {
+  color: #fff;
+}
+.cm-s-graphula span.cm-def {
+  color: #50fa7b;
+}
+.cm-s-graphula span.cm-operator {
+  color: #ff79c6;
+}
+.cm-s-graphula span.cm-keyword {
+  color: #ff79c6;
+}
+.cm-s-graphula span.cm-atom {
+  color: #bd93f9;
+}
+.cm-s-graphula span.cm-meta {
+  color: #f8f8f2;
+}
+.cm-s-graphula span.cm-tag {
+  color: #ff79c6;
+}
+.cm-s-graphula span.cm-attribute {
+  color: #50fa7b;
+}
+.cm-s-graphula span.cm-qualifier {
+  color: #50fa7b;
+}
+.cm-s-graphula span.cm-property {
+  color: #66d9ef;
+}
+.cm-s-graphula span.cm-builtin {
+  color: #50fa7b;
+}
+.cm-s-graphula span.cm-type,
+.cm-s-graphula span.cm-variable-3 {
+  color: #ffb86c;
+}
+.cm-s-graphula .CodeMirror-activeline-background {
+  background: rgba(255, 255, 255, 0.1);
+}
+.cm-s-graphula .CodeMirror-matchingbracket {
+  text-decoration: underline;
+  color: #fff !important;
+}
+/*# sourceMappingURL=graphula.min.css.map */
