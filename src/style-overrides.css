@@ -12,3 +12,42 @@
 .CodeMirror-lines {
   padding: 0 !important;
 }
+
+.graphiql-container li.CodeMirror-hint-active {
+  color: var(--theme-ui-colors-Text);
+}
+
+.graphiql-container,
+.graphiql-container .graphiql-editors {
+  background-color: transparent;
+}
+
+button.graphiql-execute-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    315deg,
+    var(--theme-ui-colors-Purple),
+    var(--theme-ui-colors-Purple48)
+  );
+  background-repeat: repeat;
+  background-attachment: scroll;
+  background-size: auto;
+  background-origin: padding-box;
+  background-clip: border-box;
+  border: none;
+  opacity: 0.8;
+  border-radius: 999px;
+  cursor: pointer;
+  fill: #fff;
+  height: 40px;
+  margin: 0;
+  padding: 0;
+  width: 40px;
+  & > svg {
+    width: 14px;
+    height: 14px;
+    padding-left: 2px;
+  }
+}
