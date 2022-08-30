@@ -1,3 +1,4 @@
+import { useExplorerPlugin } from "@graphiql/plugin-explorer";
 import {
   type Storage as GraphiQLStorage,
   CreateFetcherOptions,
@@ -7,6 +8,9 @@ import { GraphiQL } from "graphiql";
 import { useState } from "react";
 
 import "graphiql/graphiql.css";
+import "@graphiql/react/font/fira-code.css";
+import "@graphiql/plugin-explorer/dist/style.css";
+//
 import "./graphiql-react-properties.css";
 import "./style-overrides.css";
 import "./syntax-highlighting.css";
@@ -23,14 +27,31 @@ export function GraphProtocolGraphiQL({
   storage,
 }: GraphProtocolGraphiQLProps) {
   const [fetcher] = useState(() => createGraphiQLFetcher(fetcherOptions));
+  const [query, setQuery] = useState(defaultQuery);
+  const explorerPlugin = useExplorerPlugin({
+    query,
+    onEdit: setQuery,
+    storage,
+  });
 
   return (
     <GraphiQL
-      fetcher={fetcher}
       editorTheme="graphula"
-      defaultQuery={defaultQuery}
+      fetcher={fetcher}
+      query={query}
+      onEditQuery={setQuery}
       storage={storage}
-    ></GraphiQL>
+      plugins={[explorerPlugin]}
+    >
+      <GraphiQL.Toolbar>
+        <div />
+        {/* We don't render an buttons in the toolbar. */}
+      </GraphiQL.Toolbar>
+      <GraphiQL.Logo>
+        {/* Accordingly, we don't need any logo here. */}
+        <div />
+      </GraphiQL.Logo>
+    </GraphiQL>
   );
 }
 
