@@ -31,6 +31,9 @@
 .cm-s-graphula span.cm-comment {
   color: #6272a4;
 }
+.cm-s-graphula span.cm-punctuation {
+  color: #555;
+}
 .cm-s-graphula span.cm-string,
 .cm-s-graphula span.cm-string-2 {
   color: #f1fa8c;
