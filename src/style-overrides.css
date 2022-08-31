@@ -17,6 +17,10 @@
   color: var(--theme-ui-colors-Text);
 }
 
+.graphiql-container * {
+  box-sizing: unset;
+}
+
 .graphiql-container,
 .graphiql-container .graphiql-editors {
   background-color: transparent;
