@@ -31,6 +31,16 @@
   box-sizing: unset;
 }
 
+/* If the user has tabs spanning full width we definitely need to show the x button. */
+.graphiql-tab-active {
+  flex-shrink: 0;
+}
+button.graphiql-tab-button.graphiql-tab-button {
+  /* EuclidCircular is uneven */
+  padding: 5px 0 3px 8px;
+  outline: none;
+}
+
 .graphiql-container,
 .graphiql-container .graphiql-editors {
   background-color: transparent;
