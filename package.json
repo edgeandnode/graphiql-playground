@@ -1,11 +1,20 @@
 {
-  "name": "@graphprotocol/graphiql",
+  "name": "@edgeandnode/graphiql-playground",
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "module": "./dist/index.es.js",
+  "exports": {
+    "import": "./dist/index.es.js",
+    "node": "./dist/index.cjs.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/edgeandnode/graphiql-playground.git"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "vite build && tsc --declaration --emitDeclarationOnly",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/** --ext .ts --ext .tsx",
     "lint:fix": "eslint src/** --ext .ts --ext .tsx --fix",
@@ -15,9 +24,7 @@
   "dependencies": {
     "@graphiql/plugin-explorer": "^0.1.0",
     "@graphiql/react": "^0.11.1",
-    "@graphiql/toolkit": "^0.7.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "@graphiql/toolkit": "^0.7.0"
   },
   "devDependencies": {
     "@edgeandnode/components": "^23.0.7",
@@ -25,17 +32,23 @@
     "@types/node": "^18.7.13",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
+    "@types/rollup-plugin-auto-external": "^2.0.2",
     "@vitejs/plugin-react": "^2.0.1",
     "eslint": "^8.22.0",
     "eslint-plugin-testing-library": "^5.6.0",
     "postcss-nesting": "^10.1.10",
     "prettier": "^2.7.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup-plugin-auto-external": "^2.0.0",
     "theme-ui": "^0.14.7",
     "typescript": "^4.6.4",
     "vite": "^3.0.7"
   },
   "peerDependencies": {
     "@edgeandnode/components": "^23.0.7",
+    "react": ">=16",
+    "react-dom": ">=16",
     "theme-ui": "^0.14.7"
   },
   "pnpm": {

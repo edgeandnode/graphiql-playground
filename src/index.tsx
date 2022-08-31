@@ -9,12 +9,12 @@ import { useState } from "react";
 
 import { GraphiQLInterface, GraphiQLToolbar } from "./GraphiQLInterface";
 
-import "graphiql/graphiql.css";
 import "@graphiql/react/font/fira-code.css";
 import "@graphiql/plugin-explorer/dist/style.css";
 //
-import "./graphiql-react-properties.css";
+import "./graphiql-styles.css";
 import "./style-overrides.css";
+import "./graphiql-react-properties.css";
 import "./syntax-highlighting.css";
 
 // Temporary?

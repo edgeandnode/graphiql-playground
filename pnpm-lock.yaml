@@ -9,14 +9,16 @@ specifiers:
   '@types/node': ^18.7.13
   '@types/react': ^18.0.17
   '@types/react-dom': ^18.0.6
+  '@types/rollup-plugin-auto-external': ^2.0.2
   '@vitejs/plugin-react': ^2.0.1
   eslint: ^8.22.0
   eslint-plugin-testing-library: ^5.6.0
-  graphiql: 2.0.1
+  graphiql: ^2.0.3
   postcss-nesting: ^10.1.10
   prettier: ^2.7.1
   react: ^18.2.0
   react-dom: ^18.2.0
+  rollup-plugin-auto-external: ^2.0.0
   theme-ui: ^0.14.7
   typescript: ^4.6.4
   vite: ^3.0.7
@@ -25,9 +27,7 @@ dependencies:
   '@graphiql/plugin-explorer': 0.1.0_v7ijjwg7wpbmxyjwihar2prff4
   '@graphiql/react': 0.11.1_htlyy5qaz7uck5awosox7gf45a
   '@graphiql/toolkit': 0.7.0_ws7myont7bocvtatjfsqcqbuvu
-  graphiql: 2.0.1_htlyy5qaz7uck5awosox7gf45a
-  react: 18.2.0
-  react-dom: 18.2.0_react@18.2.0
+  graphiql: 2.0.3_htlyy5qaz7uck5awosox7gf45a
 
 devDependencies:
   '@edgeandnode/components': 23.0.7_kknl7qu3rlsmu5ewtx6w6ukxhm
@@ -35,11 +35,15 @@ devDependencies:
   '@types/node': 18.7.13
   '@types/react': 18.0.17
   '@types/react-dom': 18.0.6
+  '@types/rollup-plugin-auto-external': 2.0.2
   '@vitejs/plugin-react': 2.0.1_vite@3.0.9
   eslint: 8.22.0
   eslint-plugin-testing-library: 5.6.0_4rv7y5c6xz3vfxwhbrcxxi73bq
   postcss-nesting: 10.1.10_postcss@8.4.16
   prettier: 2.7.1
+  react: 18.2.0
+  react-dom: 18.2.0_react@18.2.0
+  rollup-plugin-auto-external: 2.0.0_rollup@2.77.3
   theme-ui: 0.14.7_tnei6r2ryphk4kxh5klvxjmvyu
   typescript: 4.7.4
   vite: 3.0.9
@@ -2250,6 +2254,12 @@ packages:
       '@types/scheduler': 0.16.2
       csstype: 3.1.0
 
+  /@types/rollup-plugin-auto-external/2.0.2:
+    resolution: {integrity: sha512-1Xtl9S4yQapD+A4mX1sqYVXm3UmVA9oIEf2YKEhRTCUNxlAM3DoKK1HPxrGMemDJNfhe6Yl3w0JsAGvIN5j/ow==}
+    dependencies:
+      rollup: 2.77.3
+    dev: true
+
   /@types/scheduler/0.16.2:
     resolution: {integrity: sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==}
 
@@ -2874,6 +2884,12 @@ packages:
       ieee754: 1.2.1
     dev: true
 
+  /builtins/2.0.1:
+    resolution: {integrity: sha512-XkkVe5QAb6guWPXTzpSrYpSlN3nqEmrrE2TkAr/tp7idSF6+MONh9WvKrAuR3HiKLvoSgmbs8l1U9IPmMrIoLw==}
+    dependencies:
+      semver: 6.3.0
+    dev: true
+
   /bytes/3.1.2:
     resolution: {integrity: sha512-/Nf7TyzTx6S3yRJObOAV7956r8cr2+Oj8AC5dt8wSP3BQAoeX58NoHyCU8P8zGkNXStjTSi6fzO6F0pBdcYbEg==}
     engines: {node: '>= 0.8'}
@@ -3392,10 +3408,6 @@ packages:
 
   /entities/2.1.0:
     resolution: {integrity: sha512-hCx1oky9PFrJ611mf0ifBLBRW8lUUVRlFolb5gWRfIELabBlbp9xZvrqZLZAs+NxFnbfQoeGd8wDkygjg7U85w==}
-    dev: false
-
-  /entities/2.2.0:
-    resolution: {integrity: sha512-p92if5Nz619I0w+akJrLZH0MX0Pb5DX39XOwQTtXSdQQOaYH03S1uIQp4mhOZtAXrxq4ViO67YTiLBo2638o9A==}
     dev: false
 
   /env-paths/2.2.1:
@@ -4406,8 +4418,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /graphiql/2.0.1_htlyy5qaz7uck5awosox7gf45a:
-    resolution: {integrity: sha512-/4KrJc1D+fAMpWyGPsfm7ySUpo5IBHjm2cUJYLAvQrWBycbWbJ7PICrszoAL/NhXBTaF8zSFzEQz5Liv2BVxMg==}
+  /graphiql/2.0.3_htlyy5qaz7uck5awosox7gf45a:
+    resolution: {integrity: sha512-QiQk6MhtVoJEH+V16VNDGuD/Y3bqBUZdc3QieacjExph1bJUOD3FCqcYvsfXK6BG7ihdK+tOUrrbZI7JVv6fNw==}
     peerDependencies:
       graphql: ^15.5.0 || ^16.0.0
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
@@ -4418,7 +4430,7 @@ packages:
     dependencies:
       '@graphiql/react': 0.11.1_htlyy5qaz7uck5awosox7gf45a
       '@graphiql/toolkit': 0.7.0_ws7myont7bocvtatjfsqcqbuvu
-      entities: 2.2.0
+      entities: 2.1.0
       graphql-language-service: 5.1.0
       markdown-it: 12.3.2
       react: 18.2.0
@@ -4621,6 +4633,10 @@ packages:
     resolution: {integrity: sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==}
     dependencies:
       react-is: 16.13.1
+    dev: true
+
+  /hosted-git-info/2.8.9:
+    resolution: {integrity: sha512-mxIDAb9Lsm6DoOJ7xH+5+X4y1LU/4Hi50L9C5sIswK3JzULS4bwk1FvjdBgvYR4bzT4tuUQiC15FE2f5HbLvYw==}
     dev: true
 
   /http-errors/2.0.0:
@@ -4922,6 +4938,10 @@ packages:
     hasBin: true
     dev: true
 
+  /json-parse-better-errors/1.0.2:
+    resolution: {integrity: sha512-mrqyZKfX5EhL7hvqcV6WG1yYjnjeuYDzDhhcAAUrq8Po85NBQBJP+ZDUT75qZQ98IkUoBqdkExkukOU7Ts2wrw==}
+    dev: true
+
   /json-parse-even-better-errors/2.3.1:
     resolution: {integrity: sha512-xyFwyhro/JEof6Ghe2iz2NcXoj2sloNsWr/XsERDK/oiPCfaNhl5ONfp+jQdAZRQQ0IJWNzH9zIZF7li91kh2w==}
     dev: true
@@ -5081,6 +5101,16 @@ packages:
     dependencies:
       uc.micro: 1.0.6
     dev: false
+
+  /load-json-file/4.0.0:
+    resolution: {integrity: sha512-Kx8hMakjX03tiGTLAIdJ+lL0htKnXjEZN6hk/tozf/WOuYGdZBJrZ+rCJRbVCugsjB3jMLn9746NsQIf5VjBMw==}
+    engines: {node: '>=4'}
+    dependencies:
+      graceful-fs: 4.2.10
+      parse-json: 4.0.0
+      pify: 3.0.0
+      strip-bom: 3.0.0
+    dev: true
 
   /locate-path/2.0.0:
     resolution: {integrity: sha512-NCI2kiDkyR7VeEKm27Kda/iQHyKJe1Bu0FlTbYp3CqJu+9IFe9bLyAjMxf5ZDDbEg+iMPzB5zYyUTSm8wVTKmA==}
@@ -5355,6 +5385,15 @@ packages:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
     dev: true
 
+  /normalize-package-data/2.5.0:
+    resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
+    dependencies:
+      hosted-git-info: 2.8.9
+      resolve: 1.22.1
+      semver: 5.7.1
+      validate-npm-package-license: 3.0.4
+    dev: true
+
   /normalize-path/3.0.0:
     resolution: {integrity: sha512-6eZs5Ls3WtCisHWp9S2GUy8dqkpGi4BVSz3GaqiE6ezub0512ESztXUwUB6C6IKbQkY2Pnb/mD4WYojCRwcwLA==}
     engines: {node: '>=0.10.0'}
@@ -5508,6 +5547,14 @@ packages:
       callsites: 3.1.0
     dev: true
 
+  /parse-json/4.0.0:
+    resolution: {integrity: sha512-aOIos8bujGN93/8Ox/jPLh7RwVnPEysynVFE+fQZyg6jKELEHwzgKdLRFHUgXJL6kylijVSBC4BvN9OmsB48Rw==}
+    engines: {node: '>=4'}
+    dependencies:
+      error-ex: 1.3.2
+      json-parse-better-errors: 1.0.2
+    dev: true
+
   /parse-json/5.2.0:
     resolution: {integrity: sha512-ayCKvm/phCGxOkYRSCM82iDwct8/EonSEgCSxWxD7ve6jHggsFl4fZVQBPRNgQoKiuV/odhFrGzQXZwbifC8Rg==}
     engines: {node: '>=8'}
@@ -5542,6 +5589,13 @@ packages:
     resolution: {integrity: sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==}
     dev: true
 
+  /path-type/3.0.0:
+    resolution: {integrity: sha512-T2ZUsdZFHgA3u4e5PfPbjd7HDDpxPnQb5jN0SrDsjNSuVXHJqtwTnWqG0B1jZrgmJ/7lj1EmVIByWt1gxGkWvg==}
+    engines: {node: '>=4'}
+    dependencies:
+      pify: 3.0.0
+    dev: true
+
   /path-type/4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==}
     engines: {node: '>=8'}
@@ -5565,6 +5619,11 @@ packages:
   /picomatch/2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
+    dev: true
+
+  /pify/3.0.0:
+    resolution: {integrity: sha512-C3FsVNH1udSEX48gGX1xfvwTWfsYWj5U+8/uK15BGzIGrKoUpghX8hWZwa/OFnakBiiVNmBvemTJR5mcy7iPcg==}
+    engines: {node: '>=4'}
     dev: true
 
   /pluralize/8.0.0:
@@ -5894,6 +5953,15 @@ packages:
     dependencies:
       loose-envify: 1.4.0
 
+  /read-pkg/3.0.0:
+    resolution: {integrity: sha512-BLq/cCO9two+lBgiTYNqD6GdtK8s4NpaWrl6/rCO9w0TUS8oJl7cmToOZfRYllKTISY6nt1U7jQ53brmKqY6BA==}
+    engines: {node: '>=4'}
+    dependencies:
+      load-json-file: 4.0.0
+      normalize-package-data: 2.5.0
+      path-type: 3.0.0
+    dev: true
+
   /readable-stream/3.6.0:
     resolution: {integrity: sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==}
     engines: {node: '>= 6'}
@@ -6036,6 +6104,19 @@ packages:
       bn.js: 5.2.1
     dev: true
 
+  /rollup-plugin-auto-external/2.0.0_rollup@2.77.3:
+    resolution: {integrity: sha512-HQM3ZkZYfSam1uoZtAB9sK26EiAsfs1phrkf91c/YX+S07wugyRXSigBxrIwiLr5EPPilKYmoMxsrnlGBsXnuQ==}
+    engines: {node: '>=6'}
+    peerDependencies:
+      rollup: '>=0.45.2'
+    dependencies:
+      builtins: 2.0.1
+      read-pkg: 3.0.0
+      rollup: 2.77.3
+      safe-resolve: 1.0.0
+      semver: 5.7.1
+    dev: true
+
   /rollup-plugin-img/1.1.0:
     resolution: {integrity: sha512-44JyY0wBQFNjM2pB7Yv1uUwMW4S1bjdnzLmUPShrDeACSMvn798i9ttwiBkfls+QjSY0qLrNqMacUTDX93Q0MA==}
     dependencies:
@@ -6072,6 +6153,10 @@ packages:
 
   /safe-buffer/5.2.1:
     resolution: {integrity: sha512-rp3So07KcdmmKbGvgaNxQSJr7bGVSVk5S9Eq1F+ppbRo70+YeaDxkw5Dd8NPN+GD6bjnYm2VuPuCXmpuYvmCXQ==}
+    dev: true
+
+  /safe-resolve/1.0.0:
+    resolution: {integrity: sha512-aQpRvfxoi1y0UxKEU0tNO327kb0/LMo8Xrk64M2u172UqOOLCCM0khxN2OTClDiTqTJz5864GMD1X92j4YiHTg==}
     dev: true
 
   /safer-buffer/2.1.2:
@@ -6232,6 +6317,28 @@ packages:
 
   /sourcemap-codec/1.4.8:
     resolution: {integrity: sha512-9NykojV5Uih4lgo5So5dtw+f0JgJX30KCNI8gwhz2J9A15wD0Ml6tjHKwf6fTSa6fAdVBdZeNOs9eJ71qCk8vA==}
+    dev: true
+
+  /spdx-correct/3.1.1:
+    resolution: {integrity: sha512-cOYcUWwhCuHCXi49RhFRCyJEK3iPj1Ziz9DpViV3tbZOwXD49QzIN3MpOLJNxh2qwq2lJJZaKMVw9qNi4jTC0w==}
+    dependencies:
+      spdx-expression-parse: 3.0.1
+      spdx-license-ids: 3.0.12
+    dev: true
+
+  /spdx-exceptions/2.3.0:
+    resolution: {integrity: sha512-/tTrYOC7PPI1nUAgx34hUpqXuyJG+DTHJTnIULG4rDygi4xu/tfgmq1e1cIRwRzwZgo4NLySi+ricLkZkw4i5A==}
+    dev: true
+
+  /spdx-expression-parse/3.0.1:
+    resolution: {integrity: sha512-cbqHunsQWnJNE6KhVSMsMeH5H/L9EpymbzqTQ3uLwNCLZ1Q481oWaofqH7nO6V07xlXwY6PhQdQ2IedWx/ZK4Q==}
+    dependencies:
+      spdx-exceptions: 2.3.0
+      spdx-license-ids: 3.0.12
+    dev: true
+
+  /spdx-license-ids/3.0.12:
+    resolution: {integrity: sha512-rr+VVSXtRhO4OHbXUiAF7xW3Bo9DuuF6C5jH+q/x15j2jniycgKbxU09Hr0WqlSLUs4i4ltHGXqTe7VHclYWyA==}
     dev: true
 
   /stacktrace-parser/0.1.10:
@@ -6642,6 +6749,13 @@ packages:
 
   /v8-compile-cache/2.3.0:
     resolution: {integrity: sha512-l8lCEmLcLYZh4nbunNZvQCJc5pv7+RCwa8q/LdUx8u7lsWvPDKmpodJAJNwkAhJC//dFY48KuIEmjtd4RViDrA==}
+    dev: true
+
+  /validate-npm-package-license/3.0.4:
+    resolution: {integrity: sha512-DpKm2Ui/xN7/HQKCtpZxoRWBhZ9Z0kqtygG8XCgNQ8ZlDnxuQmWhj566j8fN4Cu3/JmbhsDo7fcAJq4s9h27Ew==}
+    dependencies:
+      spdx-correct: 3.1.1
+      spdx-expression-parse: 3.0.1
     dev: true
 
   /vite/3.0.9:
