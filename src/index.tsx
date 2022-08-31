@@ -1,11 +1,17 @@
 import { useExplorerPlugin } from "@graphiql/plugin-explorer";
+import { GraphiQLProvider, GraphiQLProviderProps } from "@graphiql/react";
 import {
   type Storage as GraphiQLStorage,
   CreateFetcherOptions,
   createGraphiQLFetcher,
 } from "@graphiql/toolkit";
-import { GraphiQL } from "graphiql";
 import { useState } from "react";
+
+import {
+  GraphiQLInterface,
+  GraphiQLInterfaceProps,
+  GraphiQLToolbar,
+} from "./GraphiQLInterface";
 
 import "graphiql/graphiql.css";
 import "@graphiql/react/font/fira-code.css";
@@ -15,21 +21,18 @@ import "./graphiql-react-properties.css";
 import "./style-overrides.css";
 import "./syntax-highlighting.css";
 
+// Temporary?
 const TOOLBAR_HIDDEN = (
-  <GraphiQL.Toolbar>
+  <GraphiQLToolbar>
     <div />
     {/* Toolbar button tooltips are currently broken because of our global styles. */}
     {/* Toolbar actions keyboard shortcuts don't work. */}
-  </GraphiQL.Toolbar>
+  </GraphiQLToolbar>
 );
 
-const LOGO_HIDDEN = (
-  <GraphiQL.Logo>
-    {/* We don't really have much room for any logo here. */}
-    <div />
-  </GraphiQL.Logo>
-);
-
+/**
+ * @see https://graphiql-test.netlify.app/typedoc/modules/graphiql.html#graphiqlprops
+ */
 export interface GraphProtocolGraphiQLProps {
   fetcher: GraphProtocolGraphiQL.FetcherOptions;
   defaultQuery?: string;
@@ -50,17 +53,20 @@ export function GraphProtocolGraphiQL({
   });
 
   return (
-    <GraphiQL
-      editorTheme="graphula"
+    <GraphiQLProvider
       fetcher={fetcher}
       query={query}
-      onEditQuery={setQuery}
       storage={storage}
       plugins={[explorerPlugin]}
     >
-      {TOOLBAR_HIDDEN}
-      {LOGO_HIDDEN}
-    </GraphiQL>
+      <GraphiQLInterface
+        editorTheme="graphula"
+        onEditQuery={setQuery}
+        isHeadersEditorEnabled={false}
+      >
+        {TOOLBAR_HIDDEN}
+      </GraphiQLInterface>
+    </GraphiQLProvider>
   );
 }
 
