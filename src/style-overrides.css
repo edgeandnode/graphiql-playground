@@ -36,6 +36,30 @@
   background-color: transparent;
 }
 
+.graphiql-container .graphiql-toolbar.graphiql-toolbar {
+  margin-left: 0;
+}
+
+.graphiql-explorer-node select {
+  background-color: var(--theme-ui-colors-Background) !important;
+  border: none;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--theme-ui-colors-White4) !important;
+  }
+  & > option {
+    background-color: var(--theme-ui-colors-Background);
+    cursor: pointer;
+  }
+}
+
+.graphiql-explorer-graphql-arguments > div {
+  min-height: 22px !important;
+  display: flex;
+  gap: 0.25rem;
+  align-items: center;
+}
+
 button.graphiql-execute-button {
   display: flex;
   justify-content: center;

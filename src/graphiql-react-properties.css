@@ -18,7 +18,7 @@ reach-portal {
   --font-family-mono: "Fira Code", monospace;
   --font-size-hint: calc(12rem / 16);
   --font-size-inline-code: calc(13rem / 16);
-  --font-size-body: calc(14rem / 16);
+  --font-size-body: calc(13rem / 16);
   --font-size-h4: calc(18rem / 16);
   --font-size-h3: calc(22rem / 16);
   --font-size-h2: calc(29rem / 16);
