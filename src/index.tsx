@@ -1,5 +1,5 @@
 import { useExplorerPlugin } from "@graphiql/plugin-explorer";
-import { GraphiQLProvider, GraphiQLProviderProps } from "@graphiql/react";
+import { GraphiQLProvider } from "@graphiql/react";
 import {
   type Storage as GraphiQLStorage,
   CreateFetcherOptions,
@@ -7,11 +7,7 @@ import {
 } from "@graphiql/toolkit";
 import { useState } from "react";
 
-import {
-  GraphiQLInterface,
-  GraphiQLInterfaceProps,
-  GraphiQLToolbar,
-} from "./GraphiQLInterface";
+import { GraphiQLInterface, GraphiQLToolbar } from "./GraphiQLInterface";
 
 import "graphiql/graphiql.css";
 import "@graphiql/react/font/fira-code.css";
