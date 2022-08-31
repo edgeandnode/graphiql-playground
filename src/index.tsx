@@ -15,6 +15,21 @@ import "./graphiql-react-properties.css";
 import "./style-overrides.css";
 import "./syntax-highlighting.css";
 
+const TOOLBAR_HIDDEN = (
+  <GraphiQL.Toolbar>
+    <div />
+    {/* Toolbar button tooltips are currently broken because of our global styles. */}
+    {/* Toolbar actions keyboard shortcuts don't work. */}
+  </GraphiQL.Toolbar>
+);
+
+const LOGO_HIDDEN = (
+  <GraphiQL.Logo>
+    {/* We don't really have much room for any logo here. */}
+    <div />
+  </GraphiQL.Logo>
+);
+
 export interface GraphProtocolGraphiQLProps {
   fetcher: GraphProtocolGraphiQL.FetcherOptions;
   defaultQuery?: string;
@@ -43,14 +58,8 @@ export function GraphProtocolGraphiQL({
       storage={storage}
       plugins={[explorerPlugin]}
     >
-      <GraphiQL.Toolbar>
-        <div />
-        {/* We don't render an buttons in the toolbar. */}
-      </GraphiQL.Toolbar>
-      <GraphiQL.Logo>
-        {/* Accordingly, we don't need any logo here. */}
-        <div />
-      </GraphiQL.Logo>
+      {TOOLBAR_HIDDEN}
+      {LOGO_HIDDEN}
     </GraphiQL>
   );
 }
