@@ -19,6 +19,13 @@
 
 .graphiql-container {
   position: relative;
+
+  & svg,
+  & input,
+  & select,
+  & button {
+    display: inline-block;
+  }
 }
 .graphiql-container * {
   box-sizing: unset;
