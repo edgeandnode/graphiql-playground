@@ -17,6 +17,9 @@
   color: var(--theme-ui-colors-Text);
 }
 
+.graphiql-container {
+  position: relative;
+}
 .graphiql-container * {
   box-sizing: unset;
 }
