@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>GraphiQL Example</title>
     <style>
-      #root {
-        height: 100vh;
+      html {
         background: var(--theme-ui-colors-Background),
           linear-gradient(
             0deg,
@@ -23,6 +22,11 @@
             rgba(111, 76, 255, 0.04)
           ),
           rgb(12, 10, 29);
+      }
+      #root {
+        height: 100vh;
+        max-width: 1288px;
+        margin: 0 auto;
       }
     </style>
   </head>
