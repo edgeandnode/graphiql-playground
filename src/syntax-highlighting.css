@@ -29,7 +29,7 @@
   background: rgba(255, 255, 255, 0.1);
 }
 .cm-s-graphula span.cm-comment {
-  color: #6272a4;
+  color: var(--theme-ui-colors-White32);
 }
 .cm-s-graphula span.cm-punctuation {
   color: #555;
@@ -42,13 +42,13 @@
   color: #bd93f9;
 }
 .cm-s-graphula span.cm-variable {
-  color: #50fa7b;
+  color: var(--theme-ui-colors-Green);
 }
 .cm-s-graphula span.cm-variable-2 {
   color: #fff;
 }
 .cm-s-graphula span.cm-def {
-  color: #50fa7b;
+  color: var(--theme-ui-colors-Green);
 }
 .cm-s-graphula span.cm-operator {
   color: #ff79c6;
@@ -66,16 +66,16 @@
   color: #ff79c6;
 }
 .cm-s-graphula span.cm-attribute {
-  color: #50fa7b;
+  color: var(--theme-ui-colors-Green);
 }
 .cm-s-graphula span.cm-qualifier {
-  color: #50fa7b;
+  color: var(--theme-ui-colors-Green);
 }
 .cm-s-graphula span.cm-property {
-  color: #66d9ef;
+  color: var(--theme-ui-colors-Turquoise);
 }
 .cm-s-graphula span.cm-builtin {
-  color: #50fa7b;
+  color: var(--theme-ui-colors-Green);
 }
 .cm-s-graphula span.cm-type,
 .cm-s-graphula span.cm-variable-3 {
