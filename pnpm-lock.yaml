@@ -11,9 +11,9 @@ specifiers:
   '@types/react-dom': ^18.0.6
   '@types/rollup-plugin-auto-external': ^2.0.2
   '@vitejs/plugin-react': ^2.0.1
+  cross-env: ^7.0.3
   eslint: ^8.22.0
   eslint-plugin-testing-library: ^5.6.0
-  graphiql: ^2.0.3
   postcss-nesting: ^10.1.10
   prettier: ^2.7.1
   react: ^18.2.0
@@ -27,7 +27,6 @@ dependencies:
   '@graphiql/plugin-explorer': 0.1.0_v7ijjwg7wpbmxyjwihar2prff4
   '@graphiql/react': 0.11.1_htlyy5qaz7uck5awosox7gf45a
   '@graphiql/toolkit': 0.7.0_ws7myont7bocvtatjfsqcqbuvu
-  graphiql: 2.0.3_htlyy5qaz7uck5awosox7gf45a
 
 devDependencies:
   '@edgeandnode/components': 23.0.7_kknl7qu3rlsmu5ewtx6w6ukxhm
@@ -37,6 +36,7 @@ devDependencies:
   '@types/react-dom': 18.0.6
   '@types/rollup-plugin-auto-external': 2.0.2
   '@vitejs/plugin-react': 2.0.1_vite@3.0.9
+  cross-env: 7.0.3
   eslint: 8.22.0
   eslint-plugin-testing-library: 5.6.0_4rv7y5c6xz3vfxwhbrcxxi73bq
   postcss-nesting: 10.1.10_postcss@8.4.16
@@ -3112,6 +3112,14 @@ packages:
       sha.js: 2.4.11
     dev: true
 
+  /cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==}
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: 7.0.3
+    dev: true
+
   /cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==}
     engines: {node: '>= 8'}
@@ -4416,31 +4424,6 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
-    dev: false
-
-  /graphiql/2.0.3_htlyy5qaz7uck5awosox7gf45a:
-    resolution: {integrity: sha512-QiQk6MhtVoJEH+V16VNDGuD/Y3bqBUZdc3QieacjExph1bJUOD3FCqcYvsfXK6BG7ihdK+tOUrrbZI7JVv6fNw==}
-    peerDependencies:
-      graphql: ^15.5.0 || ^16.0.0
-      react: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
-      react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0 || 18
-    peerDependenciesMeta:
-      graphql:
-        optional: true
-    dependencies:
-      '@graphiql/react': 0.11.1_htlyy5qaz7uck5awosox7gf45a
-      '@graphiql/toolkit': 0.7.0_ws7myont7bocvtatjfsqcqbuvu
-      entities: 2.1.0
-      graphql-language-service: 5.1.0
-      markdown-it: 12.3.2
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-    transitivePeerDependencies:
-      - '@codemirror/language'
-      - '@types/node'
-      - '@types/react'
-      - graphql-ws
-      - react-is
     dev: false
 
   /graphql-language-service/5.1.0:
