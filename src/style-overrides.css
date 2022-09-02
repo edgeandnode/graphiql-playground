@@ -48,8 +48,21 @@
 }
 
 .graphiql-container .graphiql-sidebar.graphiql-sidebar {
-  padding: var(--px-8) var(--px-4) var(--px-8) 0;
+  padding: var(--px-8) var(--px-2) var(--px-8) var(--px-2);
   overflow: visible;
+}
+
+.graphiql-sidebar {
+  & button {
+    border-radius: 8px;
+    &:hover {
+      background-color: var(--theme-ui-colors-White4);
+    }
+    &:focus {
+      outline: none;
+      background-color: var(--theme-ui-colors-White8);
+    }
+  }
 }
 
 /* If the user has tabs spanning full width we definitely need to show the x button. */
