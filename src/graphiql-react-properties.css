@@ -3,11 +3,11 @@
 .CodeMirror-lint-tooltip,
 reach-portal {
   /* Colors (HSL) */
-  --color-primary: 252, 100%, 65%;
-  --color-secondary: 243, 100%, 77%;
+  --color-primary: 0, 0%, 85%; /* resolver names in explorer */
+  --color-secondary: 0, 0%, 60%; /* parameter names in explorer */
   --color-tertiary: 188, 100%, 44%;
   --color-info: 208, 100%, 72%;
-  --color-success: 158, 100%, 42%;
+  --color-success: 146, 55%, 54%; /* TODO: Use HSL values of Colors.Green here. */
   --color-warning: 30, 100%, 80%;
   --color-error: 13, 100%, 58%;
   --color-neutral: 219, 29%, 78%;
