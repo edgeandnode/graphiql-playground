@@ -31,6 +31,10 @@
   box-sizing: unset;
 }
 
+.graphiql-main .graphiql-sessions {
+  margin-right: 0;
+}
+
 /* If the user has tabs spanning full width we definitely need to show the x button. */
 .graphiql-tab-active {
   flex-shrink: 0;

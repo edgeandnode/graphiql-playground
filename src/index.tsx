@@ -12,6 +12,7 @@ import { GraphiQLInterface, GraphiQLToolbar } from "./GraphiQLInterface";
 import "@graphiql/react/font/fira-code.css";
 import "@graphiql/plugin-explorer/dist/style.css";
 //
+// TODO: Should those two be merged?
 import "./graphiql-styles.css";
 import "./style-overrides.css";
 import "./graphiql-react-properties.css";
