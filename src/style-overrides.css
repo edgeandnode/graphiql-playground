@@ -35,6 +35,18 @@
   margin-right: 0;
 }
 
+.graphiql-tab-add.graphiql-tab-add {
+  margin-right: 16px;
+}
+
+.graphiql-container .graphiql-query-editor.graphiql-query-editor {
+  border-bottom: 1px solid var(--theme-ui-colors-White4);
+}
+
+.graphiql-horizontal-drag-bar {
+  border-left: 1px solid var(--theme-ui-colors-White4);
+}
+
 /* If the user has tabs spanning full width we definitely need to show the x button. */
 .graphiql-tab-active {
   flex-shrink: 0;

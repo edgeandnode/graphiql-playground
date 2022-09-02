@@ -3,9 +3,6 @@
   color: #f8f8f2 !important;
   background-color: transparent;
 }
-.cm-s-graphula.CodeMirror-wrap {
-  border-left: 1px solid var(--theme-ui-colors-White8);
-}
 .cm-s-graphula .CodeMirror-gutters {
   background-color: transparent;
 }
