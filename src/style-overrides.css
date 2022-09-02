@@ -47,6 +47,17 @@
   border-left: 1px solid var(--theme-ui-colors-White4);
 }
 
+.graphiql-doc-explorer-header-content.graphiql-doc-explorer-header-content {
+  min-width: 0;
+}
+
+.graphiql-doc-explorer-search.graphiql-doc-explorer-search {
+  width: 150px;
+}
+.graphiql-doc-explorer-search.graphiql-doc-explorer-search:focus-within {
+  width: 100%;
+}
+
 .graphiql-container .graphiql-sidebar.graphiql-sidebar {
   padding: var(--px-8) var(--px-2) var(--px-8) var(--px-2);
   overflow: visible;
