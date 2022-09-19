@@ -152,3 +152,7 @@ button.graphiql-execute-button {
     padding-left: 2px;
   }
 }
+
+.graphiql-container .graphiql-sessions.graphiql-sessions {
+  background-color: transparent;
+}
