@@ -60,6 +60,7 @@ export function GraphProtocolGraphiQL({
         editorTheme="graphula"
         onEditQuery={setQuery}
         isHeadersEditorEnabled={false}
+        isVariablesEditorEnabled={false}
       >
         {TOOLBAR_HIDDEN}
       </GraphiQLInterface>

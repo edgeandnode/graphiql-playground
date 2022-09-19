@@ -94,6 +94,17 @@ export type GraphiQLInterfaceProps = WriteableEditorProps &
      */
     isHeadersEditorEnabled?: boolean;
     /**
+     * Toggle if the variables editor should be shown inside the editor tools.
+     * @default true
+     * @addition { Edge & Node } The Graph apps don't need variables editor.
+     */
+    isVariablesEditorEnabled?: boolean;
+    /**
+     * Toggle if the variables editor should be shown inside the editor tools.
+     * @default true
+     * @addition { Edge & Node } GraphiQL
+     */
+    /**
      * An object that allows configuration of the toolbar next to the query
      * editor.
      */
@@ -102,6 +113,7 @@ export type GraphiQLInterfaceProps = WriteableEditorProps &
 
 export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
   const isHeadersEditorEnabled = props.isHeadersEditorEnabled ?? true;
+  const isVariablesEditorEnabled = props.isVariablesEditorEnabled ?? true;
 
   const editorContext = useEditorContext({ nonNull: true });
   const executionContext = useExecutionContext({ nonNull: true });
@@ -216,6 +228,8 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
       <code className="graphiql-key">Ctrl</code>
     );
 
+  const editorToolsEnabled = isVariablesEditorEnabled || isHeadersEditorEnabled;
+
   return (
     <div data-testid="graphiql-container" className="graphiql-container">
       <div className="graphiql-main">
@@ -294,6 +308,13 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                     <section
                       className="graphiql-query-editor"
                       aria-label="Query Editor"
+                      style={
+                        editorToolsEnabled
+                          ? {}
+                          : {
+                              borderBottom: "none",
+                            }
+                      }
                     >
                       <div className="graphiql-query-editor-wrapper">
                         <QueryEditor
@@ -315,83 +336,89 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                       </div>
                     </section>
                   </div>
-                  <div ref={editorToolsResize.dragBarRef}>
-                    <div className="graphiql-editor-tools">
-                      <div className="graphiql-editor-tools-tabs">
-                        <UnStyledButton
-                          type="button"
-                          className={
-                            activeSecondaryEditor === "variables"
-                              ? "active"
-                              : ""
-                          }
-                          onClick={() => {
-                            if (editorToolsResize.hiddenElement === "second") {
-                              editorToolsResize.setHiddenElement(null);
-                            }
-                            setActiveSecondaryEditor("variables");
-                          }}
-                        >
-                          Variables
-                        </UnStyledButton>
-                        {isHeadersEditorEnabled ? (
-                          <UnStyledButton
-                            type="button"
-                            className={
-                              activeSecondaryEditor === "headers"
-                                ? "active"
-                                : ""
-                            }
-                            onClick={() => {
-                              if (
-                                editorToolsResize.hiddenElement === "second"
-                              ) {
-                                editorToolsResize.setHiddenElement(null);
+                  {editorToolsEnabled && (
+                    <div ref={editorToolsResize.dragBarRef}>
+                      <div className="graphiql-editor-tools">
+                        <div className="graphiql-editor-tools-tabs">
+                          {isHeadersEditorEnabled ? (
+                            <UnStyledButton
+                              type="button"
+                              className={
+                                activeSecondaryEditor === "variables"
+                                  ? "active"
+                                  : ""
                               }
-                              setActiveSecondaryEditor("headers");
-                            }}
-                          >
-                            Headers
-                          </UnStyledButton>
-                        ) : null}
-                      </div>
-                      <Tooltip
-                        label={
-                          editorToolsResize.hiddenElement === "second"
-                            ? "Show editor tools"
-                            : "Hide editor tools"
-                        }
-                      >
-                        <UnStyledButton
-                          type="button"
-                          onClick={() => {
-                            editorToolsResize.setHiddenElement(
-                              editorToolsResize.hiddenElement === "second"
-                                ? null
-                                : "second"
-                            );
-                          }}
-                          aria-label={
+                              onClick={() => {
+                                if (
+                                  editorToolsResize.hiddenElement === "second"
+                                ) {
+                                  editorToolsResize.setHiddenElement(null);
+                                }
+                                setActiveSecondaryEditor("variables");
+                              }}
+                            >
+                              Variables
+                            </UnStyledButton>
+                          ) : null}
+                          {isHeadersEditorEnabled ? (
+                            <UnStyledButton
+                              type="button"
+                              className={
+                                activeSecondaryEditor === "headers"
+                                  ? "active"
+                                  : ""
+                              }
+                              onClick={() => {
+                                if (
+                                  editorToolsResize.hiddenElement === "second"
+                                ) {
+                                  editorToolsResize.setHiddenElement(null);
+                                }
+                                setActiveSecondaryEditor("headers");
+                              }}
+                            >
+                              Headers
+                            </UnStyledButton>
+                          ) : null}
+                        </div>
+                        <Tooltip
+                          label={
                             editorToolsResize.hiddenElement === "second"
                               ? "Show editor tools"
                               : "Hide editor tools"
                           }
                         >
-                          {editorToolsResize.hiddenElement === "second" ? (
-                            <ChevronUpIcon
-                              className="graphiql-chevron-icon"
-                              aria-hidden="true"
-                            />
-                          ) : (
-                            <ChevronDownIcon
-                              className="graphiql-chevron-icon"
-                              aria-hidden="true"
-                            />
-                          )}
-                        </UnStyledButton>
-                      </Tooltip>
+                          <UnStyledButton
+                            type="button"
+                            onClick={() => {
+                              editorToolsResize.setHiddenElement(
+                                editorToolsResize.hiddenElement === "second"
+                                  ? null
+                                  : "second"
+                              );
+                            }}
+                            aria-label={
+                              editorToolsResize.hiddenElement === "second"
+                                ? "Show editor tools"
+                                : "Hide editor tools"
+                            }
+                          >
+                            {editorToolsResize.hiddenElement === "second" ? (
+                              <ChevronUpIcon
+                                className="graphiql-chevron-icon"
+                                aria-hidden="true"
+                              />
+                            ) : (
+                              <ChevronDownIcon
+                                className="graphiql-chevron-icon"
+                                aria-hidden="true"
+                              />
+                            )}
+                          </UnStyledButton>
+                        </Tooltip>
+                      </div>
                     </div>
-                  </div>
+                  )}
                   <div ref={editorToolsResize.secondRef}>
                     <section
                       className="graphiql-editor-tool"
