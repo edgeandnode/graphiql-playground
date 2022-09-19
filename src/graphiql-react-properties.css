@@ -14,7 +14,7 @@ reach-portal {
   --color-base: 0, 0%, 0%;
 
   /* Font */
-  --font-family: var(--theme-ui-colors-Text);
+  --font-family: "EuclidCircular", sans-serif;
   --font-family-mono: "Fira Code", monospace;
   --font-size-hint: calc(12rem / 16);
   --font-size-inline-code: calc(13rem / 16);

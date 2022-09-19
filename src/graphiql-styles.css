@@ -13,7 +13,7 @@ reach-portal {
   --color-error: 13, 93%, 58%;
   --color-neutral: 219, 28%, 32%;
   --color-base: 219, 28%, 100%;
-  --font-family: "Roboto", sans-serif;
+  --font-family: "EuclidCircular", sans-serif;
   --font-family-mono: "Fira Code", monospace;
   --font-size-hint: 0.75rem;
   --font-size-inline-code: 0.8125rem;
