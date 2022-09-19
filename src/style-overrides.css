@@ -52,10 +52,14 @@
 }
 
 .graphiql-doc-explorer-search.graphiql-doc-explorer-search {
+  cursor: text;
+  position: unset;
   width: 150px;
-}
-.graphiql-doc-explorer-search.graphiql-doc-explorer-search:focus-within {
-  width: 100%;
+
+  &:focus-within {
+    position: absolute;
+    width: 100%;
+  }
 }
 
 .graphiql-container .graphiql-sidebar.graphiql-sidebar {
@@ -110,7 +114,6 @@ button.graphiql-tab-button.graphiql-tab-button {
 
 .graphiql-explorer-graphql-arguments > div {
   min-height: 22px !important;
-  display: flex;
   gap: 0.25rem;
   align-items: center;
 }
