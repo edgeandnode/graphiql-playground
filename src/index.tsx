@@ -33,7 +33,7 @@ const TOOLBAR_HIDDEN = (
 export interface GraphProtocolGraphiQLProps {
   fetcher: GraphProtocolGraphiQL.FetcherOptions;
   defaultQuery?: string;
-  storage: GraphiQLStorage;
+  storage?: GraphiQLStorage;
 }
 
 export function GraphProtocolGraphiQL({
