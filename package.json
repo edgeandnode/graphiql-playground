@@ -50,10 +50,10 @@
     "vite": "^3.0.7"
   },
   "peerDependencies": {
-    "@edgeandnode/components": "^23.0.7",
+    "@edgeandnode/components": "^23",
     "react": ">=16",
     "react-dom": ">=16",
-    "theme-ui": "^0.14.7"
+    "theme-ui": ">=0.14"
   },
   "pnpm": {
     "peerDependencyRules": {
