@@ -76,14 +76,7 @@ export declare namespace GraphProtocolGraphiQL {
 //
 
 declare namespace OldTypes {
-  type SavedQuery = {
-    id: string;
-    name: string;
-    query: string;
-    default?: boolean;
-    subgraphId?: number;
-    versionId?: string;
-  };
+
 
   export interface GraphiQLProps {
     fetcher?: (graphQLParams: any) => Promise<any>;
