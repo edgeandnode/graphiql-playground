@@ -6,8 +6,8 @@ reach-portal {
   --color-primary: 0, 0%, 85%; /* resolver names in explorer */
   --color-secondary: 0, 0%, 60%; /* parameter names in explorer */
   --color-tertiary: 188, 100%, 44%;
-  --color-info: 208, 100%, 72%;
-  --color-success: 146, 55%, 54%; /* TODO: Use HSL values of Colors.Green here. */
+  --color-info: 249, 83%, 74%;
+  --color-success: 146, 55%, 54%;
   --color-warning: 30, 100%, 80%;
   --color-error: 13, 100%, 58%;
   --color-neutral: 219, 29%, 78%;

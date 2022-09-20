@@ -40,11 +40,11 @@
 }
 
 .graphiql-container .graphiql-query-editor.graphiql-query-editor {
-  border-bottom: 1px solid var(--theme-ui-colors-White4);
+  border-bottom: 1px solid var(--theme-ui-colors-White8);
 }
 
 .graphiql-horizontal-drag-bar {
-  border-left: 1px solid var(--theme-ui-colors-White4);
+  border-left: 1px solid var(--theme-ui-colors-White8);
 }
 
 .graphiql-doc-explorer-header-content.graphiql-doc-explorer-header-content {
@@ -151,4 +151,14 @@ button.graphiql-execute-button {
     height: 14px;
     padding-left: 2px;
   }
+}
+
+.graphiql-container .graphiql-sessions.graphiql-sessions {
+  background-color: transparent;
+}
+
+.graphiql-container .graphiql-plugin.graphiql-plugin {
+  /* We don't need a double border there. */
+  border-left: none;
+  border-right: 1px solid var(--theme-ui-colors-White4);
 }
