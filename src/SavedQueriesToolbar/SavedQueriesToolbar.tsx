@@ -8,11 +8,11 @@ import {
   SavedQueriesSnackbar,
   SnackbarMessageType,
 } from "./SavedQueriesSnackbar";
-import { Selector } from "./Selector";
+import { SavedQuerySelect } from "./SavedQuerySelect";
 import type { SavedQuery } from "./types";
 import { validateQuery, ValidationStatus } from "./validation";
 
-type QueryAction = "Set as default" | "Delete" | "Share";
+type QueryAction = "Set as default" | "Delete" | "Share" | "New query";
 
 export interface SavedQueriesToolbarProps {
   queries: SavedQuery[];
@@ -29,7 +29,14 @@ export interface SavedQueriesToolbarProps {
   onSelectQuery: (queryName: string) => void;
   onEditQuery: (querySource: string) => void;
 
-  onSelectedAction: (queryId: string, action: QueryAction) => Promise<void>;
+  onSelectedAction: (
+    queryId: string,
+    action: "Set as default" | "Delete"
+  ) => Promise<void>;
+
+  // TODO: Consider `onSetQueryAsDefault: () => Promise<void>;` and
+  //                `onDeleteQuery: () => Promise<void>;`
+  // instead of onSelectAction
 
   showActions: boolean;
   isOwner: boolean;
@@ -37,11 +44,9 @@ export interface SavedQueriesToolbarProps {
 }
 
 export function SavedQueriesToolbar(props: SavedQueriesToolbarProps) {
-  const [isSavedQuerySelectOpen, setSavedQuerySelectOpen] = useState(false);
   const [isNewQuery, setIsNewQuery] = useState(false);
   const [newQueryNameDraft, setNewQueryNameDraft] = useState("");
   const [isQueryDeletionPending, setQueryDeletionPending] = useState(false);
-  const [isActionsMenuOpen, setActionsMenuOpen] = useState(false);
 
   const [snackbarMessage, setSnackbarMessage] = useState<SnackbarMessageType>();
 
@@ -51,23 +56,12 @@ export function SavedQueriesToolbar(props: SavedQueriesToolbarProps) {
 
   return (
     <Grid className={classNames("flex", "main-flex")}>
-      <Selector
+      <SavedQuerySelect
         queries={props.queries}
-        open={isSavedQuerySelectOpen}
         selectedQueryName={props.selectedQuery.name}
         isDefaultQuery={props.selectedQuery.isDefault}
-        onOpenMenu={() => {
-          setSavedQuerySelectOpen(true);
-        }}
-        onMenuItemClick={(e, value) => {
-          setSavedQuerySelectOpen(false);
-          props.onSelectQuery(value);
-        }}
-        onChangeQueryName={(event) => {
-          setNewQueryNameDraft(event.target.value);
-        }}
-        isOwner={props.isOwner}
-        isMobile={props.isMobile}
+        onMenuItemClick={(query) => props.onSelectQuery(query.name)}
+        onChangeQueryName={(value) => setNewQueryNameDraft(value)}
       />
 
       {props.isOwner && !props.isMobile && (
@@ -184,19 +178,10 @@ export function SavedQueriesToolbar(props: SavedQueriesToolbarProps) {
       <Grid className="flex wrapper">
         <Grid className="flex actions-flex">
           {props.isOwner && !props.isMobile && (
-            <ActionsMenu
-              actions={[
-                { id: "1", name: "Share" },
-                { id: "2", name: "Set as default" },
-                { id: "3", name: "Delete" },
-                { id: "4", name: "New query" },
-              ]}
-              // TODO: Those two props could be moved inside.
-              actionsOpen={isActionsMenuOpen}
-              onActionsMenuClick={() => setActionsMenuOpen(true)}
-              onClickAction={async (e, value) => {
-                setActionsMenuOpen(false);
-                switch (value) {
+            <ActionsMenu<QueryAction>
+              actions={["Share", "Set as default", "Delete", "New query"]}
+              onSelect={async (action) => {
+                switch (action) {
                   case "Share": {
                     const url = window.location.href;
                     await navigator.clipboard.writeText(url);
@@ -204,7 +189,10 @@ export function SavedQueriesToolbar(props: SavedQueriesToolbarProps) {
                   }
                   case "Set as default": {
                     await props
-                      .onSelectedAction(props.selectedQuery.id, value)
+                      .onSelectedAction(
+                        props.selectedQuery.id,
+                        "Set as default"
+                      )
                       .then(() => {
                         setSnackbarMessage("success-setDefault");
                       });
@@ -225,9 +213,6 @@ export function SavedQueriesToolbar(props: SavedQueriesToolbarProps) {
                   }
                 }
               }}
-              isDefaultQuery={
-                isNewQuery ? false : props.selectedQuery.isDefault
-              }
             />
           )}
         </Grid>
