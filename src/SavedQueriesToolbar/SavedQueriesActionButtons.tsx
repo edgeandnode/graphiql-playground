@@ -12,6 +12,7 @@ export interface SavedQueriesActionButtonsProps<TQuery extends SavedQuery> {
   querySourceDraft: string;
   queries: readonly TQuery[];
   setSnackbarMessage: (validationStatus: SnackbarMessageType) => void;
+  className?: string;
 
   onResetChanges: () => void;
 
@@ -41,6 +42,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
   onResetChanges,
   onSaveAsNewQuery,
   onUpdateQuery,
+  className,
 }: SavedQueriesActionButtonsProps<TQuery>) {
   const canResetChanges =
     currentQuery !== null &&
@@ -56,6 +58,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
         justifyContent: "space-around",
         flexShrink: 0,
       }}
+      className={className}
     >
       {currentQuery && (
         <Button

@@ -259,13 +259,6 @@
   cursor: pointer;
 }
 
-.saved-queries-toolbar .snackbar .snackbar-content .message {
-  color: #ffffff;
-  font-family: EuclidCircular, Arial, Helvetica, sans-serif;
-  font-size: 14px;
-  line-height: 20px;
-}
-
 .saved-queries-toolbar .snackbar .snackbar-content {
   display: flex;
   align-items: center;

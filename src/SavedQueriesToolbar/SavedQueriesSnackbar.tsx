@@ -1,7 +1,5 @@
-import { Icon } from "@edgeandnode/components";
+import { Icon, Text } from "@edgeandnode/components";
 
-import { classNames } from "./lib";
-import { Snackbar } from "./Snackbar";
 import { ValidationError } from "./validation";
 
 export type SnackbarMessageType =
@@ -50,9 +48,6 @@ export function SavedQueriesSnackbar({
   const isSuccess = messageType?.startsWith("success");
   const isError = messageType?.startsWith("error");
 
-  // 🤷‍♂️
-  const isWarning = isDeleteMessage;
-
   return (
     <Snackbar
       anchorOrigin={{
@@ -62,25 +57,21 @@ export function SavedQueriesSnackbar({
       open={messageType === undefined}
       autoHideDuration={autoHideDurationMs}
       message={
-        <div className="snackbar-content">
+        <div>
           {isDeleteMessage && <Icon.Erase />}
-          {messageType && (
-            <div className="message">{snackbarMessages[messageType]}</div>
-          )}
-          {isDeleteMessage && (
-            <div onClick={onUndoDelete} className="undo-delete">
-              {"Undo"}
-            </div>
-          )}
+          {messageType && <Text.P14>{snackbarMessages[messageType]}</Text.P14>}
+          {isDeleteMessage && <div onClick={onUndoDelete}>Undo</div>}
         </div>
       }
-      className={classNames(
-        "snackbar",
-        isSuccess ? "snackbar-success" : isError ? "snackbar-error" : "",
-        isWarning && "snackbar-warning"
-      )}
       onClose={onClose}
       resumeHideDuration={0}
+      status={isSuccess ? "success" : isError ? "error" : undefined}
     />
   );
+}
+
+// TODO
+function Snackbar(props: any) {
+  console.log("Snackbar", props);
+  return null;
 }

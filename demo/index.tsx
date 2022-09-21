@@ -54,8 +54,6 @@ function Demo() {
   const [savedQueries, setSavedQueries] =
     useState<SavedQuery[]>(initialQueries);
 
-  console.log(">> currentQueryId", currentQueryId);
-
   return (
     <GraphProtocolGraphiQL
       fetcher={{ url }}
@@ -66,7 +64,6 @@ function Demo() {
           isMobile={false}
           isOwner={true}
           onSelectQuery={(queryId) => {
-            console.log("onSelectQuery", queryId);
             setCurrentQueryId(queryId);
           }}
           onSaveAsNewQuery={async ({ name, query }) => {

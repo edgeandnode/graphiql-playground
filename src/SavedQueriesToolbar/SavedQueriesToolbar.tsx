@@ -1,7 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import { useEditorContext } from "@graphiql/react";
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 
 import {
   Flex,
@@ -12,7 +11,6 @@ import {
 } from "@edgeandnode/components";
 
 import { ActionsMenu } from "./ActionsMenu";
-import { classNames } from "./lib";
 import {
   SavedQueriesActionButtons,
   SavedQueriesActionButtonsProps,
@@ -52,6 +50,8 @@ export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
    * TODO: This should be a media query.
    */
   isMobile: boolean;
+  className?: string;
+  actionButtonsClassName?: string;
 }
 
 export function SavedQueriesToolbar<TQuery extends SavedQuery>(
@@ -124,6 +124,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
         pl: Spacing["8px"],
         width: "100%",
       }}
+      className={props.className}
     >
       <SavedQuerySelect
         queries={queries}
@@ -153,6 +154,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
             setQuerySource(currentQuery.query);
             setQueryNameDraft(currentQuery.name);
           }}
+          className={props.actionButtonsClassName}
         />
       )}
       <div sx={{ flex: 1, flexBasis: 0 }} />

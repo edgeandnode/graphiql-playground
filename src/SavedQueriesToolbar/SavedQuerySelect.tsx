@@ -32,8 +32,6 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
       type="select"
       value={props.currentQueryId ?? undefined}
       onValueChange={(queryId) => {
-        console.log({ queryId });
-
         if (queryId != null) props.onMenuItemClick(queryId);
       }}
     >
