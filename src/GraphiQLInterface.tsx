@@ -245,7 +245,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
         <div ref={pluginResize.firstRef}>
           <div className="graphiql-sessions">
             {props.header}
-            <div className="graphiql-session-header">
+            {/* <div className="graphiql-session-header">
               <Tabs aria-label="Select active operation">
                 {editorContext.tabs.length > 1 ? (
                   <>
@@ -301,7 +301,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                   </Tooltip>
                 ) : null}
               </div>
-            </div>
+            </div> */}
             <div
               role="tabpanel"
               id="graphiql-session"
