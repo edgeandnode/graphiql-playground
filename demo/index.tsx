@@ -48,11 +48,13 @@ const initialQueries = [
 }));
 
 function Demo() {
-  const [currentQueryId, setCurrentQueryId] = useState<SavedQuery["id"]>(
+  const [currentQueryId, setCurrentQueryId] = useState<SavedQuery["id"] | null>(
     initialQueries[0].id
   );
   const [savedQueries, setSavedQueries] =
     useState<SavedQuery[]>(initialQueries);
+
+  console.log(">> currentQueryId", currentQueryId);
 
   return (
     <GraphProtocolGraphiQL
@@ -64,6 +66,7 @@ function Demo() {
           isMobile={false}
           isOwner={true}
           onSelectQuery={(queryId) => {
+            console.log("onSelectQuery", queryId);
             setCurrentQueryId(queryId);
           }}
           onSaveAsNewQuery={async ({ name, query }) => {

@@ -13,10 +13,7 @@ export interface SavedQueriesActionButtonsProps<TQuery extends SavedQuery> {
   queries: readonly TQuery[];
   setSnackbarMessage: (validationStatus: SnackbarMessageType) => void;
 
-  /**
-   * Create new query draft.
-   */
-  onNewQuery: () => void;
+  onResetChanges: () => void;
 
   /**
    * Save the current query to saved queries as new.
@@ -41,7 +38,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
   setSnackbarMessage,
   queryNameDraft,
   querySourceDraft,
-  onNewQuery,
+  onResetChanges,
   onSaveAsNewQuery,
   onUpdateQuery,
 }: SavedQueriesActionButtonsProps<TQuery>) {
@@ -122,7 +119,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
       >
         Save as new
       </Button>
-      <Button size="medium" variant="tertiary" onClick={onNewQuery}>
+      <Button size="medium" variant="tertiary" onClick={onResetChanges}>
         {/* Reset changes */}
         Cancel
       </Button>

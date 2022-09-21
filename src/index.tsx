@@ -56,22 +56,13 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
     (query) => query.id === currentQueryId
   );
 
-  console.log({
-    queries,
-    currentQueryId,
-    currentSavedQuery,
-  });
-
   const [querySource, setQuerySource] = useState(
     currentSavedQuery?.query || ""
   );
 
   // Whenever currentQueryId changes, we update the text in CodeMirror.
   useEffect(() => {
-    if (currentSavedQuery) {
-      console.log("USE EFFECT", currentQueryId, currentSavedQuery.query);
-      setQuerySource(currentSavedQuery.query);
-    }
+    setQuerySource(currentSavedQuery?.query || "");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQueryId]);
 

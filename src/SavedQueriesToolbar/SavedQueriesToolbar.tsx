@@ -41,7 +41,7 @@ export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
     SavedQueriesActionButtonsProps<TQuery>,
     "onSaveAsNewQuery" | "onUpdateQuery"
   > {
-  onSelectQuery: (queryId: TQuery["id"]) => void;
+  onSelectQuery: (queryId: TQuery["id"] | null) => void;
 
   onSetQueryAsDefault: () => Promise<void>;
   onDeleteQuery: () => Promise<void>;
@@ -109,7 +109,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
 
       case "New query":
         setQueryNameDraft("New Query");
-        setQuerySource("");
+        props.onSelectQuery(null);
     }
   };
 
@@ -128,7 +128,6 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
         queries={queries}
         currentQueryId={currentQueryId}
         currentQueryName={queryNameDraft}
-        isDefaultQuery={currentQuery?.isDefault}
         onMenuItemClick={(queryId) => {
           props.onSelectQuery(queryId);
           const query = findSavedQuery(queryId);
@@ -148,11 +147,10 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
           queryNameDraft={queryNameDraft}
           onSaveAsNewQuery={props.onSaveAsNewQuery}
           onUpdateQuery={props.onUpdateQuery}
-          onNewQuery={() => {
-            setQueryNameDraft("New Query");
-            setQuerySource("");
-          }}
           querySourceDraft={querySourceDraft}
+          onResetChanges={() => {
+            throw new Error("resetting changes not implemented yet");
+          }}
         />
       )}
       {props.isOwner && !props.isMobile && (

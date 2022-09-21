@@ -19,13 +19,16 @@ import { SavedQuery } from "./types";
 export interface SavedQuerySelectProps {
   queries: readonly SavedQuery[];
   currentQueryId: SavedQuery["id"] | null;
-  isDefaultQuery: boolean | undefined;
   onMenuItemClick: (value: SavedQuery["id"]) => void;
   currentQueryName: string;
   onChangeQueryName: (newName: string) => void;
 }
 
 export function SavedQuerySelect(props: SavedQuerySelectProps) {
+  const isCurrentDefault = props.queries.find(
+    (q) => q.id === props.currentQueryId
+  )?.isDefault;
+
   return (
     <Dropdown<SavedQuery["id"]>
       type="select"
@@ -53,25 +56,7 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
               input: { height: "48px", width: "240px" },
             }}
           />
-          {props.isDefaultQuery && (
-            <Chip
-              sx={{
-                position: "absolute",
-                right: 0,
-                top: "50%",
-                transform: "translateY(-50%)",
-                fontSize: FontSize["12px"],
-                py: Spacing["4px"],
-                px: Spacing["8px"],
-                pointerEvents: "none",
-                userSelect: "none",
-                fontWeight: FontWeight["LIGHT"],
-                borderRadius: BorderRadius["S"],
-              }}
-            >
-              Default
-            </Chip>
-          )}
+          {isCurrentDefault && <DefaultQueryChip />}
         </Flex>
         <Dropdown.Button asChild>
           <Button
@@ -102,5 +87,27 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
         })}
       </Dropdown.Menu>
     </Dropdown>
+  );
+}
+
+function DefaultQueryChip() {
+  return (
+    <Chip
+      sx={{
+        position: "absolute",
+        right: 0,
+        top: "50%",
+        transform: "translateY(-50%)",
+        fontSize: FontSize["12px"],
+        py: Spacing["4px"],
+        px: Spacing["8px"],
+        pointerEvents: "none",
+        userSelect: "none",
+        fontWeight: FontWeight["LIGHT"],
+        borderRadius: BorderRadius["S"],
+      }}
+    >
+      Default
+    </Chip>
   );
 }
