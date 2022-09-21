@@ -1,3 +1,5 @@
+/** @jsxImportSource theme-ui */
+
 import {
   BorderRadius,
   Chip,

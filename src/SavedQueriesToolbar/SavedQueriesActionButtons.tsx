@@ -42,10 +42,15 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
   onSaveAsNewQuery,
   onUpdateQuery,
 }: SavedQueriesActionButtonsProps<TQuery>) {
+  const canResetChanges =
+    currentQuery !== null &&
+    (currentQuery.query !== querySourceDraft ||
+      currentQuery.name !== queryNameDraft);
+
   return (
     <Flex
       align="center"
-      gap={Spacing["2px"]}
+      gap={[Spacing["4px"], Spacing["8px"]]}
       sx={{
         flexWrap: "nowrap",
         justifyContent: "space-around",
@@ -119,7 +124,12 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
       >
         Save as new
       </Button>
-      <Button size="medium" variant="tertiary" onClick={onResetChanges}>
+      <Button
+        size="medium"
+        variant="tertiary"
+        onClick={onResetChanges}
+        disabled={!canResetChanges}
+      >
         {/* Reset changes */}
         Cancel
       </Button>

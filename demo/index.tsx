@@ -78,7 +78,16 @@ function Demo() {
 
             setSavedQueries((queries) => [...queries, newQuery]);
           }}
-          onDeleteQuery={async () => {}}
+          onDeleteQuery={async () => {
+            setCurrentQueryId(
+              savedQueries.find((x) => x.isDefault)?.id ??
+                savedQueries[0]?.id ??
+                null
+            );
+            setSavedQueries((queries) =>
+              queries.filter((x) => x.id !== currentQueryId)
+            );
+          }}
           onSetQueryAsDefault={async () => {
             setSavedQueries((queries) =>
               queries.map((q) => ({ ...q, isDefault: q.id === currentQueryId }))
