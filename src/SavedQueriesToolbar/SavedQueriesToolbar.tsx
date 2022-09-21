@@ -116,7 +116,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
   return (
     <Flex
       direction="row"
-      gap={Spacing["2px"]}
+      gap={[Spacing["4px"], Spacing["8px"]]}
       sx={{
         "*": {
           boxSizing: "border-box",
@@ -138,7 +138,6 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
         }}
         onChangeQueryName={(value) => setQueryNameDraft(value)}
       />
-      <div sx={{ flex: 1, flexBasis: 0 }} />
       {props.isOwner && !props.isMobile && (
         <SavedQueriesActionButtons<TQuery>
           currentQuery={currentQuery}
@@ -155,12 +154,14 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
           }}
         />
       )}
+      <div sx={{ flex: 1, flexBasis: 0 }} />
       {props.isOwner && !props.isMobile && (
         <ActionsMenu<QueryAction>
           actions={["Share", "Set as default", "Delete", "New query"]}
           onSelect={(action) => void handleActionSelected(action)}
         />
       )}
+      <div sx={{ width: "4px" }} />
       <SavedQueriesSnackbar
         messageType={snackbarMessage}
         onUndoDelete={() => setQueryDeletionPending(false)}

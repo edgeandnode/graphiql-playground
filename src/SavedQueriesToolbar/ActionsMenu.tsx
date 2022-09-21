@@ -28,7 +28,7 @@ export function ActionsMenu<TAction extends string>(
       <Dropdown.Button asChild>
         <Button
           size="medium"
-          variant="secondary"
+          variant="tertiary"
           sx={{ "> button": { px: Spacing["8px"] } }}
         >
           <Icon.Options title="Open actions menu" sx={{ display: "flex" }} />

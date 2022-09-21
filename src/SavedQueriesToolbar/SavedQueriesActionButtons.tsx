@@ -50,7 +50,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
   return (
     <Flex
       align="center"
-      gap={[Spacing["4px"], Spacing["8px"]]}
+      gap={Spacing["2px"]}
       sx={{
         flexWrap: "nowrap",
         justifyContent: "space-around",

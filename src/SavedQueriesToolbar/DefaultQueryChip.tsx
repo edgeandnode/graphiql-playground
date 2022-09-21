@@ -12,10 +12,6 @@ export function DefaultQueryChip() {
   return (
     <Chip
       sx={{
-        position: "absolute",
-        right: 0,
-        top: "50%",
-        transform: "translateY(-50%)",
         fontSize: FontSize["12px"],
         py: Spacing["4px"],
         px: Spacing["8px"],

@@ -1,6 +1,7 @@
 /** @jsxImportSource theme-ui */
 
 import {
+  BorderRadius,
   buildBorder,
   Flex,
   NewGDSButton as Button,
@@ -36,8 +37,11 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
         if (queryId != null) props.onMenuItemClick(queryId);
       }}
     >
-      <Flex direction="row" sx={{ border: buildBorder("White4"), flexGrow: 0 }}>
-        <Flex as="label" sx={{ pr: Spacing["16px"] }}>
+      <Flex
+        direction="row"
+        sx={{ bg: "White4", borderRadius: BorderRadius.S, flexGrow: 0 }}
+      >
+        <Flex as="label" align="center" sx={{ pr: Spacing["16px"] }}>
           <Input
             name="query-name"
             autoComplete="off"
@@ -49,8 +53,13 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
                 py: 0,
                 border: "none",
                 background: "none",
+                pr: 0,
               },
-              input: { height: "48px", width: "240px" },
+              input: {
+                height: "48px",
+                width: "240px",
+                textIndent: "0.5em",
+              },
             }}
           />
           {isCurrentDefault && <DefaultQueryChip />}
