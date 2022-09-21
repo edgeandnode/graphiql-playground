@@ -1,15 +1,25 @@
-import { createContext, ReactNode, useContext } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+} from "react";
 
 import { SavedQuery } from "./types";
 
 export interface SavedQueriesContext<TQuery extends SavedQuery> {
-  queries: TQuery[];
-  currentQueryId: TQuery["id"];
+  queries: readonly TQuery[];
+  currentQueryId: TQuery["id"] | null;
+  querySource: string;
+  setQuerySource: Dispatch<SetStateAction<string>>;
 }
 
 const SavedQueriesContext = createContext<SavedQueriesContext<SavedQuery>>({
   currentQueryId: "",
   queries: [],
+  querySource: "",
+  setQuerySource: () => {},
 });
 
 export function useSavedQueriesContext<TQuery extends SavedQuery>() {

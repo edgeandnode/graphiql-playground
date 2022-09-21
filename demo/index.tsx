@@ -25,44 +25,65 @@ const DEFAULT_QUERY_STR = `\
   }
 }`;
 
-const defaultQuery = {
-  id: counter(),
-  name: "Subgraph Names",
-  query: DEFAULT_QUERY_STR,
-  isDefault: true,
-};
+const SCHEMA_TYPES_QUERY_STR = `\
+query GetSchemaTypes {
+  __schema {
+    queryType { name }
+  }
+}`;
+
+const initialQueries = [
+  {
+    name: "Subgraph Names",
+    query: DEFAULT_QUERY_STR,
+    isDefault: true,
+  },
+  {
+    name: "Schema Types",
+    query: SCHEMA_TYPES_QUERY_STR,
+  },
+].map((x, i) => ({
+  id: `${i}`,
+  ...x,
+}));
 
 function Demo() {
-  const [savedQueries, setSavedQueries] = useState<SavedQuery[]>(() => [
-    defaultQuery,
-    {
-      id: counter(),
-      name: "Schema Types",
-      query: "query GetSchemaTypes { __schema { queryType { name } } }",
-    },
-  ]);
+  const [currentQueryId, setCurrentQueryId] = useState<SavedQuery["id"]>(
+    initialQueries[0].id
+  );
+  const [savedQueries, setSavedQueries] =
+    useState<SavedQuery[]>(initialQueries);
 
   return (
     <GraphProtocolGraphiQL
       fetcher={{ url }}
       queries={savedQueries}
-      currentQueryId={defaultQuery.id}
+      currentQueryId={currentQueryId}
       header={
         <GraphProtocolGraphiQL.SavedQueriesToolbar
           isMobile={false}
           isOwner={true}
-          onCreateQuery={async ({ name, query }) => {
+          onSelectQuery={(queryId) => {
+            setCurrentQueryId(queryId);
+          }}
+          onSaveAsNewQuery={async ({ name, query }) => {
             const newQuery: SavedQuery = {
               id: counter(),
               name,
               query,
             };
+
+            setSavedQueries((queries) => [...queries, newQuery]);
           }}
-          onEditQuery={() => {}}
           onDeleteQuery={async () => {}}
-          onSelectQuery={() => {}}
           onSetQueryAsDefault={async () => {}}
-          onUpdateQuery={async ({ id, name, query }) => {}}
+          onUpdateQuery={async ({ name, query }) => {
+            setSavedQueries((qs) =>
+              qs.map((q) =>
+                q.id === currentQueryId ? { ...q, name, query } : q
+              )
+            );
+          }}
           showActions
         />
       }

@@ -17,8 +17,8 @@ import { smallDropdownMenuItemStyle } from "./styles";
 import { SavedQuery } from "./types";
 
 export interface SavedQuerySelectProps {
-  queries: SavedQuery[];
-  currentQueryId: SavedQuery["id"];
+  queries: readonly SavedQuery[];
+  currentQueryId: SavedQuery["id"] | null;
   isDefaultQuery: boolean | undefined;
   onMenuItemClick: (value: SavedQuery["id"]) => void;
   currentQueryName: string;
@@ -29,18 +29,15 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
   return (
     <Dropdown<SavedQuery["id"]>
       type="select"
-      value={props.currentQueryId}
+      value={props.currentQueryId ?? undefined}
       onValueChange={(queryId) => {
-        if (queryId) props.onMenuItemClick(queryId.toString());
+        console.log({ queryId });
+
+        if (queryId != null) props.onMenuItemClick(queryId);
       }}
     >
-      <Flex direction="row" sx={{ border: buildBorder("White4") }}>
-        <Flex
-          direction="row"
-          as="label"
-          align="center"
-          sx={{ pr: Spacing["16px"] }}
-        >
+      <Flex direction="row" sx={{ border: buildBorder("White4"), flexGrow: 0 }}>
+        <Flex as="label" sx={{ pr: Spacing["16px"] }}>
           <Input
             name="query-name"
             autoComplete="off"
@@ -53,12 +50,16 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
                 border: "none",
                 background: "none",
               },
-              input: { height: "48px" },
+              input: { height: "48px", width: "240px" },
             }}
           />
           {props.isDefaultQuery && (
             <Chip
               sx={{
+                position: "absolute",
+                right: 0,
+                top: "50%",
+                transform: "translateY(-50%)",
                 fontSize: FontSize["12px"],
                 py: Spacing["4px"],
                 px: Spacing["8px"],
@@ -87,15 +88,18 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
       </Flex>
       {/* TOOD: Open menu starting from the top — cover the whole input */}
       <Dropdown.Menu align="end">
-        {props.queries.map((query) => (
-          <Dropdown.Menu.Item
-            key={query.id}
-            value={query.id}
-            sx={smallDropdownMenuItemStyle}
-          >
-            {query.name}
-          </Dropdown.Menu.Item>
-        ))}
+        {props.queries.map((query) => {
+          if (query.id === props.currentQueryId) return null;
+          return (
+            <Dropdown.Menu.Item
+              key={query.id}
+              value={query.id}
+              sx={smallDropdownMenuItemStyle}
+            >
+              {query.name}
+            </Dropdown.Menu.Item>
+          );
+        })}
       </Dropdown.Menu>
     </Dropdown>
   );

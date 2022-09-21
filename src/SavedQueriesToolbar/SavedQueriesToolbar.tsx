@@ -39,10 +39,9 @@ type QueryAction = "Set as default" | "Delete" | "Share" | "New query";
 export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
   extends Pick<
     SavedQueriesActionButtonsProps<TQuery>,
-    "onCreateQuery" | "onUpdateQuery"
+    "onSaveAsNewQuery" | "onUpdateQuery"
   > {
   onSelectQuery: (queryId: TQuery["id"]) => void;
-  onEditQuery: (querySource: string) => void;
 
   onSetQueryAsDefault: () => Promise<void>;
   onDeleteQuery: () => Promise<void>;
@@ -58,18 +57,28 @@ export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
 export function SavedQueriesToolbar<TQuery extends SavedQuery>(
   props: SavedQueriesToolbarProps<TQuery>
 ) {
-  const { currentQueryId, queries } = useSavedQueriesContext<TQuery>();
-  const { queryEditor } = useEditorContext()!;
+  const {
+    currentQueryId,
+    queries,
+    querySource: querySourceDraft,
+    setQuerySource,
+  } = useSavedQueriesContext<TQuery>();
 
-  const findSavedQuery = (queryId: SavedQuery["id"]) =>
-    queries.find((query) => query.id === queryId) || queries[0] || EMPTY_QUERY;
-
+  const findSavedQuery = (queryId: TQuery["id"] | null) => {
+    // When we're editing a new query, the id is null.
+    if (queryId === null) return null;
+    return (
+      queries.find((query) => query.id === queryId) || queries[0] || EMPTY_QUERY
+    );
+  };
   const currentQuery = findSavedQuery(currentQueryId);
 
-  const [isNewQuery, setIsNewQuery] = useState(false);
-  const [newQueryNameDraft, setNewQueryNameDraft] = useState(currentQuery.name);
-  const [isQueryDeletionPending, setQueryDeletionPending] = useState(false);
+  // potential rename state for existing queries, name for new queries.
+  const [queryNameDraft, setQueryNameDraft] = useState(
+    currentQuery ? currentQuery.name : ""
+  );
 
+  const [isQueryDeletionPending, setQueryDeletionPending] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState<SnackbarMessageType>();
 
   const handleActionSelected = async (action: QueryAction) => {
@@ -88,6 +97,8 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
         return;
 
       case "Delete":
+        // One can't delete a query that wasn't saved yet.
+        if (!currentQuery) return;
         if (currentQuery.isDefault) {
           setQueryDeletionPending(false);
           setSnackbarMessage("error-deleteDefault");
@@ -97,8 +108,8 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
         return;
 
       case "New query":
-        setIsNewQuery(true);
-        props.onEditQuery("");
+        setQueryNameDraft("New Query");
+        setQuerySource("");
     }
   };
 
@@ -116,27 +127,32 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
       <SavedQuerySelect
         queries={queries}
         currentQueryId={currentQueryId}
-        currentQueryName={newQueryNameDraft}
-        isDefaultQuery={currentQuery.isDefault}
+        currentQueryName={queryNameDraft}
+        isDefaultQuery={currentQuery?.isDefault}
         onMenuItemClick={(queryId) => {
           props.onSelectQuery(queryId);
-          setNewQueryNameDraft(findSavedQuery(queryId).name);
+          const query = findSavedQuery(queryId);
+
+          // We won't render a select option for `null`, so this condition
+          // should always be true.
+          if (query) setQueryNameDraft(query.name);
         }}
-        onChangeQueryName={(value) => setNewQueryNameDraft(value)}
+        onChangeQueryName={(value) => setQueryNameDraft(value)}
       />
       <div sx={{ flex: 1, flexBasis: 0 }} />
       {props.isOwner && !props.isMobile && (
         <SavedQueriesActionButtons<TQuery>
-          isNewQuery={isNewQuery}
           currentQuery={currentQuery}
           queries={queries}
           setSnackbarMessage={setSnackbarMessage}
-          currentQueryId={currentQueryId}
-          newQueryNameDraft={newQueryNameDraft}
-          setNewQueryNameDraft={setNewQueryNameDraft}
-          setIsNewQuery={setIsNewQuery}
-          onCreateQuery={props.onCreateQuery}
+          queryNameDraft={queryNameDraft}
+          onSaveAsNewQuery={props.onSaveAsNewQuery}
           onUpdateQuery={props.onUpdateQuery}
+          onNewQuery={() => {
+            setQueryNameDraft("New Query");
+            setQuerySource("");
+          }}
+          querySourceDraft={querySourceDraft}
         />
       )}
       {props.isOwner && !props.isMobile && (

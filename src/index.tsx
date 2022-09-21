@@ -5,7 +5,7 @@ import {
   CreateFetcherOptions,
   createGraphiQLFetcher,
 } from "@graphiql/toolkit";
-import { ReactNode, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
 import { SavedQuery } from "./SavedQueriesToolbar/types";
 import { GraphiQLInterface, GraphiQLToolbar } from "./GraphiQLInterface";
@@ -37,7 +37,7 @@ const TOOLBAR_HIDDEN = (
  * @see https://graphiql-test.netlify.app/typedoc/modules/graphiql.html#graphiqlprops
  */
 export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
-  extends SavedQueriesContext<TQuery> {
+  extends Pick<SavedQueriesContext<TQuery>, "queries" | "currentQueryId"> {
   fetcher: GraphProtocolGraphiQL.FetcherOptions;
   storage?: GraphiQLStorage;
   /** slot for GraphProtocolGraphiQL.SavedQueriesToolbar */
@@ -52,10 +52,28 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   queries,
 }: GraphProtocolGraphiQLProps<TQuery>) {
   const [fetcher] = useState(() => createGraphiQLFetcher(fetcherOptions));
-  const currentSavedQuery =
-    queries.find((query) => query.id === currentQueryId) || queries[0];
+  const currentSavedQuery = queries.find(
+    (query) => query.id === currentQueryId
+  );
 
-  const [querySource, setQuerySource] = useState(currentSavedQuery.query);
+  console.log({
+    queries,
+    currentQueryId,
+    currentSavedQuery,
+  });
+
+  const [querySource, setQuerySource] = useState(
+    currentSavedQuery?.query || ""
+  );
+
+  // Whenever currentQueryId changes, we update the text in CodeMirror.
+  useEffect(() => {
+    if (currentSavedQuery) {
+      console.log("USE EFFECT", currentQueryId, currentSavedQuery.query);
+      setQuerySource(currentSavedQuery.query);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQueryId]);
 
   const explorerPlugin = useExplorerPlugin({
     query: querySource,
@@ -74,6 +92,8 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
         value={{
           currentQueryId,
           queries,
+          querySource,
+          setQuerySource,
         }}
       >
         <GraphiQLInterface

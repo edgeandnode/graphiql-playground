@@ -7,36 +7,42 @@ import { SavedQuery } from "./types";
 import { validateQuery, ValidationStatus } from "./validation";
 
 export interface SavedQueriesActionButtonsProps<TQuery extends SavedQuery> {
-  isNewQuery: boolean;
-  currentQuery: TQuery;
-  queries: TQuery[];
+  currentQuery: TQuery | null;
+  queryNameDraft: string;
+  querySourceDraft: string;
+  queries: readonly TQuery[];
   setSnackbarMessage: (validationStatus: SnackbarMessageType) => void;
-  currentQueryId: string | number;
-  newQueryNameDraft: string;
-  setNewQueryNameDraft: (value: string) => void;
-  setIsNewQuery: (value: boolean) => void;
 
-  onCreateQuery: (info: {
+  /**
+   * Create new query draft.
+   */
+  onNewQuery: () => void;
+
+  /**
+   * Save the current query to saved queries as new.
+   */
+  onSaveAsNewQuery: (info: {
     name: TQuery["name"];
     query: string;
   }) => Promise<void>;
+
+  /**
+   * Update the current query in saved queries.
+   */
   onUpdateQuery: (info: {
-    id: TQuery["id"];
     name: TQuery["name"];
     query: string;
   }) => Promise<void>;
 }
 
 export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
-  isNewQuery,
   currentQuery,
   queries,
   setSnackbarMessage,
-  currentQueryId,
-  newQueryNameDraft,
-  setNewQueryNameDraft,
-  setIsNewQuery,
-  onCreateQuery,
+  queryNameDraft,
+  querySourceDraft,
+  onNewQuery,
+  onSaveAsNewQuery,
   onUpdateQuery,
 }: SavedQueriesActionButtonsProps<TQuery>) {
   return (
@@ -49,21 +55,18 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
         flexShrink: 0,
       }}
     >
-      {!isNewQuery && (
+      {currentQuery && (
         <Button
           size="medium"
           variant="tertiary"
           onClick={(e) => {
-            e.stopPropagation();
-
-            // TODO: New query :-- this was previously in state.
-            const query = "";
+            const name = queryNameDraft || currentQuery.name;
 
             const validationStatus: ValidationStatus = validateQuery({
-              name: currentQuery.name,
+              name,
               updatedId: currentQuery.id,
               queries: queries,
-              query,
+              query: querySourceDraft,
             });
 
             if (validationStatus !== "valid") {
@@ -72,9 +75,8 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
             }
 
             void onUpdateQuery({
-              id: currentQueryId,
-              name: currentQuery.name,
-              query,
+              name,
+              query: querySourceDraft,
             })
               .then(() => {
                 setSnackbarMessage("success-update");
@@ -92,13 +94,12 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
         variant="tertiary"
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={async () => {
-          // TODO: New query :-- this was previously in state.
-          const query = "";
+          const name = queryNameDraft || currentQuery?.name || "";
 
           const validationStatus: ValidationStatus = validateQuery({
-            name: newQueryNameDraft,
+            name,
             queries,
-            query,
+            query: querySourceDraft,
           });
 
           if (validationStatus !== "valid") {
@@ -107,9 +108,9 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
           }
 
           try {
-            await onCreateQuery({
-              name: newQueryNameDraft,
-              query,
+            await onSaveAsNewQuery({
+              name,
+              query: querySourceDraft,
             });
           } catch (err) {
             setSnackbarMessage("error-create");
@@ -121,14 +122,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
       >
         Save as new
       </Button>
-      <Button
-        size="medium"
-        variant="tertiary"
-        onClick={() => {
-          setNewQueryNameDraft("");
-          setIsNewQuery(false);
-        }}
-      >
+      <Button size="medium" variant="tertiary" onClick={onNewQuery}>
         {/* Reset changes */}
         Cancel
       </Button>
