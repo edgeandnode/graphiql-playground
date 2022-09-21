@@ -19,22 +19,26 @@ npm i @edgeandnode/graphiql-playground
 Then, import `GraphProtocolGraphiQL` and use it in your React components.
 
 ```ts
-import { GraphProtocolGraphiQL } from "./src";
-
-const defaultQuery = `
-{
-  subgraphs(first: 5, orderBy: createdAt, orderDirection: desc) {
-    displayName
-  }
-}`;
-
 const Playground = () => {
   return (
     <GraphProtocolGraphiQL
       fetcher={{
         url: "https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet-staging",
       }}
-      defaultQuery={defaultQuery}
+      queries={savedQueries}
+      currentQueryId={currentQueryId}
+      header={
+        <GraphProtocolGraphiQL.SavedQueriesToolbar
+          isMobile={false}
+          isOwner={true}
+          onSelectQuery={onSelectQuery}
+          onSaveAsNewQuery={onSaveAsNewQuery}
+          onDeleteQuery={onDeleteQuery}
+          onSetQueryAsDefault={onSetQueryAsDefault}
+          onUpdateQuery={onUpdateQuery}
+          showActions
+        />
+      }
     />
   );
 };
