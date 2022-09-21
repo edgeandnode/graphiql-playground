@@ -1,18 +1,15 @@
 /** @jsxImportSource theme-ui */
 
 import {
-  BorderRadius,
   buildBorder,
-  Chip,
   Flex,
-  FontSize,
-  FontWeight,
   NewGDSButton as Button,
   NewGDSDropdown as Dropdown,
   NewGDSInput as Input,
   Spacing,
 } from "@edgeandnode/components";
 
+import { DefaultQueryChip } from "./DefaultQueryChip";
 import { smallDropdownMenuItemStyle } from "./styles";
 import { SavedQuery } from "./types";
 
@@ -87,27 +84,5 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
         })}
       </Dropdown.Menu>
     </Dropdown>
-  );
-}
-
-function DefaultQueryChip() {
-  return (
-    <Chip
-      sx={{
-        position: "absolute",
-        right: 0,
-        top: "50%",
-        transform: "translateY(-50%)",
-        fontSize: FontSize["12px"],
-        py: Spacing["4px"],
-        px: Spacing["8px"],
-        pointerEvents: "none",
-        userSelect: "none",
-        fontWeight: FontWeight["LIGHT"],
-        borderRadius: BorderRadius["S"],
-      }}
-    >
-      Default
-    </Chip>
   );
 }

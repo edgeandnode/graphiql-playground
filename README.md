@@ -40,6 +40,8 @@ const Playground = () => {
 };
 ```
 
+You can find example implementation in [_`/demo/.index.tsx`_](./demo/index.tsx)
+
 ## Contributing
 
 - This library exports one React component named `GraphProtocolGraphiQL`, built using `@graphiql/react`, `@graphiql/plugin-explorer` and `@graphiql/toolkit`.

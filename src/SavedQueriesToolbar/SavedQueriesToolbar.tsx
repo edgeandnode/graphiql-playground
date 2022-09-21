@@ -149,7 +149,9 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
           onUpdateQuery={props.onUpdateQuery}
           querySourceDraft={querySourceDraft}
           onResetChanges={() => {
-            throw new Error("resetting changes not implemented yet");
+            if (!currentQuery) return;
+            setQuerySource(currentQuery.query);
+            setQueryNameDraft(currentQuery.name);
           }}
         />
       )}
