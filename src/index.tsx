@@ -5,9 +5,15 @@ import {
   CreateFetcherOptions,
   createGraphiQLFetcher,
 } from "@graphiql/toolkit";
-import { useState } from "react";
+import { ReactNode, useState } from "react";
 
+import { SavedQuery } from "./SavedQueriesToolbar/types";
 import { GraphiQLInterface, GraphiQLToolbar } from "./GraphiQLInterface";
+import {
+  SavedQueriesContext,
+  SavedQueriesContextProvider,
+  SavedQueriesToolbar,
+} from "./SavedQueriesToolbar";
 
 import "@graphiql/react/font/fira-code.css";
 import "@graphiql/plugin-explorer/dist/style.css";
@@ -30,47 +36,65 @@ const TOOLBAR_HIDDEN = (
 /**
  * @see https://graphiql-test.netlify.app/typedoc/modules/graphiql.html#graphiqlprops
  */
-export interface GraphProtocolGraphiQLProps {
+export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
+  extends SavedQueriesContext<TQuery> {
   fetcher: GraphProtocolGraphiQL.FetcherOptions;
-  defaultQuery?: string;
   storage?: GraphiQLStorage;
+  /** slot for GraphProtocolGraphiQL.SavedQueriesToolbar */
+  header: ReactNode;
 }
 
-export function GraphProtocolGraphiQL({
+export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   fetcher: fetcherOptions,
-  defaultQuery,
   storage,
-}: GraphProtocolGraphiQLProps) {
+  header,
+  currentQueryId,
+  queries,
+}: GraphProtocolGraphiQLProps<TQuery>) {
   const [fetcher] = useState(() => createGraphiQLFetcher(fetcherOptions));
-  const [query, setQuery] = useState(defaultQuery);
+  const currentSavedQuery =
+    queries.find((query) => query.id === currentQueryId) || queries[0];
+
+  const [querySource, setQuerySource] = useState(currentSavedQuery.query);
+
   const explorerPlugin = useExplorerPlugin({
-    query,
-    onEdit: setQuery,
+    query: querySource,
+    onEdit: setQuerySource,
     storage,
   });
 
   return (
     <GraphiQLProvider
       fetcher={fetcher}
-      query={query}
+      query={querySource}
       storage={storage}
       plugins={[explorerPlugin]}
     >
-      <GraphiQLInterface
-        editorTheme="graphula"
-        onEditQuery={setQuery}
-        isHeadersEditorEnabled={false}
-        isVariablesEditorEnabled={false}
+      <SavedQueriesContextProvider<TQuery>
+        value={{
+          currentQueryId,
+          queries,
+        }}
       >
-        {TOOLBAR_HIDDEN}
-      </GraphiQLInterface>
+        <GraphiQLInterface
+          editorTheme="graphula"
+          onEditQuery={setQuerySource}
+          isHeadersEditorEnabled={false}
+          isVariablesEditorEnabled={false}
+          header={header}
+        >
+          {TOOLBAR_HIDDEN}
+        </GraphiQLInterface>
+      </SavedQueriesContextProvider>
     </GraphiQLProvider>
   );
 }
+
+GraphProtocolGraphiQL.SavedQueriesToolbar = SavedQueriesToolbar;
 
 export declare namespace GraphProtocolGraphiQL {
   export interface FetcherOptions extends CreateFetcherOptions {}
   export interface Storage extends GraphiQLStorage {}
 }
 
-//
+export * from "./SavedQueriesToolbar/types";

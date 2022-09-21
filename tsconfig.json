@@ -14,9 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "jsxImportSource": "theme-ui",
     "outDir": "dist"
   },
-  "include": ["src"],
+  "include": ["src", "demo"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

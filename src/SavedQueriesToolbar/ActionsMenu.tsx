@@ -1,8 +1,14 @@
+/** @jsxImportSource theme-ui */
+
 import {
+  FontSize,
   Icon,
   NewGDSButton as Button,
   NewGDSDropdown as Dropdown,
+  Spacing,
 } from "@edgeandnode/components";
+
+import { smallDropdownMenuItemStyle } from "./styles";
 
 export interface Action {
   id: string;
@@ -20,13 +26,21 @@ export function ActionsMenu<TAction extends string>(
   return (
     <Dropdown type="menu">
       <Dropdown.Button asChild>
-        <Button>
-          <Icon.Menu />
+        <Button
+          size="medium"
+          variant="secondary"
+          sx={{ "> button": { px: Spacing["8px"] } }}
+        >
+          <Icon.Options title="Open actions menu" sx={{ display: "flex" }} />
         </Button>
       </Dropdown.Button>
-      <Dropdown.Menu align="start">
+      <Dropdown.Menu align="end">
         {props.actions.map((action, i) => (
-          <Dropdown.Menu.Item key={i} onClick={() => props.onSelect(action)}>
+          <Dropdown.Menu.Item
+            key={i}
+            onClick={() => props.onSelect(action)}
+            sx={smallDropdownMenuItemStyle}
+          >
             {action}
           </Dropdown.Menu.Item>
         ))}

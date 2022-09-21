@@ -26,7 +26,7 @@ function validateQuerySource({
 
 interface ValidateQueryNameArgs {
   name: string;
-  updatedId?: string;
+  updatedId?: SavedQuery["id"];
   queries: SavedQuery[];
 }
 

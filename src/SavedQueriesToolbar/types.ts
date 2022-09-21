@@ -1,5 +1,5 @@
 export interface SavedQuery {
-  id: string;
+  id: string | number;
   name: string;
   query: string;
   isDefault?: boolean;

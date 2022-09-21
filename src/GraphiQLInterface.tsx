@@ -78,6 +78,7 @@ export type GraphiQLInterfaceProps = WriteableEditorProps &
   AddSuffix<Pick<UseHeaderEditorArgs, "onEdit">, "Headers"> &
   Pick<UseResponseEditorArgs, "responseTooltip"> & {
     children?: ReactNode;
+
     /**
      * Set the default state for the editor tools.
      * - `false` hides the editor tools
@@ -88,17 +89,20 @@ export type GraphiQLInterfaceProps = WriteableEditorProps &
      * editors has contents.
      */
     defaultEditorToolsVisibility?: boolean | "variables" | "headers";
+
     /**
      * Toggle if the headers editor should be shown inside the editor tools.
      * @default true
      */
     isHeadersEditorEnabled?: boolean;
+
     /**
      * Toggle if the variables editor should be shown inside the editor tools.
      * @default true
      * @addition { Edge & Node } The Graph apps don't need variables editor.
      */
     isVariablesEditorEnabled?: boolean;
+
     /**
      * Toggle if the variables editor should be shown inside the editor tools.
      * @default true
@@ -109,6 +113,11 @@ export type GraphiQLInterfaceProps = WriteableEditorProps &
      * editor.
      */
     toolbar?: GraphiQLToolbarConfig;
+
+    /**
+     * Slot for SavedQueriesToolbar
+     */
+    header: ReactNode;
   };
 
 export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
@@ -235,6 +244,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
       <div className="graphiql-main">
         <div ref={pluginResize.firstRef}>
           <div className="graphiql-sessions">
+            {props.header}
             <div className="graphiql-session-header">
               <Tabs aria-label="Select active operation">
                 {editorContext.tabs.length > 1 ? (
