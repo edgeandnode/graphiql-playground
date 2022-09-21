@@ -18,9 +18,10 @@ import { SavedQuery } from "./types";
 
 export interface SavedQuerySelectProps {
   queries: SavedQuery[];
-  selectedQueryName: string;
+  currentQueryId: SavedQuery["id"];
   isDefaultQuery: boolean | undefined;
   onMenuItemClick: (value: SavedQuery["id"]) => void;
+  currentQueryName: string;
   onChangeQueryName: (newName: string) => void;
 }
 
@@ -28,6 +29,7 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
   return (
     <Dropdown<SavedQuery["id"]>
       type="select"
+      value={props.currentQueryId}
       onValueChange={(queryId) => {
         if (queryId) props.onMenuItemClick(queryId.toString());
       }}
@@ -42,7 +44,7 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
           <Input
             name="query-name"
             autoComplete="off"
-            value={props.selectedQueryName}
+            value={props.currentQueryName}
             onClick={(e) => e.stopPropagation()}
             onChange={(event) => props.onChangeQueryName(event.target.value)}
             sx={{
@@ -83,6 +85,7 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
           </Button>
         </Dropdown.Button>
       </Flex>
+      {/* TOOD: Open menu starting from the top — cover the whole input */}
       <Dropdown.Menu align="end">
         {props.queries.map((query) => (
           <Dropdown.Menu.Item

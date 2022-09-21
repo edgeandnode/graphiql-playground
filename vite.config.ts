@@ -23,4 +23,7 @@ const demoBuildOptions: BuildOptions = {
 export default defineConfig({
   plugins: [react()],
   build: process.env.BUILD_DEMO ? demoBuildOptions : libraryBuildOptions,
+  esbuild: {
+    jsx: "automatic",
+  },
 });

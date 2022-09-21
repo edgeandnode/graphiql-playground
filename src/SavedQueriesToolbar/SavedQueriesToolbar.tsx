@@ -1,7 +1,7 @@
 /** @jsxImportSource theme-ui */
 
 import { useEditorContext } from "@graphiql/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import {
   Flex,
@@ -61,13 +61,13 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
   const { currentQueryId, queries } = useSavedQueriesContext<TQuery>();
   const { queryEditor } = useEditorContext()!;
 
-  const currentQuery =
-    queries.find((query) => query.id === currentQueryId) ||
-    queries[0] ||
-    EMPTY_QUERY;
+  const findSavedQuery = (queryId: SavedQuery["id"]) =>
+    queries.find((query) => query.id === queryId) || queries[0] || EMPTY_QUERY;
+
+  const currentQuery = findSavedQuery(currentQueryId);
 
   const [isNewQuery, setIsNewQuery] = useState(false);
-  const [newQueryNameDraft, setNewQueryNameDraft] = useState("");
+  const [newQueryNameDraft, setNewQueryNameDraft] = useState(currentQuery.name);
   const [isQueryDeletionPending, setQueryDeletionPending] = useState(false);
 
   const [snackbarMessage, setSnackbarMessage] = useState<SnackbarMessageType>();
@@ -115,9 +115,13 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
     >
       <SavedQuerySelect
         queries={queries}
-        selectedQueryName={currentQuery.name}
+        currentQueryId={currentQueryId}
+        currentQueryName={newQueryNameDraft}
         isDefaultQuery={currentQuery.isDefault}
-        onMenuItemClick={(queryId) => props.onSelectQuery(queryId)}
+        onMenuItemClick={(queryId) => {
+          props.onSelectQuery(queryId);
+          setNewQueryNameDraft(findSavedQuery(queryId).name);
+        }}
         onChangeQueryName={(value) => setNewQueryNameDraft(value)}
       />
       <div sx={{ flex: 1, flexBasis: 0 }} />
