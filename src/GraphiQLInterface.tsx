@@ -244,9 +244,9 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
       <div className="graphiql-main">
         <div ref={pluginResize.firstRef}>
           <div className="graphiql-sessions">
-            {props.header}
-            {/* <div className="graphiql-session-header">
-              <Tabs aria-label="Select active operation">
+            <div className="graphiql-session-header">
+              {props.header}
+              {/* <Tabs aria-label="Select active operation">
                 {editorContext.tabs.length > 1 ? (
                   <>
                     {editorContext.tabs.map((tab, index) => (
@@ -300,8 +300,8 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                     </UnStyledButton>
                   </Tooltip>
                 ) : null}
-              </div>
-            </div> */}
+              </div> */}
+            </div>
             <div
               role="tabpanel"
               id="graphiql-session"

@@ -122,6 +122,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
           boxSizing: "border-box",
         },
         pl: Spacing["8px"],
+        width: "100%",
       }}
     >
       <SavedQuerySelect

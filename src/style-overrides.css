@@ -168,11 +168,18 @@ button.graphiql-execute-button {
 .graphiql-container .graphiql-plugin.graphiql-plugin {
   /* We don't need a double border there. */
   border-left: none;
-  border-right: 1px solid var(--theme-ui-colors-White8);
+}
+
+.graphiql-sidebar.graphiql-sidebar {
+  border-left: 1px solid var(--theme-ui-colors-White8);
 }
 
 .graphiql-session > div {
   border-top: 1px solid var(--theme-ui-colors-White8);
+}
+
+.graphiql-session-header {
+  padding-bottom: 8px;
 }
 
 .CodeMirror-scroll {
@@ -181,4 +188,8 @@ button.graphiql-execute-button {
 
 .graphiql-query-editor.graphiql-query-editor {
   padding: 0;
+}
+
+.graphiql-container .graphiql-editors.full-height {
+  margin-top: unset;
 }

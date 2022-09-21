@@ -80,7 +80,6 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
       {/* TOOD: Open menu starting from the top — cover the whole input */}
       <Dropdown.Menu align="end">
         {props.queries.map((query) => {
-          if (query.id === props.currentQueryId) return null;
           return (
             <Dropdown.Menu.Item
               key={query.id}
