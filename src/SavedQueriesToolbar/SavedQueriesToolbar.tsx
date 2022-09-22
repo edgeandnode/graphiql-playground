@@ -1,128 +1,99 @@
 /** @jsxImportSource theme-ui */
 
-import { useState } from "react";
+import { useState } from 'react'
 
-import {
-  Flex,
-  Grid,
-  NewGDSButton as Button,
-  Spacer,
-  Spacing,
-} from "@edgeandnode/components";
+import { Flex, Grid, NewGDSButton as Button, Spacer, Spacing } from '@edgeandnode/components'
 
-import { ActionsMenu } from "./ActionsMenu";
-import {
-  SavedQueriesActionButtons,
-  SavedQueriesActionButtonsProps,
-} from "./SavedQueriesActionButtons";
-import {
-  SavedQueriesContext,
-  useSavedQueriesContext,
-} from "./SavedQueriesContext";
-import {
-  SavedQueriesSnackbar,
-  SnackbarMessageType,
-} from "./SavedQueriesSnackbar";
-import { SavedQuerySelect } from "./SavedQuerySelect";
-import type { SavedQuery } from "./types";
+import { ActionsMenu } from './ActionsMenu'
+import { SavedQueriesActionButtons, SavedQueriesActionButtonsProps } from './SavedQueriesActionButtons'
+import { SavedQueriesContext, useSavedQueriesContext } from './SavedQueriesContext'
+import { SavedQueriesSnackbar, SnackbarMessageType } from './SavedQueriesSnackbar'
+import { SavedQuerySelect } from './SavedQuerySelect'
+import type { SavedQuery } from './types'
 
 const EMPTY_QUERY: SavedQuery = {
-  id: "",
-  name: "",
-  query: "",
-};
+  id: '',
+  name: '',
+  query: '',
+}
 
-type QueryAction = "Set as default" | "Delete" | "Share" | "New query";
+type QueryAction = 'Set as default' | 'Delete' | 'Share' | 'New query'
 
 export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
-  extends Pick<
-    SavedQueriesActionButtonsProps<TQuery>,
-    "onSaveAsNewQuery" | "onUpdateQuery"
-  > {
-  onSelectQuery: (queryId: TQuery["id"] | null) => void;
+  extends Pick<SavedQueriesActionButtonsProps<TQuery>, 'onSaveAsNewQuery' | 'onUpdateQuery'> {
+  onSelectQuery: (queryId: TQuery['id'] | null) => void
 
-  onSetQueryAsDefault: () => Promise<void>;
-  onDeleteQuery: () => Promise<void>;
+  onSetQueryAsDefault: () => Promise<void>
+  onDeleteQuery: () => Promise<void>
 
-  showActions: boolean;
-  isOwner: boolean;
+  showActions: boolean
+  isOwner: boolean
   /**
    * TODO: This should be a media query.
    */
-  isMobile: boolean;
-  className?: string;
-  actionButtonsClassName?: string;
+  isMobile: boolean
+  className?: string
+  actionButtonsClassName?: string
 }
 
-export function SavedQueriesToolbar<TQuery extends SavedQuery>(
-  props: SavedQueriesToolbarProps<TQuery>
-) {
-  const {
-    currentQueryId,
-    queries,
-    querySource: querySourceDraft,
-    setQuerySource,
-  } = useSavedQueriesContext<TQuery>();
+export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueriesToolbarProps<TQuery>) {
+  const { currentQueryId, queries, querySource: querySourceDraft, setQuerySource } = useSavedQueriesContext<TQuery>()
 
-  const findSavedQuery = (queryId: TQuery["id"] | null) => {
+  const findSavedQuery = (queryId: TQuery['id'] | null) => {
     // When we're editing a new query, the id is null.
-    if (queryId === null) return null;
-    return (
-      queries.find((query) => query.id === queryId) || queries[0] || EMPTY_QUERY
-    );
-  };
-  const currentQuery = findSavedQuery(currentQueryId);
+    if (queryId === null) return null
+    return queries.find((query) => query.id === queryId) || queries[0] || EMPTY_QUERY
+  }
+  const currentQuery = findSavedQuery(currentQueryId)
 
   // potential rename state for existing queries, name for new queries.
-  const [queryNameDraft, setQueryNameDraft] = useState(
-    currentQuery ? currentQuery.name : ""
-  );
+  const [queryNameDraft, setQueryNameDraft] = useState(currentQuery ? currentQuery.name : '')
 
-  const [isQueryDeletionPending, setQueryDeletionPending] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState<SnackbarMessageType>();
+  const [isQueryDeletionPending, setQueryDeletionPending] = useState(false)
+  const [snackbarMessage, setSnackbarMessage] = useState<SnackbarMessageType>()
 
   const handleActionSelected = async (action: QueryAction) => {
     switch (action) {
-      case "Share": {
-        const url = window.location.href;
-        await navigator.clipboard.writeText(url);
-        setSnackbarMessage("success-share");
-        return;
+      case 'Share': {
+        const url = window.location.href
+        await navigator.clipboard.writeText(url)
+        setSnackbarMessage('success-share')
+        return
       }
 
-      case "Set as default":
+      case 'Set as default':
         await props.onSetQueryAsDefault().then(() => {
-          setSnackbarMessage("success-setDefault");
-        });
-        return;
+          setSnackbarMessage('success-setDefault')
+        })
+        return
 
-      case "Delete":
+      case 'Delete':
         // One can't delete a query that wasn't saved yet.
-        if (!currentQuery) return;
+        if (!currentQuery) return
         if (currentQuery.isDefault) {
-          setSnackbarMessage("error-deleteDefault");
-          return;
+          setSnackbarMessage('error-deleteDefault')
+          return
         }
-        setQueryDeletionPending(true);
-        setSnackbarMessage("success-delete");
-        return;
+        setQueryDeletionPending(true)
+        setSnackbarMessage('success-delete')
+        return
 
-      case "New query":
-        setQueryNameDraft("New Query");
-        props.onSelectQuery(null);
+      case 'New query':
+        setQueryNameDraft('New Query')
+        props.onSelectQuery(null)
     }
-  };
+  }
 
   return (
     <Flex
       direction="row"
-      gap={[Spacing["4px"], Spacing["8px"]]}
+      gap={[Spacing['4px'], Spacing['8px']]}
       sx={{
-        "*": {
-          boxSizing: "border-box",
+        '*': {
+          boxSizing: 'border-box',
         },
-        pl: Spacing["8px"],
-        width: "100%",
+        pl: Spacing['8px'],
+        width: '100%',
       }}
       className={props.className}
     >
@@ -131,12 +102,12 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
         currentQueryId={currentQueryId}
         currentQueryName={queryNameDraft}
         onMenuItemClick={(queryId) => {
-          props.onSelectQuery(queryId);
-          const query = findSavedQuery(queryId);
+          props.onSelectQuery(queryId)
+          const query = findSavedQuery(queryId)
 
           // We won't render a select option for `null`, so this condition
           // should always be true.
-          if (query) setQueryNameDraft(query.name);
+          if (query) setQueryNameDraft(query.name)
         }}
         onChangeQueryName={(value) => setQueryNameDraft(value)}
       />
@@ -150,9 +121,9 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
           onUpdateQuery={props.onUpdateQuery}
           querySourceDraft={querySourceDraft}
           onResetChanges={() => {
-            if (!currentQuery) return;
-            setQuerySource(currentQuery.query);
-            setQueryNameDraft(currentQuery.name);
+            if (!currentQuery) return
+            setQuerySource(currentQuery.query)
+            setQueryNameDraft(currentQuery.name)
           }}
           className={props.actionButtonsClassName}
         />
@@ -160,20 +131,20 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
       <div sx={{ flex: 1, flexBasis: 0 }} />
       {props.isOwner && !props.isMobile && (
         <ActionsMenu<QueryAction>
-          actions={["Share", "Set as default", "Delete", "New query"]}
+          actions={['Share', 'Set as default', 'Delete', 'New query']}
           onSelect={(action) => void handleActionSelected(action)}
         />
       )}
-      <div sx={{ width: "4px" }} />
+      <div sx={{ width: '4px' }} />
       <SavedQueriesSnackbar
         messageType={snackbarMessage}
         onUndoDelete={() => setQueryDeletionPending(false)}
         onClose={() => {
           // The snackbar is used as a confirmation prompt here.
-          if (isQueryDeletionPending) void props.onDeleteQuery();
-          setSnackbarMessage(undefined);
+          if (isQueryDeletionPending) void props.onDeleteQuery()
+          setSnackbarMessage(undefined)
         }}
       />
     </Flex>
-  );
+  )
 }

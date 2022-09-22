@@ -1,36 +1,30 @@
 /** @jsxImportSource theme-ui */
 
-import { Flex, NewGDSButton as Button, Spacing } from "@edgeandnode/components";
+import { Flex, NewGDSButton as Button, Spacing } from '@edgeandnode/components'
 
-import { SnackbarMessageType } from "./SavedQueriesSnackbar";
-import { SavedQuery } from "./types";
-import { validateQuery, ValidationStatus } from "./validation";
+import { SnackbarMessageType } from './SavedQueriesSnackbar'
+import { SavedQuery } from './types'
+import { validateQuery, ValidationStatus } from './validation'
 
 export interface SavedQueriesActionButtonsProps<TQuery extends SavedQuery> {
-  currentQuery: TQuery | null;
-  queryNameDraft: string;
-  querySourceDraft: string;
-  queries: readonly TQuery[];
-  setSnackbarMessage: (validationStatus: SnackbarMessageType) => void;
-  className?: string;
+  currentQuery: TQuery | null
+  queryNameDraft: string
+  querySourceDraft: string
+  queries: readonly TQuery[]
+  setSnackbarMessage: (validationStatus: SnackbarMessageType) => void
+  className?: string
 
-  onResetChanges: () => void;
+  onResetChanges: () => void
 
   /**
    * Save the current query to saved queries as new.
    */
-  onSaveAsNewQuery: (info: {
-    name: TQuery["name"];
-    query: string;
-  }) => Promise<void>;
+  onSaveAsNewQuery: (info: { name: TQuery['name']; query: string }) => Promise<void>
 
   /**
    * Update the current query in saved queries.
    */
-  onUpdateQuery: (info: {
-    name: TQuery["name"];
-    query: string;
-  }) => Promise<void>;
+  onUpdateQuery: (info: { name: TQuery['name']; query: string }) => Promise<void>
 }
 
 export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
@@ -45,44 +39,42 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
   className,
 }: SavedQueriesActionButtonsProps<TQuery>) {
   const canResetChanges =
-    currentQuery !== null &&
-    (currentQuery.query !== querySourceDraft ||
-      currentQuery.name !== queryNameDraft);
+    currentQuery !== null && (currentQuery.query !== querySourceDraft || currentQuery.name !== queryNameDraft)
 
   const handleSaveAsNewClick = async () => {
-    const name = queryNameDraft || currentQuery?.name || "";
+    const name = queryNameDraft || currentQuery?.name || ''
 
     const validationStatus: ValidationStatus = validateQuery({
       name,
       queries,
       query: querySourceDraft,
-    });
+    })
 
-    if (validationStatus !== "valid") {
-      setSnackbarMessage(validationStatus);
-      return;
+    if (validationStatus !== 'valid') {
+      setSnackbarMessage(validationStatus)
+      return
     }
 
     try {
       await onSaveAsNewQuery({
         name,
         query: querySourceDraft,
-      });
+      })
     } catch (err) {
-      setSnackbarMessage("error-create");
-      return;
+      setSnackbarMessage('error-create')
+      return
     }
 
-    setSnackbarMessage("success-create");
-  };
+    setSnackbarMessage('success-create')
+  }
 
   return (
     <Flex
       align="center"
-      gap={Spacing["2px"]}
+      gap={Spacing['2px']}
       sx={{
-        flexWrap: "nowrap",
-        justifyContent: "space-around",
+        flexWrap: 'nowrap',
+        justifyContent: 'space-around',
         flexShrink: 0,
       }}
       className={className}
@@ -92,18 +84,18 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
           size="medium"
           variant="tertiary"
           onClick={() => {
-            const name = queryNameDraft || currentQuery.name;
+            const name = queryNameDraft || currentQuery.name
 
             const validationStatus: ValidationStatus = validateQuery({
               name,
               updatedId: currentQuery.id,
               queries: queries,
               query: querySourceDraft,
-            });
+            })
 
-            if (validationStatus !== "valid") {
-              setSnackbarMessage(validationStatus);
-              return;
+            if (validationStatus !== 'valid') {
+              setSnackbarMessage(validationStatus)
+              return
             }
 
             void onUpdateQuery({
@@ -111,32 +103,23 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
               query: querySourceDraft,
             })
               .then(() => {
-                setSnackbarMessage("success-update");
+                setSnackbarMessage('success-update')
               })
               .catch(() => {
-                setSnackbarMessage("error-update");
-              });
+                setSnackbarMessage('error-update')
+              })
           }}
         >
           Save
         </Button>
       )}
-      <Button
-        size="medium"
-        variant="tertiary"
-        onClick={() => void handleSaveAsNewClick()}
-      >
+      <Button size="medium" variant="tertiary" onClick={() => void handleSaveAsNewClick()}>
         Save as new
       </Button>
-      <Button
-        size="medium"
-        variant="tertiary"
-        onClick={onResetChanges}
-        disabled={!canResetChanges}
-      >
+      <Button size="medium" variant="tertiary" onClick={onResetChanges} disabled={!canResetChanges}>
         {/* Reset changes */}
         Cancel
       </Button>
     </Flex>
-  );
+  )
 }
