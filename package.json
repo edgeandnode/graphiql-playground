@@ -1,7 +1,6 @@
 {
   "name": "@edgeandnode/graphiql-playground",
-  "private": true,
-  "version": "0.0.0",
+  "version": "0.1.1",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
@@ -10,6 +9,12 @@
     "import": "./dist/index.es.js",
     "node": "./dist/index.cjs.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/edgeandnode/graphiql-playground.git"

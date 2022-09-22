@@ -49,6 +49,33 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
     (currentQuery.query !== querySourceDraft ||
       currentQuery.name !== queryNameDraft);
 
+  const handleSaveAsNewClick = async () => {
+    const name = queryNameDraft || currentQuery?.name || "";
+
+    const validationStatus: ValidationStatus = validateQuery({
+      name,
+      queries,
+      query: querySourceDraft,
+    });
+
+    if (validationStatus !== "valid") {
+      setSnackbarMessage(validationStatus);
+      return;
+    }
+
+    try {
+      await onSaveAsNewQuery({
+        name,
+        query: querySourceDraft,
+      });
+    } catch (err) {
+      setSnackbarMessage("error-create");
+      return;
+    }
+
+    setSnackbarMessage("success-create");
+  };
+
   return (
     <Flex
       align="center"
@@ -64,7 +91,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
         <Button
           size="medium"
           variant="tertiary"
-          onClick={(e) => {
+          onClick={() => {
             const name = queryNameDraft || currentQuery.name;
 
             const validationStatus: ValidationStatus = validateQuery({
@@ -97,33 +124,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
       <Button
         size="medium"
         variant="tertiary"
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
-        onClick={async () => {
-          const name = queryNameDraft || currentQuery?.name || "";
-
-          const validationStatus: ValidationStatus = validateQuery({
-            name,
-            queries,
-            query: querySourceDraft,
-          });
-
-          if (validationStatus !== "valid") {
-            setSnackbarMessage(validationStatus);
-            return;
-          }
-
-          try {
-            await onSaveAsNewQuery({
-              name,
-              query: querySourceDraft,
-            });
-          } catch (err) {
-            setSnackbarMessage("error-create");
-            return;
-          }
-
-          setSnackbarMessage("success-create");
-        }}
+        onClick={() => void handleSaveAsNewClick()}
       >
         Save as new
       </Button>
