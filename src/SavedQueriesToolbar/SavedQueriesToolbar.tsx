@@ -100,10 +100,10 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(
         // One can't delete a query that wasn't saved yet.
         if (!currentQuery) return;
         if (currentQuery.isDefault) {
-          setQueryDeletionPending(false);
           setSnackbarMessage("error-deleteDefault");
           return;
         }
+        setQueryDeletionPending(true);
         setSnackbarMessage("success-delete");
         return;
 
