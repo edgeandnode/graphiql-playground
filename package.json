@@ -26,7 +26,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/** --ext .ts --ext .tsx",
     "lint:fix": "eslint src/** --ext .ts --ext .tsx --fix",
-    "format": "prettier --write",
+    "format": "prettier --write ./src/**/*.{ts,tsx}",
     "ci": "pnpm typecheck && pnpm lint"
   },
   "dependencies": {
