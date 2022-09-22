@@ -3,6 +3,4 @@ export interface SavedQuery {
   name: string;
   query: string;
   isDefault?: boolean;
-  subgraphId?: number;
-  versionId?: string;
 }
