@@ -5,9 +5,15 @@ import {
   CreateFetcherOptions,
   createGraphiQLFetcher,
 } from "@graphiql/toolkit";
-import { useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 
+import { SavedQuery } from "./SavedQueriesToolbar/types";
 import { GraphiQLInterface, GraphiQLToolbar } from "./GraphiQLInterface";
+import {
+  SavedQueriesContext,
+  SavedQueriesContextProvider,
+  SavedQueriesToolbar,
+} from "./SavedQueriesToolbar";
 
 import "@graphiql/react/font/fira-code.css";
 import "@graphiql/plugin-explorer/dist/style.css";
@@ -30,93 +36,76 @@ const TOOLBAR_HIDDEN = (
 /**
  * @see https://graphiql-test.netlify.app/typedoc/modules/graphiql.html#graphiqlprops
  */
-export interface GraphProtocolGraphiQLProps {
+export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
+  extends Pick<SavedQueriesContext<TQuery>, "queries" | "currentQueryId"> {
   fetcher: GraphProtocolGraphiQL.FetcherOptions;
-  defaultQuery?: string;
   storage?: GraphiQLStorage;
+  /** slot for GraphProtocolGraphiQL.SavedQueriesToolbar */
+  header: ReactNode;
 }
 
-export function GraphProtocolGraphiQL({
+export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   fetcher: fetcherOptions,
-  defaultQuery,
   storage,
-}: GraphProtocolGraphiQLProps) {
+  header,
+  currentQueryId,
+  queries,
+}: GraphProtocolGraphiQLProps<TQuery>) {
   const [fetcher] = useState(() => createGraphiQLFetcher(fetcherOptions));
-  const [query, setQuery] = useState(defaultQuery);
+  const currentSavedQuery = queries.find(
+    (query) => query.id === currentQueryId
+  );
+
+  const [querySource, setQuerySource] = useState(
+    currentSavedQuery?.query || ""
+  );
+
+  // Whenever currentQueryId changes, we update the text in CodeMirror.
+  useEffect(() => {
+    setQuerySource(currentSavedQuery?.query || "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQueryId]);
+
   const explorerPlugin = useExplorerPlugin({
-    query,
-    onEdit: setQuery,
+    query: querySource,
+    onEdit: setQuerySource,
     storage,
   });
 
   return (
     <GraphiQLProvider
       fetcher={fetcher}
-      query={query}
+      query={querySource}
       storage={storage}
       plugins={[explorerPlugin]}
     >
-      <GraphiQLInterface
-        editorTheme="graphula"
-        onEditQuery={setQuery}
-        isHeadersEditorEnabled={false}
-        isVariablesEditorEnabled={false}
+      <SavedQueriesContextProvider<TQuery>
+        value={{
+          currentQueryId,
+          queries,
+          querySource,
+          setQuerySource,
+        }}
       >
-        {TOOLBAR_HIDDEN}
-      </GraphiQLInterface>
+        <GraphiQLInterface
+          editorTheme="graphula"
+          onEditQuery={setQuerySource}
+          isHeadersEditorEnabled={false}
+          isVariablesEditorEnabled={false}
+          header={header}
+        >
+          {TOOLBAR_HIDDEN}
+        </GraphiQLInterface>
+      </SavedQueriesContextProvider>
     </GraphiQLProvider>
   );
 }
+
+GraphProtocolGraphiQL.SavedQueriesToolbar = SavedQueriesToolbar;
 
 export declare namespace GraphProtocolGraphiQL {
   export interface FetcherOptions extends CreateFetcherOptions {}
   export interface Storage extends GraphiQLStorage {}
 }
 
-//
-
-declare namespace OldTypes {
-  type SavedQuery = {
-    id: string;
-    name: string;
-    query: string;
-    default?: boolean;
-    subgraphId?: number;
-    versionId?: string;
-  };
-
-  export interface GraphiQLProps {
-    fetcher?: (graphQLParams: any) => Promise<any>;
-    schema?: any;
-    query?: string;
-    variables?: string;
-    operationName?: string;
-    response?: string;
-    storage?: {
-      getItem: (key: string) => any;
-      setItem: (key: string, value: any) => void;
-      removeItem: (key: string) => void;
-    };
-    defaultQuery?: string;
-    onEditQuery?: () => void;
-    onEditVariables?: () => void;
-    onEditOperationName?: () => void;
-    onToggleDocs?: () => void;
-    getDefaultFieldNames?: () => void;
-    editorTheme?: string;
-    onToggleHistory?: () => void;
-    ResultsTooltip?: any;
-    defaultTypeOrField?: string;
-    savedQueries?: Array<SavedQuery>;
-    handleUpdateQuery?: (query: SavedQuery) => Promise<SavedQuery>;
-    handleCreateQuery?: (query: SavedQuery) => Promise<SavedQuery>;
-    handleSelectedAction?: (id: number, value: string) => void;
-    isActionsMenuOpen?: boolean;
-    handleSelectQuery?: (name: string) => void;
-    selectedQueryName?: any;
-    isOwner?: boolean;
-    docExplorerClosed?: boolean;
-    from?: string;
-    hideSnackbar?: boolean;
-  }
-}
+export * from "./SavedQueriesToolbar/types";

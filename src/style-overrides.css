@@ -5,10 +5,6 @@
   display: none;
 }
 
-.CodeMirror-sizer {
-  margin-left: 16px !important;
-}
-
 .CodeMirror-lines {
   padding: 0 !important;
 }
@@ -122,18 +118,13 @@ button.graphiql-execute-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  background: linear-gradient(
-    315deg,
-    var(--theme-ui-colors-Purple),
-    var(--theme-ui-colors-Purple48)
-  );
+  background: var(--theme-ui-colors-Background);
   background-repeat: repeat;
   background-attachment: scroll;
   background-size: auto;
   background-origin: padding-box;
   background-clip: border-box;
   border: none;
-  opacity: 0.8;
   border-radius: 999px;
   cursor: pointer;
   fill: #fff;
@@ -141,6 +132,9 @@ button.graphiql-execute-button {
   margin: 0;
   padding: 0;
   width: 40px;
+  margin-top: 16px;
+  transform: translateX(50%);
+  z-index: 1;
 
   &:focus {
     outline: none;
@@ -151,14 +145,51 @@ button.graphiql-execute-button {
     height: 14px;
     padding-left: 2px;
   }
+
+  &:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: linear-gradient(
+      315deg,
+      var(--theme-ui-colors-Purple),
+      var(--theme-ui-colors-Purple48)
+    );
+  }
 }
 
 .graphiql-container .graphiql-sessions.graphiql-sessions {
   background-color: transparent;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 
 .graphiql-container .graphiql-plugin.graphiql-plugin {
   /* We don't need a double border there. */
   border-left: none;
-  border-right: 1px solid var(--theme-ui-colors-White4);
+}
+
+.graphiql-sidebar.graphiql-sidebar {
+  border-left: 1px solid var(--theme-ui-colors-White8);
+}
+
+.graphiql-session > div {
+  border-top: 1px solid var(--theme-ui-colors-White8);
+}
+
+.graphiql-session-header {
+  padding-bottom: 8px;
+}
+
+.CodeMirror-scroll {
+  padding-top: 16px;
+}
+
+.graphiql-query-editor.graphiql-query-editor {
+  padding: 0;
+}
+
+.graphiql-container .graphiql-editors.full-height {
+  margin-top: unset;
 }
