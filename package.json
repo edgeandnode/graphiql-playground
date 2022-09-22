@@ -1,6 +1,6 @@
 {
   "name": "@edgeandnode/graphiql-playground",
-  "version": "0.1.1",
+  "version": "0.1.3",
   "type": "module",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
