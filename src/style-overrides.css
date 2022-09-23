@@ -147,15 +147,11 @@ button.graphiql-execute-button {
   }
 
   &:before {
-    content: "";
+    content: '';
     position: absolute;
     inset: 0;
     border-radius: 999px;
-    background: linear-gradient(
-      315deg,
-      var(--theme-ui-colors-Purple),
-      var(--theme-ui-colors-Purple48)
-    );
+    background: linear-gradient(315deg, var(--theme-ui-colors-Purple), var(--theme-ui-colors-Purple48));
   }
 }
 
@@ -163,6 +159,10 @@ button.graphiql-execute-button {
   background-color: transparent;
   margin-top: 8px;
   margin-bottom: 8px;
+}
+
+.graphiql-container .graphiql-session.graphiql-session {
+  padding: 0;
 }
 
 .graphiql-container .graphiql-plugin.graphiql-plugin {
