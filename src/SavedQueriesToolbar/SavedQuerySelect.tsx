@@ -71,7 +71,7 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
           </Button>
         </Dropdown.Button>
       </Flex>
-      {/* TOOD: Open menu starting from the top — cover the whole input */}
+      {/* TODO: Open menu starting from the top — cover the whole input */}
       <Dropdown.Menu align="end">
         {props.queries.map((query) => {
           return (
