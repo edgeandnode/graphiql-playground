@@ -21,3 +21,6 @@ dist-ssr
 *.sw?
 .netlify
 netlify.toml
+
+# pnpm pack tarballs
+*.tgz
