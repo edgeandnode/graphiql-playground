@@ -1,6 +1,6 @@
 {
   "name": "@edgeandnode/graphiql-playground",
-  "version": "0.1.5-rc.2",
+  "version": "0.1.5-rc.6",
   "type": "commonjs",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
@@ -37,6 +37,7 @@
   "devDependencies": {
     "@edgeandnode/components": "^23.0.7",
     "@edgeandnode/eslint-config": "^1.0.3",
+    "@emotion/react": ">=11",
     "@types/node": "^18.7.13",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
@@ -56,6 +57,7 @@
   },
   "peerDependencies": {
     "@edgeandnode/components": "^23",
+    "@emotion/react": ">=11",
     "react": ">=16",
     "react-dom": ">=16",
     "theme-ui": ">=0.14"

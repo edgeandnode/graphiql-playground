@@ -2,7 +2,6 @@
 
 import {
   BorderRadius,
-  buildBorder,
   Flex,
   NewGDSButton as Button,
   NewGDSDropdown as Dropdown,
@@ -33,7 +32,17 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
         if (queryId != null) props.onMenuItemClick(queryId)
       }}
     >
-      <Flex direction="row" sx={{ bg: 'White4', borderRadius: BorderRadius.S, flexGrow: 0 }}>
+      <Flex
+        direction="row"
+        sx={{
+          bg: (theme) => {
+            console.log(`[[[[`, theme, `]]]]`)
+            return 'White4'
+          },
+          borderRadius: BorderRadius.S,
+          flexGrow: 0,
+        }}
+      >
         <Flex as="label" align="center" sx={{ pr: Spacing['16px'] }}>
           <Input
             name="query-name"
