@@ -144,6 +144,7 @@ button.graphiql-execute-button {
     width: 14px;
     height: 14px;
     padding-left: 2px;
+    z-index: 1;
   }
 
   &:before {
