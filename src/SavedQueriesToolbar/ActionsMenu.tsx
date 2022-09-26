@@ -25,7 +25,7 @@ export function ActionsMenu({ children }: ActionsMenuProps) {
   return (
     <Dropdown type="menu">
       <Dropdown.Button asChild>
-        <Button size="medium" variant="tertiary" sx={{ '> button': { px: Spacing['8px'] } }}>
+        <Button size="medium" variant="tertiary" sx={{ '> button': { px: Spacing['16px'] } }}>
           <Icon.Options title="Open actions menu" sx={{ display: 'flex' }} />
         </Button>
       </Dropdown.Button>
