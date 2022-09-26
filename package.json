@@ -1,6 +1,6 @@
 {
   "name": "@edgeandnode/graphiql-playground",
-  "version": "0.1.5-rc.7",
+  "version": "0.1.5-rc.8",
   "type": "commonjs",
   "main": "./dist/index.cjs.js",
   "module": "./dist/index.es.js",
@@ -35,7 +35,7 @@
     "@graphiql/toolkit": "0.7.3"
   },
   "devDependencies": {
-    "@edgeandnode/components": "^23.0.7",
+    "@edgeandnode/components": "^23.5.10",
     "@edgeandnode/eslint-config": "^1.0.3",
     "@emotion/react": ">=11",
     "@types/node": "^18.7.13",

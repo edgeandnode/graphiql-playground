@@ -2,11 +2,11 @@
 
 import { useState } from 'react'
 
-import { Flex, Grid, NewGDSButton as Button, Spacer, Spacing } from '@edgeandnode/components'
+import { Flex, Spacing } from '@edgeandnode/components'
 
 import { ActionsMenu } from './ActionsMenu'
 import { SavedQueriesActionButtons, SavedQueriesActionButtonsProps } from './SavedQueriesActionButtons'
-import { SavedQueriesContext, useSavedQueriesContext } from './SavedQueriesContext'
+import { useSavedQueriesContext } from './SavedQueriesContext'
 import { SavedQueriesSnackbar, SnackbarMessageType } from './SavedQueriesSnackbar'
 import { SavedQuerySelect } from './SavedQuerySelect'
 import type { SavedQuery } from './types'
@@ -98,7 +98,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
       className={props.className}
     >
       <SavedQuerySelect
-        queries={queries}
+        queries={[]}
         currentQueryId={currentQueryId}
         currentQueryName={queryNameDraft}
         onMenuItemClick={(queryId) => {
@@ -130,10 +130,16 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
       )}
       <div sx={{ flex: 1, flexBasis: 0 }} />
       {props.isOwner && !props.isMobile && (
-        <ActionsMenu<QueryAction>
-          actions={['Share', 'Set as default', 'Delete', 'New query']}
-          onSelect={(action) => void handleActionSelected(action)}
-        />
+        <ActionsMenu>
+          <ActionsMenu.Item onClick={() => void handleActionSelected('Share')}>Share</ActionsMenu.Item>
+          <ActionsMenu.Item onClick={() => void handleActionSelected('Set as default')}>
+            Set as default
+          </ActionsMenu.Item>
+          <ActionsMenu.Item disabled={currentQueryId == null} onClick={() => void handleActionSelected('Delete')}>
+            Delete
+          </ActionsMenu.Item>
+          <ActionsMenu.Item onClick={() => void handleActionSelected('New query')}>New query</ActionsMenu.Item>
+        </ActionsMenu>
       )}
       <div sx={{ width: '4px' }} />
       <SavedQueriesSnackbar

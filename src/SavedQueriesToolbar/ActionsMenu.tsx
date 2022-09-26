@@ -1,6 +1,14 @@
 /** @jsxImportSource theme-ui */
 
-import { FontSize, Icon, NewGDSButton as Button, NewGDSDropdown as Dropdown, Spacing } from '@edgeandnode/components'
+import { ReactNode } from 'react'
+
+import {
+  Icon,
+  NewGDSButton as Button,
+  NewGDSDropdown as Dropdown,
+  NewGDSDropdownMenuItemProps,
+  Spacing,
+} from '@edgeandnode/components'
 
 import { smallDropdownMenuItemStyle } from './styles'
 
@@ -9,12 +17,11 @@ export interface Action {
   name: string
 }
 
-export interface ActionsMenuProps<TAction> {
-  actions: TAction[]
-  onSelect: (selected: TAction) => void
+export interface ActionsMenuProps {
+  children: ReactNode
 }
 
-export function ActionsMenu<TAction extends string>(props: ActionsMenuProps<TAction>) {
+export function ActionsMenu({ children }: ActionsMenuProps) {
   return (
     <Dropdown type="menu">
       <Dropdown.Button asChild>
@@ -22,13 +29,11 @@ export function ActionsMenu<TAction extends string>(props: ActionsMenuProps<TAct
           <Icon.Options title="Open actions menu" sx={{ display: 'flex' }} />
         </Button>
       </Dropdown.Button>
-      <Dropdown.Menu align="end">
-        {props.actions.map((action, i) => (
-          <Dropdown.Menu.Item key={i} onClick={() => props.onSelect(action)} sx={smallDropdownMenuItemStyle}>
-            {action}
-          </Dropdown.Menu.Item>
-        ))}
-      </Dropdown.Menu>
+      <Dropdown.Menu align="end">{children}</Dropdown.Menu>
     </Dropdown>
   )
+}
+
+ActionsMenu.Item = (props: NewGDSDropdownMenuItemProps) => {
+  return <Dropdown.Menu.Item {...props} sx={smallDropdownMenuItemStyle} />
 }

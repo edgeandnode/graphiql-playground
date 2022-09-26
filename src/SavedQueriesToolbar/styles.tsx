@@ -12,7 +12,7 @@ export const smallDropdownMenuItemStyle: ThemeUICSSObject = {
   gap: Spacing['8px'],
 
   // Why is this needed? TODO: Ask Benoit
-  ':hover': {
+  ':hover:not(:disabled)': {
     'span[role="img"]': { opacity: 0.8 },
   },
 }
