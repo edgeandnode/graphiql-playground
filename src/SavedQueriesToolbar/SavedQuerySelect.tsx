@@ -65,9 +65,9 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
           />
           {isCurrentDefault && <DefaultQueryChip />}
         </Flex>
-        <Dropdown.Button asChild>
+        <Dropdown.Button asChild disabled={props.queries.length === 0}>
           <Button variant="tertiary" sx={{ '> button': { px: Spacing['8px'] } }}>
-            <Icon.CaretDown sx={{ transform: 'translateY(-4px)' }} />
+            <Icon.CaretDown sx={{ transform: 'translateY(-4px)', opacity: props.queries.length ? 1 : 0 }} />
           </Button>
         </Dropdown.Button>
       </Flex>
