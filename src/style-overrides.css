@@ -194,3 +194,7 @@ button.graphiql-execute-button {
 .graphiql-container .graphiql-editors.full-height {
   margin-top: unset;
 }
+
+.graphiql-history.graphiql-history {
+  max-width: 380px;
+}
