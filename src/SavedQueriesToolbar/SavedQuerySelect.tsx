@@ -2,8 +2,8 @@
 
 import {
   BorderRadius,
-  buildBorder,
   Flex,
+  Icon,
   NewGDSButton as Button,
   NewGDSDropdown as Dropdown,
   NewGDSInput as Input,
@@ -33,7 +33,14 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
         if (queryId != null) props.onMenuItemClick(queryId)
       }}
     >
-      <Flex direction="row" sx={{ bg: 'White4', borderRadius: BorderRadius.S, flexGrow: 0 }}>
+      <Flex
+        direction="row"
+        sx={{
+          bg: 'White4',
+          borderRadius: BorderRadius.S,
+          flexGrow: 0,
+        }}
+      >
         <Flex as="label" align="center" sx={{ pr: Spacing['16px'] }}>
           <Input
             name="query-name"
@@ -41,6 +48,7 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
             value={props.currentQueryName}
             onClick={(e) => e.stopPropagation()}
             onChange={(event) => props.onChangeQueryName(event.target.value)}
+            placeholder="Untitled Query"
             sx={{
               '> div > div': {
                 py: 0,
@@ -57,17 +65,13 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
           />
           {isCurrentDefault && <DefaultQueryChip />}
         </Flex>
-        <Dropdown.Button asChild>
+        <Dropdown.Button asChild disabled={props.queries.length === 0}>
           <Button variant="tertiary" sx={{ '> button': { px: Spacing['8px'] } }}>
-            <img
-              alt="Open saved queries select"
-              src="https://storage.googleapis.com/graph-web/query-selector-icon.svg"
-              sx={{ width: Spacing['16px'], height: Spacing['16px'] }}
-            />
+            <Icon.CaretDown sx={{ transform: 'translateY(-4px)', opacity: props.queries.length ? 1 : 0 }} />
           </Button>
         </Dropdown.Button>
       </Flex>
-      {/* TOOD: Open menu starting from the top — cover the whole input */}
+      {/* TODO: Open menu starting from the top — cover the whole input */}
       <Dropdown.Menu align="end">
         {props.queries.map((query) => {
           return (
