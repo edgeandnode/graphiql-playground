@@ -2,7 +2,15 @@
 
 import { BorderRadius, Chip, FontSize, FontWeight, Spacing } from '@edgeandnode/components'
 
-export function DefaultQueryChip() {
+export interface DefaultQueryChipProps {
+  visible: boolean
+}
+export function DefaultQueryChip({ visible }: DefaultQueryChipProps) {
+  // We want to preserve the space for the chip even when it's not visible.
+  if (!visible) {
+    return <div sx={{ width: '56px' }} />
+  }
+
   return (
     <Chip
       sx={{

@@ -58,20 +58,20 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
               },
               input: {
                 height: '48px',
-                width: '240px',
+                width: '220px',
                 textIndent: '0.5em',
               },
             }}
           />
-          {isCurrentDefault && <DefaultQueryChip />}
+          <DefaultQueryChip visible={!!isCurrentDefault} />
         </Flex>
         <Dropdown.Button asChild disabled={props.queries.length === 0}>
-          <Button variant="tertiary" sx={{ '> button': { px: Spacing['8px'] } }}>
+          <Button variant="tertiary" sx={{ '> button': { width: '48px', height: '48px', px: 0 }, flexShrink: 0 }}>
             <Icon.CaretDown sx={{ transform: 'translateY(-4px)', opacity: props.queries.length ? 1 : 0 }} />
           </Button>
         </Dropdown.Button>
       </Flex>
-      {/* TODO: Open menu starting from the top — cover the whole input */}
+      {/* TODO: Carl's redesign for better multichoice menu */}
       <Dropdown.Menu align="end">
         {props.queries.map((query) => {
           return (
