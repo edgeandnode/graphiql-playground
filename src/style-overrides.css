@@ -59,13 +59,24 @@
 }
 
 .graphiql-container .graphiql-sidebar.graphiql-sidebar {
-  padding: var(--px-8) var(--px-2) var(--px-8) var(--px-2);
+  padding: 10px 2px 8px 4px;
   overflow: visible;
 }
 
 .graphiql-sidebar {
-  & button {
+  && button {
     border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > svg {
+      width: 20px;
+      height: 20px;
+    }
+    &:not(:first-child) {
+      margin-top: 8px;
+    }
     &:hover {
       background-color: var(--theme-ui-colors-White4);
     }
@@ -205,4 +216,12 @@ button.graphiql-execute-button {
 
 .graphiql-explorer-actions {
   display: none;
+}
+
+.CodeMirror .CodeMirror-sizer {
+  margin-left: 0;
+}
+
+.graphiql-operation-title-bar.graphiql-operation-title-bar {
+  margin-top: 16px;
 }

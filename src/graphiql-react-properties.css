@@ -14,14 +14,14 @@ reach-portal {
   --color-base: 0, 0%, 0%;
 
   /* Font */
-  --font-family: "EuclidCircular", sans-serif;
-  --font-family-mono: "Fira Code", monospace;
+  --font-family: 'EuclidCircular', sans-serif;
+  --font-family-mono: 'Fira Code', monospace;
   --font-size-hint: calc(12rem / 16);
   --font-size-inline-code: calc(13rem / 16);
   --font-size-body: calc(13rem / 16);
   --font-size-h4: calc(18rem / 16);
-  --font-size-h3: calc(22rem / 16);
-  --font-size-h2: calc(29rem / 16);
+  --font-size-h3: calc(20rem / 16);
+  --font-size-h2: calc(20rem / 16);
   --font-weight-regular: 400;
   --font-weight-medium: 500;
   --line-height: 1.5;
@@ -43,13 +43,12 @@ reach-portal {
   --border-radius-8: 8px;
   --border-radius-12: 12px;
 
-  --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13),
-    0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
+  --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13), 0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
     0px 0.399006px 1.33002px rgba(59, 76, 106, 0.0525061);
   --popover-border: 1px solid var(--theme-ui-colors-White16);
 
   /* Layout */
-  --sidebar-width: 44px;
+  --sidebar-width: 48px;
   --toolbar-width: 40px;
   --session-header-height: 51px;
 }
@@ -85,3 +84,4 @@ reach-portal {
     }
   }
 }
+
