@@ -41,7 +41,7 @@ export function SavedQuerySelect(props: SavedQuerySelectProps) {
           flexGrow: 0,
         }}
       >
-        <Flex as="label" align="center" sx={{ pr: Spacing['16px'] }}>
+        <Flex as="label" align="center" sx={{ pr: Spacing['8px'] }}>
           <Input
             name="query-name"
             autoComplete="off"
