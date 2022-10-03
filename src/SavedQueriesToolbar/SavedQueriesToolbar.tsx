@@ -98,7 +98,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
       className={props.className}
     >
       <SavedQuerySelect
-        queries={[]}
+        queries={queries}
         currentQueryId={currentQueryId}
         currentQueryName={queryNameDraft}
         onMenuItemClick={(queryId) => {
