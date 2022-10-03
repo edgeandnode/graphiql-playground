@@ -192,6 +192,7 @@ button.graphiql-execute-button {
 
 .graphiql-session-header {
   padding-bottom: 8px;
+  padding-right: 8px;
 }
 
 .CodeMirror-scroll {
@@ -215,7 +216,7 @@ button.graphiql-execute-button {
 }
 
 .graphiql-explorer-actions {
-  display: none;
+  display: none !important;
 }
 
 .CodeMirror .CodeMirror-sizer {
@@ -224,4 +225,9 @@ button.graphiql-execute-button {
 
 .graphiql-operation-title-bar.graphiql-operation-title-bar {
   margin-top: 16px;
+}
+
+.graphiql-history-header,
+.doc-explorer-title {
+  padding-top: 5px;
 }
