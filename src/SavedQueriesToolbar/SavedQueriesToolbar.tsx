@@ -92,13 +92,12 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
         '*': {
           boxSizing: 'border-box',
         },
-        pl: Spacing['8px'],
         width: '100%',
       }}
       className={props.className}
     >
       <SavedQuerySelect
-        queries={[]}
+        queries={queries}
         currentQueryId={currentQueryId}
         currentQueryName={queryNameDraft}
         onMenuItemClick={(queryId) => {
@@ -141,7 +140,6 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
           <ActionsMenu.Item onClick={() => void handleActionSelected('New query')}>New query</ActionsMenu.Item>
         </ActionsMenu>
       )}
-      <div sx={{ width: '4px' }} />
       <SavedQueriesSnackbar
         messageType={snackbarMessage}
         onUndoDelete={() => setQueryDeletionPending(false)}

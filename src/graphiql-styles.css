@@ -1,4 +1,6 @@
-/* This is graphiql/graphiql.css without the fonts. */
+/* This is graphiql/graphiql.css
+   - without the fonts
+   - and without dark mode Custom Properties */
 
 .graphiql-container,
 .CodeMirror-info,
@@ -13,8 +15,8 @@ reach-portal {
   --color-error: 13, 93%, 58%;
   --color-neutral: 219, 28%, 32%;
   --color-base: 219, 28%, 100%;
-  --font-family: "EuclidCircular", sans-serif;
-  --font-family-mono: "Fira Code", monospace;
+  --font-family: 'EuclidCircular', sans-serif;
+  --font-family-mono: 'Fira Code', monospace;
   --font-size-hint: 0.75rem;
   --font-size-inline-code: 0.8125rem;
   --font-size-body: 0.9375rem;
@@ -37,47 +39,12 @@ reach-portal {
   --border-radius-4: 4px;
   --border-radius-8: 8px;
   --border-radius-12: 12px;
-  --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13),
-    0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
+  --popover-box-shadow: 0px 6px 20px rgba(59, 76, 106, 0.13), 0px 1.34018px 4.46726px rgba(59, 76, 106, 0.0774939),
     0px 0.399006px 1.33002px rgba(59, 76, 106, 0.0525061);
   --popover-border: none;
   --sidebar-width: 44px;
   --toolbar-width: 40px;
   --session-header-height: 51px;
-}
-@media (prefers-color-scheme: dark) {
-  body:not(.graphiql-light) .graphiql-container,
-  body:not(.graphiql-light) .CodeMirror-info,
-  body:not(.graphiql-light) .CodeMirror-lint-tooltip,
-  body:not(.graphiql-light) reach-portal {
-    --color-primary: 338, 100%, 67%;
-    --color-secondary: 243, 100%, 77%;
-    --color-tertiary: 188, 100%, 44%;
-    --color-info: 208, 100%, 72%;
-    --color-success: 158, 100%, 42%;
-    --color-warning: 30, 100%, 80%;
-    --color-error: 13, 100%, 58%;
-    --color-neutral: 219, 29%, 78%;
-    --color-base: 219, 29%, 18%;
-    --popover-box-shadow: none;
-    --popover-border: 1px solid hsl(var(--color-neutral));
-  }
-}
-body.graphiql-dark .graphiql-container,
-body.graphiql-dark .CodeMirror-info,
-body.graphiql-dark .CodeMirror-lint-tooltip,
-body.graphiql-dark reach-portal {
-  --color-primary: 338, 100%, 67%;
-  --color-secondary: 243, 100%, 77%;
-  --color-tertiary: 188, 100%, 44%;
-  --color-info: 208, 100%, 72%;
-  --color-success: 158, 100%, 42%;
-  --color-warning: 30, 100%, 80%;
-  --color-error: 13, 100%, 58%;
-  --color-neutral: 219, 29%, 78%;
-  --color-base: 219, 29%, 18%;
-  --popover-box-shadow: none;
-  --popover-border: 1px solid hsl(var(--color-neutral));
 }
 :is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal),
 :is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal):is(button) {
@@ -87,22 +54,18 @@ body.graphiql-dark reach-portal {
   font-weight: var(----font-weight-regular);
   line-height: var(--line-height);
 }
-:is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal)
-  input {
+:is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal) input {
   color: hsla(var(--color-neutral), 1);
   font-family: var(--font-family);
   font-size: var(--font-size-caption);
 }
-:is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal)
-  input::placeholder {
+:is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal) input::placeholder {
   color: hsla(var(--color-neutral), 0.6);
 }
-:is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal)
-  a {
+:is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal) a {
   color: hsl(var(--color-primary));
 }
-:is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal)
-  a:focus {
+:is(.graphiql-container, .CodeMirror-info, .CodeMirror-lint-tooltip, reach-portal) a:focus {
   outline: hsl(var(--color-primary)) auto 1px;
 }
 .graphiql-un-styled,
@@ -247,7 +210,7 @@ button.graphiql-button {
   animation: flash 0.1s;
   animation-iteration-count: 1;
 }
-[data-reach-listbox-option][aria-disabled="true"] {
+[data-reach-listbox-option][aria-disabled='true'] {
   opacity: 0.5;
 }
 [data-reach-listbox-button] {
@@ -260,7 +223,7 @@ button.graphiql-button {
   cursor: default;
   user-select: none;
 }
-[data-reach-listbox-button][aria-disabled="true"] {
+[data-reach-listbox-button][aria-disabled='true'] {
   opacity: 0.5;
 }
 [data-reach-listbox-arrow] {
@@ -446,57 +409,42 @@ button.graphiql-button {
   > :last-child {
   margin-bottom: 0;
 }
-:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info
-    .info-description)
-  a {
+:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info .info-description) a {
   color: hsl(var(--color-primary));
   text-decoration: none;
 }
-:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info
-    .info-description)
+:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info .info-description)
   a:hover {
   text-decoration: underline;
 }
-:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info
-    .info-description)
+:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info .info-description)
   blockquote {
   border-left: 1.5px solid hsla(var(--color-neutral), 0.4);
 }
-:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info
-    .info-description)
-  code,
-:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info
-    .info-description)
-  pre {
+:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info .info-description) code,
+:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info .info-description) pre {
   background-color: hsla(var(--color-neutral), 0.07);
   color: hsla(var(--color-neutral), 1);
 }
-:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info
-    .info-description)
-  > * {
+:is(.graphiql-markdown-description, .CodeMirror-hint-information-description, .CodeMirror-info .info-description) > * {
   margin: var(--px-12) 0;
 }
-:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info
-    .info-deprecation)
+:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info .info-deprecation)
   a {
   color: hsl(var(--color-warning));
   text-decoration: underline;
 }
-:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info
-    .info-deprecation)
+:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info .info-deprecation)
   blockquote {
   border-left: 1.5px solid hsl(var(--color-warning));
 }
-:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info
-    .info-deprecation)
+:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info .info-deprecation)
   code,
-:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info
-    .info-deprecation)
+:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info .info-deprecation)
   pre {
   background-color: hsla(var(--color-warning), 0.15);
 }
-:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info
-    .info-deprecation)
+:is(.graphiql-markdown-deprecation, .CodeMirror-hint-information-deprecation-reason, .CodeMirror-info .info-deprecation)
   > * {
   margin: var(--px-8) 0;
 }
@@ -532,7 +480,7 @@ button.graphiql-button {
   border: 4px solid transparent;
   border-radius: 100%;
   border-top: 4px solid hsla(var(--color-neutral), 0.4);
-  content: "";
+  content: '';
   display: inline-block;
   height: 46px;
   vertical-align: middle;
@@ -768,13 +716,13 @@ a.graphiql-doc-explorer-type-name:focus {
   margin: 0;
   padding: 0.25rem 0.5rem;
 }
-[data-reach-combobox-option][aria-selected="true"] {
+[data-reach-combobox-option][aria-selected='true'] {
   background: hsl(211, 10%, 95%);
 }
 [data-reach-combobox-option]:hover {
   background: hsl(211, 10%, 92%);
 }
-[data-reach-combobox-option][aria-selected="true"]:hover {
+[data-reach-combobox-option][aria-selected='true']:hover {
   background: hsl(211, 10%, 90%);
 }
 [data-suggested-value] {
@@ -783,14 +731,13 @@ a.graphiql-doc-explorer-type-name:focus {
 [data-reach-combobox] {
   color: hsla(var(--color-neutral), 0.6);
 }
-[data-reach-combobox]:not([data-state="idle"]) {
+[data-reach-combobox]:not([data-state='idle']) {
   border: var(--popover-border);
   border-radius: var(--border-radius-4);
   box-shadow: var(--popover-box-shadow);
   color: hsla(var(--color-neutral), 1);
 }
-[data-reach-combobox]:not([data-state="idle"])
-  .graphiql-doc-explorer-search-input {
+[data-reach-combobox]:not([data-state='idle']) .graphiql-doc-explorer-search-input {
   background: hsl(var(--color-base));
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
@@ -892,14 +839,14 @@ a.graphiql-doc-explorer-field-name:focus {
 .graphiql-doc-explorer-header:focus-within .graphiql-doc-explorer-title {
   visibility: hidden;
 }
-.graphiql-doc-explorer-header:focus-within
-  .graphiql-doc-explorer-back:not(:focus) {
+.graphiql-doc-explorer-header:focus-within .graphiql-doc-explorer-back:not(:focus) {
   color: transparent;
 }
 .graphiql-doc-explorer-header-content {
-  display: flex;
-  flex-direction: column;
   min-width: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .graphiql-doc-explorer-search {
   height: 100%;
@@ -1348,7 +1295,7 @@ div.CodeMirror-dragcursors,
   }
 }
 .cm-tab-wrap-hack:after {
-  content: "";
+  content: '';
 }
 span.CodeMirror-selectedtext {
   background: none;
@@ -1471,8 +1418,7 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
 }
 .CodeMirror-foldmarker {
   color: #00f;
-  text-shadow: #b9f 1px 1px 2px, #b9f -1px -1px 2px, #b9f 1px -1px 2px,
-    #b9f -1px 1px 2px;
+  text-shadow: #b9f 1px 1px 2px, #b9f -1px -1px 2px, #b9f 1px -1px 2px, #b9f -1px 1px 2px;
   font-family: arial;
   line-height: 0.3;
   cursor: pointer;
@@ -1485,10 +1431,10 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   cursor: pointer;
 }
 .CodeMirror-foldgutter-open:after {
-  content: "\25be";
+  content: '\25be';
 }
 .CodeMirror-foldgutter-folded:after {
-  content: "\25b8";
+  content: '\25b8';
 }
 .CodeMirror-foldgutter {
   width: var(--px-12);
@@ -1601,59 +1547,19 @@ div.CodeMirror span.CodeMirror-nonmatchingbracket {
   color: hsl(var(--color-error));
 }
 .CodeMirror-lint-mark-error {
-  background-image: linear-gradient(
-      45deg,
-      transparent 65%,
-      hsl(var(--color-error)) 80%,
-      transparent 90%
-    ),
-    linear-gradient(
-      135deg,
-      transparent 5%,
-      hsl(var(--color-error)) 15%,
-      transparent 25%
-    ),
-    linear-gradient(
-      135deg,
-      transparent 45%,
-      hsl(var(--color-error)) 55%,
-      transparent 65%
-    ),
-    linear-gradient(
-      45deg,
-      transparent 25%,
-      hsl(var(--color-error)) 35%,
-      transparent 50%
-    );
+  background-image: linear-gradient(45deg, transparent 65%, hsl(var(--color-error)) 80%, transparent 90%),
+    linear-gradient(135deg, transparent 5%, hsl(var(--color-error)) 15%, transparent 25%),
+    linear-gradient(135deg, transparent 45%, hsl(var(--color-error)) 55%, transparent 65%),
+    linear-gradient(45deg, transparent 25%, hsl(var(--color-error)) 35%, transparent 50%);
 }
 .cm-s-graphiql .CodeMirror-lint-mark-warning {
   color: hsl(var(--color-warning));
 }
 .CodeMirror-lint-mark-warning {
-  background-image: linear-gradient(
-      45deg,
-      transparent 65%,
-      hsl(var(--color-warning)) 80%,
-      transparent 90%
-    ),
-    linear-gradient(
-      135deg,
-      transparent 5%,
-      hsl(var(--color-warning)) 15%,
-      transparent 25%
-    ),
-    linear-gradient(
-      135deg,
-      transparent 45%,
-      hsl(var(--color-warning)) 55%,
-      transparent 65%
-    ),
-    linear-gradient(
-      45deg,
-      transparent 25%,
-      hsl(var(--color-warning)) 35%,
-      transparent 50%
-    );
+  background-image: linear-gradient(45deg, transparent 65%, hsl(var(--color-warning)) 80%, transparent 90%),
+    linear-gradient(135deg, transparent 5%, hsl(var(--color-warning)) 15%, transparent 25%),
+    linear-gradient(135deg, transparent 45%, hsl(var(--color-warning)) 55%, transparent 65%),
+    linear-gradient(45deg, transparent 25%, hsl(var(--color-warning)) 35%, transparent 50%);
 }
 .CodeMirror-lint-tooltip {
   background-color: hsl(var(--color-base));
@@ -2064,7 +1970,7 @@ button.graphiql-tab-add > svg {
 .graphiql-container .graphiql-horizontal-drag-bar:hover::after {
   border: var(--px-2) solid hsla(var(--color-neutral), 0.15);
   border-radius: var(--border-radius-2);
-  content: "";
+  content: '';
   display: block;
   height: 25%;
   margin: 0 auto;

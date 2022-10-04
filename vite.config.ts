@@ -8,7 +8,7 @@ const libraryBuildOptions: BuildOptions = {
     entry: path.resolve(__dirname, 'src', 'index.tsx'),
     name: 'GraphiQLPlayground',
     formats: ['es', 'cjs'],
-    fileName: (format) => `index.${format}.js`,
+    fileName: (format) => `index.${format === 'cjs' ? 'cjs' : 'mjs'}`,
   },
   rollupOptions: {
     external: ['react/jsx-runtime', 'theme-ui/jsx-runtime', '@emotion/react/jsx-runtime'],
