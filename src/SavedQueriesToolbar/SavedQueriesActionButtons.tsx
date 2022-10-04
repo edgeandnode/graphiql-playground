@@ -2,7 +2,7 @@
 
 import { Flex, NewGDSButton as Button, Spacing } from '@edgeandnode/components'
 
-import { SnackbarMessageType } from './SavedQueriesSnackbar'
+import { SnackbarMessageType } from './messages'
 import { SavedQuery } from './types'
 import { validateQuery, ValidationStatus } from './validation'
 
@@ -40,6 +40,8 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
 }: SavedQueriesActionButtonsProps<TQuery>) {
   const canResetChanges =
     currentQuery !== null && (currentQuery.query !== querySourceDraft || currentQuery.name !== queryNameDraft)
+
+  console.log('>> canResetChanges', { currentQuery, queryNameDraft, querySourceDraft })
 
   const handleSaveAsNewClick = async () => {
     const name = queryNameDraft || currentQuery?.name || ''
