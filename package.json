@@ -28,8 +28,8 @@
     "build": "vite build && tsc --declaration --emitDeclarationOnly",
     "build:demo": "cross-env BUILD_DEMO=1 vite build",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint src/** --ext .ts --ext .tsx",
-    "lint:fix": "eslint src/** --ext .ts --ext .tsx --fix",
+    "lint": "eslint src/**/*.{ts,tsx}",
+    "lint:fix": "eslint src/**/*.{ts,tsx}",
     "format": "prettier --write ./src/**/*.{ts,tsx}",
     "ci": "pnpm typecheck && pnpm lint"
   },
