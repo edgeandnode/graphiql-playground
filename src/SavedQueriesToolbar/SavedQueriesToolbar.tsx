@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import { useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Flex, Spacing } from '@edgeandnode/components'
 
@@ -47,17 +47,20 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
   }
   const currentQuery = findSavedQuery(currentQueryId)
 
+  const currentQueryName = currentQuery?.name || ''
   // potential rename state for existing queries, name for new queries.
-  const [queryNameDraft, setQueryNameDraft] = useState(currentQuery ? currentQuery.name : '')
+  const [queryNameDraft, setQueryNameDraft] = useState(currentQueryName)
+  useEffect(() => setQueryNameDraft(currentQueryName), [currentQueryName])
 
   const isQueryDeletionPending = useRef(false)
+  const confirmPendingDelete = () => {
+    if (isQueryDeletionPending.current) void props.onDeleteQuery()
+  }
 
   const setSnackbarMessage = (message: SnackbarMessageType) =>
     props.onToast(
       toToastMessage(message, {
-        confirmDelete: () => {
-          if (isQueryDeletionPending.current) void props.onDeleteQuery()
-        },
+        confirmDelete: confirmPendingDelete,
         undoDelete: () => {
           isQueryDeletionPending.current = false
         },
@@ -86,7 +89,11 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
           setSnackbarMessage('error-deleteDefault')
           return
         }
+        // This is the first part of two-part action with confirmation
         isQueryDeletionPending.current = true
+        const otherQueries = queries.filter((x) => x.id !== currentQueryId)
+        // We select another query optimistically, even before the old one is removed.
+        props.onSelectQuery(otherQueries[0]?.id || null)
         setSnackbarMessage('success-delete')
         return
 
@@ -113,6 +120,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
         currentQueryId={currentQueryId}
         currentQueryName={queryNameDraft}
         onMenuItemClick={(queryId) => {
+          confirmPendingDelete()
           props.onSelectQuery(queryId)
           const query = findSavedQuery(queryId)
 
