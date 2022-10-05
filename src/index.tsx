@@ -5,7 +5,12 @@ import { ReactNode, useEffect, useState } from 'react'
 
 import { SavedQuery } from './SavedQueriesToolbar/types'
 import { GraphiQLInterface, GraphiQLToolbar } from './GraphiQLInterface'
-import { SavedQueriesContext, SavedQueriesContextProvider, SavedQueriesToolbar } from './SavedQueriesToolbar'
+import {
+  SavedQueriesContext,
+  SavedQueriesContextProvider,
+  SavedQueriesToolbar,
+  ToastMessage as _ToastMessage,
+} from './SavedQueriesToolbar'
 
 import '@graphiql/react/font/fira-code.css'
 import '@graphiql/plugin-explorer/dist/style.css'
@@ -93,6 +98,7 @@ GraphProtocolGraphiQL.SavedQueriesToolbar = SavedQueriesToolbar
 export declare namespace GraphProtocolGraphiQL {
   export interface FetcherOptions extends CreateFetcherOptions {}
   export interface Storage extends GraphiQLStorage {}
+  export interface ToastMessage extends _ToastMessage {}
 }
 
 export * from './SavedQueriesToolbar/types'

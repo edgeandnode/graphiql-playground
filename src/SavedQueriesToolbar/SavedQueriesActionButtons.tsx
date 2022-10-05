@@ -2,7 +2,7 @@
 
 import { Flex, NewGDSButton as Button, Spacing } from '@edgeandnode/components'
 
-import { SnackbarMessageType } from './SavedQueriesSnackbar'
+import { SnackbarMessageType } from './messages'
 import { SavedQuery } from './types'
 import { validateQuery, ValidationStatus } from './validation'
 

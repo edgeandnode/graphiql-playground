@@ -1,13 +1,13 @@
 /** @jsxImportSource theme-ui */
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import { Flex, Spacing } from '@edgeandnode/components'
 
 import { ActionsMenu } from './ActionsMenu'
+import { SnackbarMessageType, ToastMessage, toToastMessage } from './messages'
 import { SavedQueriesActionButtons, SavedQueriesActionButtonsProps } from './SavedQueriesActionButtons'
 import { useSavedQueriesContext } from './SavedQueriesContext'
-import { SavedQueriesSnackbar, SnackbarMessageType } from './SavedQueriesSnackbar'
 import { SavedQuerySelect } from './SavedQuerySelect'
 import type { SavedQuery } from './types'
 
@@ -34,6 +34,7 @@ export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
   isMobile: boolean
   className?: string
   actionButtonsClassName?: string
+  onToast: (message: ToastMessage) => void
 }
 
 export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueriesToolbarProps<TQuery>) {
@@ -49,8 +50,19 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
   // potential rename state for existing queries, name for new queries.
   const [queryNameDraft, setQueryNameDraft] = useState(currentQuery ? currentQuery.name : '')
 
-  const [isQueryDeletionPending, setQueryDeletionPending] = useState(false)
-  const [snackbarMessage, setSnackbarMessage] = useState<SnackbarMessageType>()
+  const isQueryDeletionPending = useRef(false)
+
+  const setSnackbarMessage = (message: SnackbarMessageType) =>
+    props.onToast(
+      toToastMessage(message, {
+        confirmDelete: () => {
+          if (isQueryDeletionPending.current) void props.onDeleteQuery()
+        },
+        undoDelete: () => {
+          isQueryDeletionPending.current = false
+        },
+      }),
+    )
 
   const handleActionSelected = async (action: QueryAction) => {
     switch (action) {
@@ -74,7 +86,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
           setSnackbarMessage('error-deleteDefault')
           return
         }
-        setQueryDeletionPending(true)
+        isQueryDeletionPending.current = true
         setSnackbarMessage('success-delete')
         return
 
@@ -140,15 +152,6 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
           <ActionsMenu.Item onClick={() => void handleActionSelected('New query')}>New query</ActionsMenu.Item>
         </ActionsMenu>
       )}
-      <SavedQueriesSnackbar
-        messageType={snackbarMessage}
-        onUndoDelete={() => setQueryDeletionPending(false)}
-        onClose={() => {
-          // The snackbar is used as a confirmation prompt here.
-          if (isQueryDeletionPending) void props.onDeleteQuery()
-          setSnackbarMessage(undefined)
-        }}
-      />
     </Flex>
   )
 }
