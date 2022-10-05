@@ -56,11 +56,9 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
     props.onToast(
       toToastMessage(message, {
         confirmDelete: () => {
-          console.log('CONFIRM DELETE')
           if (isQueryDeletionPending.current) void props.onDeleteQuery()
         },
         undoDelete: () => {
-          console.log('UNDO DELETE')
           isQueryDeletionPending.current = false
         },
       }),

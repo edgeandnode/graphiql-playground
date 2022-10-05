@@ -41,8 +41,6 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
   const canResetChanges =
     currentQuery !== null && (currentQuery.query !== querySourceDraft || currentQuery.name !== queryNameDraft)
 
-  console.log('>> canResetChanges', { currentQuery, queryNameDraft, querySourceDraft })
-
   const handleSaveAsNewClick = async () => {
     const name = queryNameDraft || currentQuery?.name || ''
 
