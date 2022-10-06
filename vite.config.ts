@@ -25,5 +25,9 @@ export default defineConfig({
   build: process.env.BUILD_DEMO ? demoBuildOptions : libraryBuildOptions,
   esbuild: {
     jsx: 'automatic',
+    logOverride: {
+      // https://github.com/vitejs/vite/issues/8644
+      'this-is-undefined-in-esm': 'silent',
+    },
   },
 })
