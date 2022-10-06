@@ -1,6 +1,6 @@
 {
   "name": "@edgeandnode/graphiql-playground",
-  "version": "0.1.17",
+  "version": "0.1.18",
   "type": "commonjs",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -26,6 +26,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build && tsc --declaration --emitDeclarationOnly",
+    "release": "pnpm build && pnpm publish",
     "build:demo": "cross-env BUILD_DEMO=1 vite build",
     "typecheck": "tsc --noEmit",
     "lint": "eslint src/**/*.{ts,tsx}",

@@ -108,7 +108,7 @@ export type GraphiQLInterfaceProps = WriteableEditorProps &
     /**
      * Slot for SavedQueriesToolbar
      */
-    header: ReactNode
+    header?: ReactNode
   }
 
 export function GraphiQLInterface(props: GraphiQLInterfaceProps) {

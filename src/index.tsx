@@ -40,7 +40,7 @@ export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
   /** used for initial state if ther eare no savedQueries  */
   defaultQuery?: string
   /** slot for GraphProtocolGraphiQL.SavedQueriesToolbar */
-  header: ReactNode
+  header?: ReactNode
 }
 
 export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
