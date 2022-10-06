@@ -169,7 +169,7 @@ button.graphiql-execute-button {
 
 .graphiql-container .graphiql-sessions.graphiql-sessions {
   background-color: transparent;
-  margin-top: 8px;
+  margin-top: 0;
   margin-bottom: 8px;
 }
 
@@ -191,6 +191,7 @@ button.graphiql-execute-button {
 }
 
 .graphiql-session-header {
+  padding-top: 8px;
   padding-bottom: 8px;
   padding-right: 8px;
 }

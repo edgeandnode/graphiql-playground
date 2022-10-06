@@ -209,7 +209,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
       <div className="graphiql-main">
         <div ref={pluginResize.firstRef}>
           <div className="graphiql-sessions">
-            <div className="graphiql-session-header">{props.header}</div>
+            {props.header && <div className="graphiql-session-header">{props.header}</div>}
             <div id="graphiql-session" className="graphiql-session">
               <div ref={editorResize.firstRef}>
                 <div className={`graphiql-editors${editorContext.tabs.length === 1 ? ' full-height' : ''}`}>
