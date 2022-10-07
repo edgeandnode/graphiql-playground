@@ -1,3 +1,7 @@
+import { savedQueriesReducer as reducer } from './savedQueriesReducer'
+
+const { initialState } = reducer
+
 describe(reducer, () => {
   const queries = [
     { id: 101, name: 'Query 1', query: '{ one }' },
