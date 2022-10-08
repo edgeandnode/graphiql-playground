@@ -38,8 +38,9 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
   onUpdateQuery,
   className,
 }: SavedQueriesActionButtonsProps<TQuery>) {
-  const canResetChanges =
-    currentQuery !== null && (currentQuery.query !== querySourceDraft || currentQuery.name !== queryNameDraft)
+  const nameChanged = !currentQuery || currentQuery.name !== queryNameDraft
+  const sourceChanged = !currentQuery || currentQuery.query !== querySourceDraft
+  const anythingChanged = nameChanged || sourceChanged
 
   const handleSaveAsNewClick = async () => {
     const name = queryNameDraft || currentQuery?.name || ''
@@ -83,6 +84,7 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
         <Button
           size="medium"
           variant="tertiary"
+          disabled={!anythingChanged}
           onClick={() => {
             const name = queryNameDraft || currentQuery.name
 
@@ -113,10 +115,10 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
           Save
         </Button>
       )}
-      <Button size="medium" variant="tertiary" onClick={() => void handleSaveAsNewClick()}>
+      <Button size="medium" variant="tertiary" onClick={() => void handleSaveAsNewClick()} disabled={!nameChanged}>
         Save as new
       </Button>
-      <Button size="medium" variant="tertiary" onClick={onResetChanges} disabled={!canResetChanges}>
+      <Button size="medium" variant="tertiary" onClick={onResetChanges} disabled={!anythingChanged}>
         {/* Reset changes */}
         Cancel
       </Button>
