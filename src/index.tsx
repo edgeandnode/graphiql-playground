@@ -8,7 +8,6 @@ import { GraphiQLInterface, GraphiQLToolbar } from './GraphiQLInterface'
 import {
   SavedQueriesContext,
   SavedQueriesContextProvider,
-  savedQueriesReducer,
   SavedQueriesToolbar,
   ToastMessage as _ToastMessage,
 } from './SavedQueriesToolbar'
@@ -102,4 +101,5 @@ export declare namespace GraphProtocolGraphiQL {
   export interface ToastMessage extends _ToastMessage {}
 }
 
+export { savedQueriesReducer } from './SavedQueriesToolbar'
 export * from './SavedQueriesToolbar/types'
