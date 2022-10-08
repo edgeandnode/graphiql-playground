@@ -8,6 +8,7 @@ import { GraphiQLInterface, GraphiQLToolbar } from './GraphiQLInterface'
 import {
   SavedQueriesContext,
   SavedQueriesContextProvider,
+  savedQueriesReducer,
   SavedQueriesToolbar,
   ToastMessage as _ToastMessage,
 } from './SavedQueriesToolbar'
