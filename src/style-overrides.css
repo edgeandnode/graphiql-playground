@@ -44,7 +44,8 @@
 }
 
 .graphiql-doc-explorer-header.graphiql-doc-explorer-header {
-  height: 40px;
+  height: 48px;
+  margin-top: -7px;
 }
 
 .graphiql-doc-explorer-header-content.graphiql-doc-explorer-header-content {
@@ -52,8 +53,9 @@
 
   & .graphiql-doc-explorer-title {
     font-size: var(--font-size-body);
-    font-weight: bold;
-    margin-left: 12px;
+    font-weight: 600;
+    color: var(--theme-ui-colors-White88);
+    margin: 0;
   }
 }
 
@@ -65,6 +67,11 @@
   &:focus-within {
     position: absolute;
     width: 100%;
+  }
+
+  & .graphiql-doc-explorer-search-input {
+    box-sizing: border-box;
+    height: 48px;
   }
 }
 
@@ -241,7 +248,10 @@ button.graphiql-execute-button {
 
 .graphiql-history-header,
 .doc-explorer-title {
-  padding-top: 5px;
+  padding-top: 7px;
+  font-size: var(--font-size-body);
+  font-weight: 600;
+  color: var(--theme-ui-colors-White88);
 }
 
 [data-reach-combobox] {
