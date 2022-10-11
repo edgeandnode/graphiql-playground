@@ -7,8 +7,8 @@ import { SavedQuery } from './types'
 import { validateQuery, ValidationStatus } from './validation'
 
 const disableButtonReasonTooltips = {
-  saveAsNew: 'A new query must have a different name.',
-  save: 'The query must have any changes to save them.',
+  saveAsNew: 'A query already exists with this name.',
+  save: 'No unsaved changes.',
   cancel: 'The query must have any changes to cancel them.',
 }
 
