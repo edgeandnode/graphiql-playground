@@ -43,8 +43,18 @@
   border-left: 1px solid var(--theme-ui-colors-White8);
 }
 
+.graphiql-doc-explorer-header.graphiql-doc-explorer-header {
+  height: 40px;
+}
+
 .graphiql-doc-explorer-header-content.graphiql-doc-explorer-header-content {
   min-width: 0;
+
+  & .graphiql-doc-explorer-title {
+    font-size: var(--font-size-body);
+    font-weight: bold;
+    margin-left: 12px;
+  }
 }
 
 .graphiql-doc-explorer-search.graphiql-doc-explorer-search {
@@ -232,4 +242,8 @@ button.graphiql-execute-button {
 .graphiql-history-header,
 .doc-explorer-title {
   padding-top: 5px;
+}
+
+[data-reach-combobox] {
+  z-index: 1;
 }
