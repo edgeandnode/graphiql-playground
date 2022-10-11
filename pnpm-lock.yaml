@@ -1,7 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@edgeandnode/components': ^23.7.1
+  '@edgeandnode/components': ^23.8.0-rc.1
   '@edgeandnode/eslint-config': ^1.0.3
   '@emotion/react': '>=11'
   '@graphiql/plugin-explorer': 0.1.0
@@ -34,7 +34,7 @@ dependencies:
   '@graphiql/toolkit': 0.7.3_@types+node@18.7.13
 
 devDependencies:
-  '@edgeandnode/components': 23.7.1_3lp5xpj6l2qrmy37j4k465pe7y
+  '@edgeandnode/components': 23.8.0-rc.1_3lp5xpj6l2qrmy37j4k465pe7y
   '@edgeandnode/eslint-config': 1.0.3_4rv7y5c6xz3vfxwhbrcxxi73bq
   '@emotion/react': 11.10.0_tu23i5xxn6kbev62oblybgbdem
   '@jest/types': 29.1.2
@@ -547,8 +547,8 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@edgeandnode/components/23.7.1_3lp5xpj6l2qrmy37j4k465pe7y:
-    resolution: {integrity: sha512-GZYJt+4F4x0CaObn6A8Ns75XFLquzNX1mrfzu6W0POw7JrK97Sm1DMiLv1SG4uldxnenPx6oHWzZIozJilZhTA==}
+  /@edgeandnode/components/23.8.0-rc.1_3lp5xpj6l2qrmy37j4k465pe7y:
+    resolution: {integrity: sha512-sQCfSzYD6m7FVD5vcvVSv6gMTNkA5JEiuFa8iu2hAYxTbuCxQJgNed5+rykskQVtpPVrrUjj5mado9oJn4fb9A==}
     peerDependencies:
       '@emotion/react': ^11.10.4
       '@mdx-js/react': ^1.6.22

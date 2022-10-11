@@ -1,7 +1,7 @@
 import React, { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
 
-import { ThemeProvider, Toast } from '@edgeandnode/components'
+import { ThemeProvider, Toast, ToastProvider, ToastViewport } from '@edgeandnode/components'
 
 import { GraphProtocolGraphiQL } from '../src'
 import { SavedQuery } from '../src/SavedQueriesToolbar/types'
@@ -90,18 +90,22 @@ function Demo() {
           />
         }
       />
-      {/* TODO: I'm not quite sure if this is the best public API. */}
-      <Toast
-        open={!!toast}
-        severity={toast?.severity || 'error'}
-        title={toast?.title || ''}
-        action={toast?.action}
-        description={toast?.description}
-        onClose={() => {
-          toast?.onClose?.()
-          setToast(undefined)
-        }}
-      />
+      <ToastProvider>
+        <ToastViewport>
+          {/* TODO: I'm not quite sure if this is the best public API. */}
+          <Toast
+            open={!!toast}
+            severity={toast?.severity || 'error'}
+            title={toast?.title || ''}
+            action={toast?.action}
+            description={toast?.description}
+            onClose={() => {
+              toast?.onClose?.()
+              setToast(undefined)
+            }}
+          />
+        </ToastViewport>
+      </ToastProvider>
     </>
   )
 }

@@ -101,4 +101,5 @@ export declare namespace GraphProtocolGraphiQL {
   export interface ToastMessage extends _ToastMessage {}
 }
 
+export { savedQueriesReducer } from './SavedQueriesToolbar'
 export * from './SavedQueriesToolbar/types'
