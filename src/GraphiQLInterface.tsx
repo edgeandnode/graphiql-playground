@@ -205,7 +205,11 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
   const editorToolsEnabled = isVariablesEditorEnabled || isHeadersEditorEnabled
 
   return (
-    <div data-testid="graphiql-container" className="graphiql-container">
+    <div
+      data-testid="graphiql-container"
+      className="graphiql-container"
+      onClick={preventDocsBackButtonFromNavigatingToIndexPage}
+    >
       <div className="graphiql-main">
         <div ref={pluginResize.firstRef}>
           <div className="graphiql-sessions">
@@ -608,4 +612,11 @@ function _UnusedSettingsDialog({
       ) : null}
     </Dialog>
   )
+}
+
+function preventDocsBackButtonFromNavigatingToIndexPage(event: Event) {
+  const target = event.target as HTMLElement
+  if (target.nodeName === 'A') {
+    event.preventDefault()
+  }
 }
