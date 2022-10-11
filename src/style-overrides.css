@@ -268,3 +268,11 @@ button.graphiql-execute-button {
   left: 0;
   color: var(--theme-ui-colors-White64);
 }
+
+.graphiql-dialog-close > svg {
+  box-sizing: unset;
+}
+.graphiql-dialog-close:hover,
+.graphiql-dialog-close:focus {
+  background-color: var(--theme-ui-colors-White8);
+}

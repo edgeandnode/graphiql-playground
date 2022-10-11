@@ -49,6 +49,8 @@ import {
 } from '@graphiql/react'
 import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react'
 
+import { Spacing } from '@edgeandnode/components'
+
 export type GraphiQLToolbarConfig = {
   /**
    * This content will be rendered after the built-in buttons of the toolbar.
@@ -494,7 +496,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                 </tr>
               </tbody>
             </table>
-            <p>
+            <p style={{ paddingTop: Spacing['8px'], opacity: 0.88 }}>
               The editors use{' '}
               <a href="https://codemirror.net/5/doc/manual.html#keymaps" target="_blank" rel="noopener noreferrer">
                 CodeMirror Key Maps
@@ -614,7 +616,7 @@ function _UnusedSettingsDialog({
   )
 }
 
-function preventDocsBackButtonFromNavigatingToIndexPage(event: Event) {
+function preventDocsBackButtonFromNavigatingToIndexPage(event: React.MouseEvent<HTMLDivElement>) {
   const target = event.target as HTMLElement
   if (target.nodeName === 'A') {
     event.preventDefault()
