@@ -24,7 +24,7 @@ export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
   onSelectQuery: (queryId: TQuery['id'] | null) => void
 
   onSetQueryAsDefault: () => Promise<void>
-  onDeleteQuery: () => Promise<void>
+  onDeleteQuery: (queryId: TQuery['id']) => Promise<void>
 
   showActions: boolean
   isOwner: boolean
@@ -52,9 +52,12 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
   const [queryNameDraft, setQueryNameDraft] = useState(currentQueryName)
   useEffect(() => setQueryNameDraft(currentQueryName), [currentQueryName])
 
-  const isQueryDeletionPending = useRef(false)
+  const pendingQueryDeletion = useRef<TQuery | undefined>()
   const confirmPendingDelete = () => {
-    if (isQueryDeletionPending.current) void props.onDeleteQuery()
+    const query = pendingQueryDeletion.current
+    if (query) {
+      void props.onDeleteQuery(query.id)
+    }
   }
 
   const setSnackbarMessage = (message: SnackbarMessageType) =>
@@ -62,7 +65,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
       toToastMessage(message, {
         confirmDelete: confirmPendingDelete,
         undoDelete: () => {
-          isQueryDeletionPending.current = false
+          pendingQueryDeletion.current = undefined
         },
       }),
     )
@@ -90,7 +93,7 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
           return
         }
         // This is the first part of two-part action with confirmation
-        isQueryDeletionPending.current = true
+        pendingQueryDeletion.current = currentQuery
         const otherQueries = queries.filter((x) => x.id !== currentQueryId)
         // We select another query optimistically, even before the old one is removed.
         props.onSelectQuery(otherQueries[0]?.id || null)
