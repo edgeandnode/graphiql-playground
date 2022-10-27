@@ -86,7 +86,6 @@ function Demo() {
             onUpdateQuery={async ({ name, query }) => {
               setSavedQueries((qs) => qs.map((q) => (q.id === currentQueryId ? { ...q, name, query } : q)))
             }}
-            showActions
           />
         }
       />

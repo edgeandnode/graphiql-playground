@@ -26,7 +26,6 @@ export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
   onSetQueryAsDefault: () => Promise<void>
   onDeleteQuery: (queryId: TQuery['id']) => Promise<void>
 
-  showActions: boolean
   isOwner: boolean
   /**
    * TODO: This should be a media query.

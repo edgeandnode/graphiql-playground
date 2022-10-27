@@ -23,7 +23,7 @@ const Playground = () => {
   return (
     <GraphProtocolGraphiQL
       fetcher={{
-        url: "https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet-staging",
+        url: 'https://api.thegraph.com/subgraphs/name/graphprotocol/graph-network-mainnet-staging',
       }}
       queries={savedQueries}
       currentQueryId={currentQueryId}
@@ -36,12 +36,11 @@ const Playground = () => {
           onDeleteQuery={onDeleteQuery}
           onSetQueryAsDefault={onSetQueryAsDefault}
           onUpdateQuery={onUpdateQuery}
-          showActions
         />
       }
     />
-  );
-};
+  )
+}
 ```
 
 You can find example implementation in [_`/demo/.index.tsx`_](./demo/index.tsx)
