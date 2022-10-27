@@ -41,6 +41,7 @@ export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
   defaultQuery?: string
   /** slot for GraphProtocolGraphiQL.SavedQueriesToolbar */
   header?: ReactNode
+  className?: string
 }
 
 export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
@@ -50,6 +51,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   currentQueryId,
   queries,
   defaultQuery = '',
+  className,
 }: GraphProtocolGraphiQLProps<TQuery>) {
   const [fetcher] = useState(() => createGraphiQLFetcher(fetcherOptions))
   const currentSavedQuery = queries.find((query) => query.id === currentQueryId)
@@ -85,6 +87,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
           isHeadersEditorEnabled={false}
           isVariablesEditorEnabled={false}
           header={header}
+          className={className}
         >
           {TOOLBAR_HIDDEN}
         </GraphiQLInterface>

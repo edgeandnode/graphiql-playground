@@ -111,6 +111,7 @@ export type GraphiQLInterfaceProps = WriteableEditorProps &
      * Slot for SavedQueriesToolbar
      */
     header?: ReactNode
+    className?: string
   }
 
 export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
@@ -209,7 +210,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
   return (
     <div
       data-testid="graphiql-container"
-      className="graphiql-container"
+      className={['graphiql-container', props.className].filter(Boolean).join(' ')}
       onClick={preventDocsBackButtonFromNavigatingToIndexPage}
     >
       <div className="graphiql-main">
