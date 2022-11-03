@@ -88,7 +88,7 @@ describe(reducer, () => {
     expect(state.queries).toEqual([queries[2]])
   })
 
-  it('reads and removes the query id from search params', () => {
+  it('reads and removes the query id from search params', async () => {
     setLocationHref('https://playground.test/?playgroundQuery=123')
 
     const replaceState = jest.fn()
@@ -96,6 +96,8 @@ describe(reducer, () => {
 
     let state = reducer(initialState, { type: 'init', payload: [...queries, { id: 123, query: '', name: '' }] })
     expect(state.currentId).toBe(123)
+
+    await new Promise((resolve) => setTimeout(resolve, 50))
 
     expect(replaceState).toHaveBeenCalledWith({}, '', 'https://playground.test/')
   })
