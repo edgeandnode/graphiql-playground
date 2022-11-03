@@ -43,7 +43,7 @@ export const savedQueriesReducer = <TQuery extends SavedQuery>(
       // hack: this shouldn't be in a reducer
       const queryIdFromSearchParams = pluckQueryIdFromUrl()
       if (queryIdFromSearchParams) {
-        current = current || queries.find((q) => q.id.toString() === queryIdFromSearchParams)
+        current = queries.find((q) => q.id.toString() === queryIdFromSearchParams) || current
       }
 
       return { ...s, queries: a.payload, currentId: current?.id ?? null, initialized: true }
