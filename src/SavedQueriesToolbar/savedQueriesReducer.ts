@@ -4,7 +4,7 @@ import { SavedQuery } from './types'
 interface SavedQueriesState<TQuery extends SavedQuery> {
   queries: TQuery[]
   currentId: TQuery['id'] | null
-  loading: boolean
+  initialized: boolean
 }
 type SavedQueriesAction<TQuery extends SavedQuery> =
   | { type: 'init'; payload: TQuery[] }
@@ -46,7 +46,7 @@ export const savedQueriesReducer = <TQuery extends SavedQuery>(
         current = current || queries.find((q) => q.id.toString() === queryIdFromSearchParams)
       }
 
-      return { ...s, queries: a.payload, currentId: current?.id ?? null }
+      return { ...s, queries: a.payload, currentId: current?.id ?? null, initialized: true }
     }
     default:
       const _exhaustive: never = a
@@ -54,7 +54,7 @@ export const savedQueriesReducer = <TQuery extends SavedQuery>(
   }
 }
 
-const savedQueriesInitialState: SavedQueriesState<SavedQuery> = { queries: [], currentId: null, loading: true }
+const savedQueriesInitialState: SavedQueriesState<SavedQuery> = { queries: [], currentId: null, initialized: false }
 
 savedQueriesReducer.initialState = savedQueriesInitialState
 
