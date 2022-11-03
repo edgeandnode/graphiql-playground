@@ -1,3 +1,4 @@
+import { pluckQueryIdFromUrl } from './queryInSearchParams'
 import { SavedQuery } from './types'
 
 interface SavedQueriesState<TQuery extends SavedQuery> {
@@ -37,7 +38,14 @@ export const savedQueriesReducer = <TQuery extends SavedQuery>(
     case 'init': {
       const queries = a.payload
       const defaultQuery = queries.find((q) => q.isDefault)
-      const current = defaultQuery || queries[0]
+      let current = defaultQuery || queries[0]
+
+      // hack: this shouldn't be in a reducer
+      const queryIdFromSearchParams = pluckQueryIdFromUrl()
+      if (queryIdFromSearchParams) {
+        current = current || queries.find((q) => q.id.toString() === queryIdFromSearchParams)
+      }
+
       return { ...s, queries: a.payload, currentId: current?.id ?? null }
     }
     default:
