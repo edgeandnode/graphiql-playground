@@ -277,3 +277,8 @@ button.graphiql-execute-button {
 .graphiql-dialog-close:focus {
   background-color: var(--theme-ui-colors-White8);
 }
+
+.CodeMirror-scrollbar-filler.CodeMirror-scrollbar-filler,
+.CodeMirror-gutter-filler.CodeMirror-gutter-filler {
+  background-color: transparent;
+}
