@@ -54,7 +54,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   className,
 }: GraphProtocolGraphiQLProps<TQuery>) {
   const [fetcher] = useState(() => createGraphiQLFetcher(fetcherOptions))
-  const currentSavedQuery = queries.find((query) => query.id === currentQueryId)
+  const currentSavedQuery = queries.find((query) => currentQueryId && query.id.toString() === currentQueryId.toString())
 
   const [querySource, setQuerySource] = useState(currentSavedQuery?.query || defaultQuery)
 

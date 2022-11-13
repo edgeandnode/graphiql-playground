@@ -3,11 +3,19 @@ import { savedQueriesReducer as reducer } from './savedQueriesReducer'
 const { initialState } = reducer
 
 describe(reducer, () => {
+  beforeAll(() => setLocationHref('https://playground.test'))
+
   const queries = [
     { id: 101, name: 'Query 1', query: '{ one }' },
     { id: 102, name: 'Query 2', query: '{ two }' },
     { id: 103, name: 'Query 3', query: '{ three }' },
   ]
+
+  it('has initialized set to true after "init"', () => {
+    expect(initialState.initialized).toBe(false)
+    const result = reducer(initialState, { type: 'init', payload: queries })
+    expect(result.initialized).toBe(true)
+  })
 
   it('has default query selected after "init"', () => {
     for (let i = 0; i < queries.length; i++) {
@@ -79,4 +87,24 @@ describe(reducer, () => {
     expect(state.currentId).toBe(103)
     expect(state.queries).toEqual([queries[2]])
   })
+
+  it('reads and removes the query id from search params', async () => {
+    setLocationHref('https://playground.test/?playgroundQuery=123')
+
+    const replaceState = jest.fn()
+    globalThis.window.history = { replaceState } as any
+
+    let state = reducer(initialState, { type: 'init', payload: [...queries, { id: 123, query: '', name: '' }] })
+    expect(state.currentId).toBe(123)
+
+    await new Promise((resolve) => setTimeout(resolve, 50))
+
+    expect(replaceState).toHaveBeenCalledWith({}, '', 'https://playground.test/')
+  })
 })
+
+function setLocationHref(href: string) {
+  ;(globalThis as any).window = {
+    location: { href },
+  } as Window
+}

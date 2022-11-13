@@ -6,6 +6,7 @@ import { Flex, Spacing } from '@edgeandnode/components'
 
 import { ActionsMenu } from './ActionsMenu'
 import { SnackbarMessageType, ToastMessage, toToastMessage } from './messages'
+import { createQuerySharingURL } from './queryInSearchParams'
 import { SavedQueriesActionButtons, SavedQueriesActionButtonsProps } from './SavedQueriesActionButtons'
 import { useSavedQueriesContext } from './SavedQueriesContext'
 import { SavedQuerySelect } from './SavedQuerySelect'
@@ -76,8 +77,11 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
   const handleActionSelected = async (action: QueryAction) => {
     switch (action) {
       case 'Share': {
-        const url = window.location.href
+        if (currentQueryId == null) return
+
+        const url = createQuerySharingURL(currentQueryId)
         await navigator.clipboard.writeText(url)
+
         setSnackbarMessage('success-share')
         return
       }

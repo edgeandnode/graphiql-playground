@@ -1,9 +1,10 @@
+import { pluckQueryIdFromUrl } from './queryInSearchParams'
 import { SavedQuery } from './types'
 
 interface SavedQueriesState<TQuery extends SavedQuery> {
   queries: TQuery[]
   currentId: TQuery['id'] | null
-  loading: boolean
+  initialized: boolean
 }
 type SavedQueriesAction<TQuery extends SavedQuery> =
   | { type: 'init'; payload: TQuery[] }
@@ -37,8 +38,20 @@ export const savedQueriesReducer = <TQuery extends SavedQuery>(
     case 'init': {
       const queries = a.payload
       const defaultQuery = queries.find((q) => q.isDefault)
-      const current = defaultQuery || queries[0]
-      return { ...s, queries: a.payload, currentId: current?.id ?? null }
+      let current = defaultQuery || queries[0]
+
+      // hack: this shouldn't be in a reducer
+      const queryIdFromSearchParams = pluckQueryIdFromUrl()
+
+      if (queryIdFromSearchParams) {
+        const queryFromSearchParams = queries.find((q) => q.id.toString() === queryIdFromSearchParams)
+
+        if (queryFromSearchParams) {
+          current = queryFromSearchParams
+        }
+      }
+
+      return { ...s, queries, currentId: current?.id ?? null, initialized: true }
     }
     default:
       const _exhaustive: never = a
@@ -46,7 +59,7 @@ export const savedQueriesReducer = <TQuery extends SavedQuery>(
   }
 }
 
-const savedQueriesInitialState: SavedQueriesState<SavedQuery> = { queries: [], currentId: null, loading: true }
+const savedQueriesInitialState: SavedQueriesState<SavedQuery> = { queries: [], currentId: null, initialized: false }
 
 savedQueriesReducer.initialState = savedQueriesInitialState
 
