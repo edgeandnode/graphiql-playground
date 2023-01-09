@@ -87,52 +87,58 @@ export function SavedQueriesActionButtons<TQuery extends SavedQuery>({
       className={className}
     >
       {currentQuery && (
-        <Tooltip disabled={anythingChanged} text={disableButtonReasonTooltips.save}>
-          <Button
-            size="medium"
-            variant="tertiary"
-            disabled={!anythingChanged}
-            onClick={() => {
-              const name = queryNameDraft || currentQuery.name
+        <Tooltip content={anythingChanged ? null : disableButtonReasonTooltips.save}>
+          <span>
+            <Button
+              size="medium"
+              variant="tertiary"
+              disabled={!anythingChanged}
+              onClick={() => {
+                const name = queryNameDraft || currentQuery.name
 
-              const validationStatus: ValidationStatus = validateQuery({
-                name,
-                updatedId: currentQuery.id,
-                queries: queries,
-                query: querySourceDraft,
-              })
-
-              if (validationStatus !== 'valid') {
-                setSnackbarMessage(validationStatus)
-                return
-              }
-
-              void onUpdateQuery({
-                name,
-                query: querySourceDraft,
-              })
-                .then(() => {
-                  setSnackbarMessage('success-update')
+                const validationStatus: ValidationStatus = validateQuery({
+                  name,
+                  updatedId: currentQuery.id,
+                  queries: queries,
+                  query: querySourceDraft,
                 })
-                .catch(() => {
-                  setSnackbarMessage('error-update')
+
+                if (validationStatus !== 'valid') {
+                  setSnackbarMessage(validationStatus)
+                  return
+                }
+
+                void onUpdateQuery({
+                  name,
+                  query: querySourceDraft,
                 })
-            }}
-          >
-            Save
-          </Button>
+                  .then(() => {
+                    setSnackbarMessage('success-update')
+                  })
+                  .catch(() => {
+                    setSnackbarMessage('error-update')
+                  })
+              }}
+            >
+              Save
+            </Button>
+          </span>
         </Tooltip>
       )}
-      <Tooltip disabled={nameChanged} text={disableButtonReasonTooltips.saveAsNew}>
-        <Button size="medium" variant="tertiary" onClick={() => void handleSaveAsNewClick()} disabled={!nameChanged}>
-          Save as new
-        </Button>
+      <Tooltip content={nameChanged ? null : disableButtonReasonTooltips.saveAsNew}>
+        <span>
+          <Button size="medium" variant="tertiary" onClick={() => void handleSaveAsNewClick()} disabled={!nameChanged}>
+            Save as new
+          </Button>
+        </span>
       </Tooltip>
-      <Tooltip disabled={anythingChanged} text={disableButtonReasonTooltips.cancel}>
-        <Button size="medium" variant="tertiary" onClick={onResetChanges} disabled={!anythingChanged}>
-          {/* Reset changes */}
-          Cancel
-        </Button>
+      <Tooltip content={anythingChanged ? null : disableButtonReasonTooltips.cancel}>
+        <span>
+          <Button size="medium" variant="tertiary" onClick={onResetChanges} disabled={!anythingChanged}>
+            {/* Reset changes */}
+            Cancel
+          </Button>
+        </span>
       </Tooltip>
     </Flex>
   )

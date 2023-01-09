@@ -5,14 +5,12 @@ import { SavedQuery } from './types'
 export interface SavedQueriesContext<TQuery extends SavedQuery> {
   queries: readonly TQuery[]
   currentQueryId: TQuery['id'] | null
-  querySource: string
   setQuerySource: Dispatch<SetStateAction<string>>
 }
 
 const SavedQueriesContext = createContext<SavedQueriesContext<SavedQuery>>({
   currentQueryId: '',
   queries: [],
-  querySource: '',
   setQuerySource: () => {},
 })
 

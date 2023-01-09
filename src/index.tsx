@@ -77,13 +77,11 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
         value={{
           currentQueryId,
           queries,
-          querySource,
           setQuerySource,
         }}
       >
         <GraphiQLInterface
           editorTheme="graphula"
-          onEditQuery={setQuerySource}
           isHeadersEditorEnabled={false}
           isVariablesEditorEnabled={false}
           header={header}

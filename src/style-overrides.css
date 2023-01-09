@@ -1,3 +1,10 @@
+.graphiql-container.graphiql-container,
+.CodeMirror-info.CodeMirror-info,
+.CodeMirror-lint-tooltip.CodeMirror-lint-tooltip,
+reach-portal {
+  --toolbar-width: 22px;
+}
+
 /* Hide line numbers */
 .CodeMirror-linenumbers,
 .CodeMirror-linenumber,
@@ -155,6 +162,8 @@ button.graphiql-tab-button.graphiql-tab-button {
 }
 
 button.graphiql-execute-button {
+  --size: 40px;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -168,12 +177,12 @@ button.graphiql-execute-button {
   border-radius: 999px;
   cursor: pointer;
   fill: #fff;
-  height: 40px;
   margin: 0;
   padding: 0;
-  width: 40px;
+  width: var(--size);
+  height: var(--size);
   margin-top: 16px;
-  transform: translateX(50%);
+  transform: translateX(calc(var(--toolbar-width) - var(--size) / 2));
   z-index: 1;
 
   &:focus {
@@ -281,4 +290,23 @@ button.graphiql-execute-button {
 .CodeMirror-scrollbar-filler.CodeMirror-scrollbar-filler,
 .CodeMirror-gutter-filler.CodeMirror-gutter-filler {
   background-color: transparent;
+}
+
+/* Fixes to CodeMirror hint popover overflow */
+.CodeMirror-hint-information-header {
+  flex-wrap: wrap;
+  column-gap: 8px;
+}
+.CodeMirror-hint-information-type-name-pill {
+  margin-left: 0;
+}
+.CodeMirror-hints {
+  width: max-content;
+}
+.CodeMirror-hint-information-description {
+  display: flex !important;
+}
+.CodeMirror-hint-information-description > p {
+  width: 190px;
+  flex-grow: 1;
 }
