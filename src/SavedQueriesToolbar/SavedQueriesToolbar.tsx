@@ -1,5 +1,6 @@
 /** @jsxImportSource theme-ui */
 
+import { useEditorContext, useQueryEditor } from '@graphiql/react'
 import { useEffect, useRef, useState } from 'react'
 
 import { Flex, Spacing } from '@edgeandnode/components'
@@ -41,7 +42,15 @@ export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
 }
 
 export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueriesToolbarProps<TQuery>) {
-  const { currentQueryId, queries, querySource: querySourceDraft, setQuerySource } = useSavedQueriesContext<TQuery>()
+  const { currentQueryId, queries, setQuerySource } = useSavedQueriesContext<TQuery>()
+
+  const { queryEditor } = useEditorContext()!
+  const [querySourceDraft, setQuerySourceDraft] = useState(queryEditor?.getValue() || '')
+  useEffect(() => {
+    if (queryEditor) {
+      queryEditor.on('change', (editor) => setQuerySourceDraft(editor.getValue()))
+    }
+  }, [queryEditor])
 
   const findSavedQuery = (queryId: TQuery['id'] | null) => {
     // When we're editing a new query, the id is null.
