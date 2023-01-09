@@ -41,9 +41,9 @@
     "@graphiql/toolkit": "0.8.0"
   },
   "devDependencies": {
-    "@edgeandnode/components": "^24.4.1",
+    "@edgeandnode/components": "^24.4.2",
     "@edgeandnode/eslint-config": "^1.1.0",
-    "@emotion/react": "^11.10.5",
+    "@emotion/react": ">=11",
     "@jest/types": "^29.3.1",
     "@types/codemirror": "^5.60.6",
     "@types/jest": "^29.2.5",
@@ -51,7 +51,7 @@
     "@types/react": "^18.0.26",
     "@types/react-dom": "^18.0.10",
     "@types/rollup-plugin-auto-external": "^2.0.2",
-    "@vitejs/plugin-react": "^3.0.1",
+    "@vitejs/plugin-react": "~2.0.1",
     "cross-env": "^7.0.3",
     "esbuild-jest": "^0.5.0",
     "eslint": "^8.31.0",
@@ -64,7 +64,7 @@
     "rollup-plugin-auto-external": "^2.0.0",
     "theme-ui": "^0.15.4",
     "typescript": "^4.9.4",
-    "vite": "^4.0.4"
+    "vite": "~3.0.7"
   },
   "peerDependencies": {
     "@edgeandnode/components": "^23",
