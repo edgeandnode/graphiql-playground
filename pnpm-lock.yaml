@@ -8,6 +8,7 @@ specifiers:
   '@graphiql/react': 0.15.0
   '@graphiql/toolkit': 0.8.0
   '@jest/types': ^29.3.1
+  '@types/codemirror': ^5.60.6
   '@types/jest': ^29.2.5
   '@types/node': ^18.11.18
   '@types/react': ^18.0.26
@@ -38,6 +39,7 @@ devDependencies:
   '@edgeandnode/eslint-config': 1.1.0_iukboom6ndih5an6iafl45j2fe
   '@emotion/react': 11.10.5_jp5qgyg6plq757v5hojp7ls2oe
   '@jest/types': 29.3.1
+  '@types/codemirror': 5.60.6
   '@types/jest': 29.2.5
   '@types/node': 18.11.18
   '@types/react': 18.0.26
@@ -3447,6 +3449,12 @@ packages:
       '@types/node': 18.11.18
     dev: true
 
+  /@types/codemirror/5.60.6:
+    resolution: {integrity: sha512-JIDPSvkYRlcv/2F0erqD+de2ni/Mz6FJMEGb0vwF6ByQOcHIKfiEfwrO4d6dSRwYeHyNUMpGjev0PyjX2M0XWw==}
+    dependencies:
+      '@types/tern': 0.23.4
+    dev: true
+
   /@types/d3-color/2.0.3:
     resolution: {integrity: sha512-+0EtEjBfKEDtH9Rk3u3kLOUXM5F+iZK+WvASPb0MhIZl8J8NUvGeZRwKCXl+P3HkYx5TdU4YtcibpqHkSR9n7w==}
     dev: true
@@ -3475,6 +3483,10 @@ packages:
 
   /@types/d3-time/2.1.1:
     resolution: {integrity: sha512-9MVYlmIgmRR31C5b4FVSWtuMmBHh2mOWQYfl7XAYOa8dsnb7iEmUmRSWSFgXFtkjxO65d7hTUHQC+RhR/9IWFg==}
+    dev: true
+
+  /@types/estree/1.0.0:
+    resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
     dev: true
 
   /@types/graceful-fs/4.1.5:
@@ -3584,6 +3596,12 @@ packages:
     resolution: {integrity: sha512-+dyGs2n2o6QStsexh87NeaRmXYnKOnEe7iOEkcYOwKwI5a1gFL0+Mt/hZKi+4KD1qDMkLkGb0lpDrffb/vSkDQ==}
     dependencies:
       csstype: 3.1.1
+    dev: true
+
+  /@types/tern/0.23.4:
+    resolution: {integrity: sha512-JAUw1iXGO1qaWwEOzxTKJZ/5JxVeON9kvGZ/osgZaJImBnyjyn0cjovPsf6FNLmyGY8Vw9DoXZCMlfMkMwHRWg==}
+    dependencies:
+      '@types/estree': 1.0.0
     dev: true
 
   /@types/yargs-parser/21.0.0:
@@ -8856,7 +8874,7 @@ packages:
     resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
     hasBin: true
     dependencies:
-      glob: 7.2.0
+      glob: 7.2.3
     dev: true
 
   /rimraf/3.0.2:
