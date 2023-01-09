@@ -282,3 +282,22 @@ button.graphiql-execute-button {
 .CodeMirror-gutter-filler.CodeMirror-gutter-filler {
   background-color: transparent;
 }
+
+.CodeMirror-hint-information-header {
+  flex-wrap: wrap;
+  column-gap: 8px;
+}
+.CodeMirror-hint-information-type-name-pill {
+  margin-left: 0;
+}
+
+.CodeMirror-hints {
+  width: max-content;
+}
+.CodeMirror-hint-information-description {
+  display: flex !important;
+}
+.CodeMirror-hint-information-description > p {
+  width: 190px;
+  flex-grow: 1;
+}
