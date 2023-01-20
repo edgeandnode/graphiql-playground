@@ -1,6 +1,6 @@
 {
   "name": "@edgeandnode/graphiql-playground",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "type": "commonjs",
   "main": "./dist/index.cjs",
   "module": "./dist/index.mjs",
@@ -37,13 +37,13 @@
   },
   "dependencies": {
     "@graphiql/plugin-explorer": "0.1.12",
-    "@graphiql/react": "0.15.0",
     "@graphiql/toolkit": "0.8.0"
   },
   "devDependencies": {
     "@edgeandnode/components": "^24.4.2",
     "@edgeandnode/eslint-config": "^1.1.0",
     "@emotion/react": ">=11",
+    "@graphiql/react": "0.15.0",
     "@jest/types": "^29.3.1",
     "@types/codemirror": "^5.60.6",
     "@types/jest": "^29.2.5",
@@ -82,6 +82,9 @@
         "react": "18",
         "react-dom": "18"
       }
+    },
+    "patchedDependencies": {
+      "@graphiql/react@0.15.0": "patches/@graphiql__react@0.15.0.patch"
     }
   }
 }

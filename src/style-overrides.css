@@ -310,3 +310,7 @@ button.graphiql-execute-button {
   width: 190px;
   flex-grow: 1;
 }
+
+.graphiql-doc-explorer .graphiql-markdown-description br {
+  display: none;
+}
