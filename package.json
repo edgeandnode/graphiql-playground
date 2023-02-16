@@ -41,6 +41,7 @@
     "@graphiql/toolkit": "0.8.0"
   },
   "devDependencies": {
+    "graphql": "16.6.0",
     "@edgeandnode/components": "^24.4.2",
     "@edgeandnode/eslint-config": "^1.1.0",
     "@emotion/react": ">=11",

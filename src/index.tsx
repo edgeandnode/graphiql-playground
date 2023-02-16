@@ -1,7 +1,13 @@
 import { useExplorerPlugin } from '@graphiql/plugin-explorer'
 import { GraphiQLProvider } from '@graphiql/react'
-import { type Storage as GraphiQLStorage, CreateFetcherOptions, createGraphiQLFetcher } from '@graphiql/toolkit'
-import { ReactNode, useEffect, useState } from 'react'
+import {
+  type Storage as GraphiQLStorage,
+  CreateFetcherOptions,
+  createGraphiQLFetcher,
+  Fetcher,
+} from '@graphiql/toolkit'
+import { GraphQLError, GraphQLSchema, parse, validate } from 'graphql'
+import { ReactNode, useEffect, useMemo, useState } from 'react'
 
 import { SavedQuery } from './SavedQueriesToolbar/types'
 import { GraphiQLInterface, GraphiQLToolbar } from './GraphiQLInterface'
@@ -42,6 +48,38 @@ export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
   /** slot for GraphProtocolGraphiQL.SavedQueriesToolbar */
   header?: ReactNode
   className?: string
+  graphqlValidations?: boolean
+}
+
+function extendFetcherWithValidations(schema: GraphQLSchema | null, fetcher: Fetcher): Fetcher {
+  return (...[params, opts]: Parameters<Fetcher>): ReturnType<Fetcher> => {
+    if (params.operationName === 'IntrospectionQuery' || schema === null) {
+      return fetcher(params, opts)
+    }
+
+    try {
+      const documentNode = parse(params.query)
+      const validationErrors = validate(schema, documentNode)
+
+      if (validationErrors.length > 0) {
+        return {
+          data: null,
+          extensions: {
+            warning:
+              'The Graph will soon start returning validation errors for GraphQL queries. Please fix the errors in your queries. For more information: LINK_HERE',
+          },
+          errors: validationErrors,
+        }
+      }
+
+      return fetcher(params, opts)
+    } catch (e) {
+      return {
+        data: null,
+        errors: [e as GraphQLError],
+      }
+    }
+  }
 }
 
 export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
@@ -52,8 +90,14 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   queries,
   defaultQuery = '',
   className,
+  graphqlValidations = true,
 }: GraphProtocolGraphiQLProps<TQuery>) {
-  const [fetcher] = useState(() => createGraphiQLFetcher(fetcherOptions))
+  const [schema, setSchema] = useState<GraphQLSchema | null>(null)
+  const fetcher = useMemo(() => {
+    const rawFetcher = createGraphiQLFetcher(fetcherOptions)
+
+    return graphqlValidations ? extendFetcherWithValidations(schema, rawFetcher) : rawFetcher
+  }, [fetcherOptions, graphqlValidations, schema])
   const currentSavedQuery = queries.find((query) => currentQueryId && query.id.toString() === currentQueryId.toString())
 
   const [querySource, setQuerySource] = useState(currentSavedQuery?.query || defaultQuery)
@@ -72,7 +116,13 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   })
 
   return (
-    <GraphiQLProvider fetcher={fetcher} query={querySource} storage={storage} plugins={[explorerPlugin]}>
+    <GraphiQLProvider
+      fetcher={fetcher}
+      query={querySource}
+      storage={storage}
+      plugins={[explorerPlugin]}
+      onSchemaChange={setSchema}
+    >
       <SavedQueriesContextProvider<TQuery>
         value={{
           currentQueryId,
