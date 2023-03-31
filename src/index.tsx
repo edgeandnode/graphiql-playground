@@ -66,7 +66,7 @@ function extendFetcherWithValidations(schema: GraphQLSchema | null, fetcher: Fet
           data: null,
           extensions: {
             warning:
-              'The Graph will soon start returning validation errors for GraphQL queries. Please fix the errors in your queries. For more information: LINK_HERE',
+              'The Graph will soon start returning validation errors for GraphQL queries. Please fix the errors in your queries. For more information: https://thegraph.com/docs/en/release-notes/graphql-validations-migration-guide',
           },
           errors: validationErrors,
         }
