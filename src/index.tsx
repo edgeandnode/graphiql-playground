@@ -51,9 +51,9 @@ export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
   graphqlValidations?: boolean
 }
 
-function extendFetcherWithValidations(schema: GraphQLSchema | null, fetcher: Fetcher): Fetcher {
+function extendFetcherWithValidations(schema: GraphQLSchema | undefined, fetcher: Fetcher): Fetcher {
   return (...[params, opts]: Parameters<Fetcher>): ReturnType<Fetcher> => {
-    if (params.operationName === 'IntrospectionQuery' || schema === null) {
+    if (params.operationName === 'IntrospectionQuery' || schema === undefined) {
       return fetcher(params, opts)
     }
 
@@ -92,7 +92,10 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   className,
   graphqlValidations = true,
 }: GraphProtocolGraphiQLProps<TQuery>) {
-  const [schema, setSchema] = useState<GraphQLSchema | null>(null)
+  const [schema, setSchema] = useState<GraphQLSchema | undefined>(
+    // `undefined` will trigger introspection for the schema when given to `GraphiQLProvider`
+    undefined,
+  )
   const fetcher = useMemo(() => {
     const rawFetcher = createGraphiQLFetcher(fetcherOptions)
 
@@ -121,13 +124,8 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
       query={querySource}
       storage={storage}
       plugins={[explorerPlugin]}
-      onSchemaChange={(newSchema) => {
-        // GraphiQLProvider calls onSchema every time `fetcher` changes,
-        // and our fetcher changes every time `schema` changes,
-        // because it depends on `schema` for validations.
-        if (!schema) setSchema(newSchema)
-        console.log('schema change', [schema, newSchema])
-      }}
+      schema={schema}
+      onSchemaChange={setSchema}
     >
       <SavedQueriesContextProvider<TQuery>
         value={{
