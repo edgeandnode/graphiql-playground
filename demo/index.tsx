@@ -46,6 +46,8 @@ const initialQueries = [
   ...x,
 }))
 
+const fetcherOptions = { url }
+
 function Demo() {
   const [currentQueryId, setCurrentQueryId] = useState<SavedQuery['id'] | null>(initialQueries[0].id)
   const [savedQueries, setSavedQueries] = useState<SavedQuery[]>(initialQueries)
@@ -54,7 +56,7 @@ function Demo() {
   return (
     <>
       <GraphProtocolGraphiQL
-        fetcher={{ url }}
+        fetcher={fetcherOptions}
         queries={savedQueries}
         currentQueryId={currentQueryId}
         header={

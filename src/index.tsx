@@ -98,8 +98,8 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
 
     return graphqlValidations ? extendFetcherWithValidations(schema, rawFetcher) : rawFetcher
   }, [fetcherOptions, graphqlValidations, schema])
-  const currentSavedQuery = queries.find((query) => currentQueryId && query.id.toString() === currentQueryId.toString())
 
+  const currentSavedQuery = queries.find((query) => currentQueryId && query.id.toString() === currentQueryId.toString())
   const [querySource, setQuerySource] = useState(currentSavedQuery?.query || defaultQuery)
 
   // Whenever currentQueryId changes, we update the text in CodeMirror.
@@ -112,7 +112,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   const explorerPlugin = useExplorerPlugin({
     query: querySource,
     onEdit: setQuerySource,
-    storage,
+    showAttribution: false,
   })
 
   return (
@@ -121,7 +121,13 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
       query={querySource}
       storage={storage}
       plugins={[explorerPlugin]}
-      onSchemaChange={setSchema}
+      onSchemaChange={(newSchema) => {
+        // GraphiQLProvider calls onSchema every time `fetcher` changes,
+        // and our fetcher changes every time `schema` changes,
+        // because it depends on `schema` for validations.
+        if (!schema) setSchema(newSchema)
+        console.log('schema change', [schema, newSchema])
+      }}
     >
       <SavedQueriesContextProvider<TQuery>
         value={{
