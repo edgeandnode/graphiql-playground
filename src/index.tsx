@@ -96,6 +96,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
     // `undefined` will trigger introspection for the schema when given to `GraphiQLProvider`
     undefined,
   )
+
   const fetcher = useMemo(() => {
     const rawFetcher = createGraphiQLFetcher(fetcherOptions)
 
