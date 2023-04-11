@@ -94,7 +94,7 @@ describe(reducer, () => {
     const replaceState = jest.fn()
     globalThis.window.history = { replaceState } as any
 
-    let state = reducer(initialState, { type: 'init', payload: [...queries, { id: 123, query: '', name: '' }] })
+    const state = reducer(initialState, { type: 'init', payload: [...queries, { id: 123, query: '', name: '' }] })
     expect(state.currentId).toBe(123)
 
     await new Promise((resolve) => setTimeout(resolve, 50))
