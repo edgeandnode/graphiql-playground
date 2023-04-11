@@ -33,5 +33,6 @@ jobs:
         uses: pkg-size/action@v1
         with:
           build-command: pnpm build
+          display-size: gzip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
