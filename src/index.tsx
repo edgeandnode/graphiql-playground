@@ -1,12 +1,7 @@
 import { useExplorerPlugin } from '@graphiql/plugin-explorer'
 import { GraphiQLProvider } from '@graphiql/react'
-import {
-  type Storage as GraphiQLStorage,
-  CreateFetcherOptions,
-  createGraphiQLFetcher,
-  Fetcher,
-} from '@graphiql/toolkit'
-import { GraphQLError, GraphQLSchema, parse, validate } from 'graphql'
+import { type Storage as GraphiQLStorage, CreateFetcherOptions, createGraphiQLFetcher } from '@graphiql/toolkit'
+import { GraphQLSchema } from 'graphql'
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 
 import { SavedQuery } from './SavedQueriesToolbar/types'
@@ -17,6 +12,7 @@ import {
   SavedQueriesToolbar,
   ToastMessage as _ToastMessage,
 } from './SavedQueriesToolbar'
+import { extendFetcherWithValidations } from './validations'
 
 import '@graphiql/react/font/fira-code.css'
 import '@graphiql/plugin-explorer/dist/style.css'
@@ -49,37 +45,6 @@ export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
   header?: ReactNode
   className?: string
   graphqlValidations?: boolean
-}
-
-function extendFetcherWithValidations(schema: GraphQLSchema | undefined, fetcher: Fetcher): Fetcher {
-  return (...[params, opts]: Parameters<Fetcher>): ReturnType<Fetcher> => {
-    if (params.operationName === 'IntrospectionQuery' || schema === undefined) {
-      return fetcher(params, opts)
-    }
-
-    try {
-      const documentNode = parse(params.query)
-      const validationErrors = validate(schema, documentNode)
-
-      if (validationErrors.length > 0) {
-        return {
-          data: null,
-          extensions: {
-            warning:
-              'The Graph will soon start returning validation errors for GraphQL queries. Please fix the errors in your queries. For more information: https://thegraph.com/docs/en/release-notes/graphql-validations-migration-guide',
-          },
-          errors: validationErrors,
-        }
-      }
-
-      return fetcher(params, opts)
-    } catch (e) {
-      return {
-        data: null,
-        errors: [e as GraphQLError],
-      }
-    }
-  }
 }
 
 export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
