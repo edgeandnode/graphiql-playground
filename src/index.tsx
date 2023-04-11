@@ -51,9 +51,9 @@ export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
   graphqlValidations?: boolean
 }
 
-function extendFetcherWithValidations(schema: GraphQLSchema | null, fetcher: Fetcher): Fetcher {
+function extendFetcherWithValidations(schema: GraphQLSchema | undefined, fetcher: Fetcher): Fetcher {
   return (...[params, opts]: Parameters<Fetcher>): ReturnType<Fetcher> => {
-    if (params.operationName === 'IntrospectionQuery' || schema === null) {
+    if (params.operationName === 'IntrospectionQuery' || schema === undefined) {
       return fetcher(params, opts)
     }
 
@@ -92,14 +92,18 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   className,
   graphqlValidations = true,
 }: GraphProtocolGraphiQLProps<TQuery>) {
-  const [schema, setSchema] = useState<GraphQLSchema | null>(null)
+  const [schema, setSchema] = useState<GraphQLSchema | undefined>(
+    // `undefined` will trigger introspection for the schema when given to `GraphiQLProvider`
+    undefined,
+  )
+
   const fetcher = useMemo(() => {
     const rawFetcher = createGraphiQLFetcher(fetcherOptions)
 
     return graphqlValidations ? extendFetcherWithValidations(schema, rawFetcher) : rawFetcher
   }, [fetcherOptions, graphqlValidations, schema])
-  const currentSavedQuery = queries.find((query) => currentQueryId && query.id.toString() === currentQueryId.toString())
 
+  const currentSavedQuery = queries.find((query) => currentQueryId && query.id.toString() === currentQueryId.toString())
   const [querySource, setQuerySource] = useState(currentSavedQuery?.query || defaultQuery)
 
   // Whenever currentQueryId changes, we update the text in CodeMirror.
@@ -112,7 +116,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   const explorerPlugin = useExplorerPlugin({
     query: querySource,
     onEdit: setQuerySource,
-    storage,
+    showAttribution: false,
   })
 
   return (
@@ -121,6 +125,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
       query={querySource}
       storage={storage}
       plugins={[explorerPlugin]}
+      schema={schema}
       onSchemaChange={setSchema}
     >
       <SavedQueriesContextProvider<TQuery>

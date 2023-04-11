@@ -1,0 +1,38 @@
+name: Checks and build analysis
+
+on:
+  pull_request:
+
+jobs:
+  pkg-size-report:
+    name: Package Size Report
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the repo
+        uses: actions/checkout@v3
+
+      - name: Set up pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 8.2.0
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Typecheck
+        run: pnpm typecheck
+
+      - name: Lint
+        run: pnpm lint
+
+      - name: Test
+        run: pnpm test
+
+      - name: Package size report
+        uses: pkg-size/action@v1
+        with:
+          build-command: pnpm build
+          display-size: gzip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
