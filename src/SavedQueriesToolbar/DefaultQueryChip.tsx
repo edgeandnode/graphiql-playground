@@ -1,6 +1,6 @@
 /** @jsxImportSource theme-ui */
 
-import { BorderRadius, Chip, FontSize, FontWeight, Spacing } from '@edgeandnode/components'
+import { BorderRadius, Chip, FontSize, FontWeight, Spacing } from '@edgeandnode/gds'
 
 export interface DefaultQueryChipProps {
   visible: boolean

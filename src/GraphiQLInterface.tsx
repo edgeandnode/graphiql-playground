@@ -49,7 +49,7 @@ import {
 } from '@graphiql/react'
 import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react'
 
-import { Spacing } from '@edgeandnode/components'
+import { Spacing } from '@edgeandnode/gds'
 
 export type GraphiQLToolbarConfig = {
   /**

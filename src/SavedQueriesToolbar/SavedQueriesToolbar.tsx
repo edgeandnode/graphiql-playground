@@ -3,7 +3,7 @@
 import { useEditorContext, useQueryEditor } from '@graphiql/react'
 import { useDebugValue, useEffect, useRef, useState } from 'react'
 
-import { Flex, Spacing } from '@edgeandnode/components'
+import { Flex, Spacing } from '@edgeandnode/gds'
 
 import { ActionsMenu } from './ActionsMenu'
 import { SnackbarMessageType, ToastMessage, toToastMessage } from './messages'
