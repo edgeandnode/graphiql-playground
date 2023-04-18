@@ -8,7 +8,7 @@ import {
   NewGDSDropdown as Dropdown,
   NewGDSDropdownMenuItemProps,
   Spacing,
-} from '@edgeandnode/components'
+} from '@edgeandnode/gds'
 
 import { smallDropdownMenuItemStyle } from './styles'
 

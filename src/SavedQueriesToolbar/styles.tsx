@@ -3,7 +3,7 @@
 
 import type { ThemeUICSSObject } from 'theme-ui'
 
-import { FontSize, Spacing } from '@edgeandnode/components'
+import { FontSize, Spacing } from '@edgeandnode/gds'
 
 export const smallDropdownMenuItemStyle: ThemeUICSSObject = {
   '> div': { fontSize: FontSize['14px'] },

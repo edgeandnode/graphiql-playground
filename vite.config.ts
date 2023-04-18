@@ -11,7 +11,7 @@ const libraryBuildOptions: BuildOptions = {
     fileName: (format) => `index.${format === 'cjs' ? 'cjs' : 'mjs'}`,
   },
   rollupOptions: {
-    external: ['react/jsx-runtime', 'theme-ui/jsx-runtime', '@emotion/react/jsx-runtime'],
+    external: ['react/jsx-runtime', 'theme-ui/jsx-runtime', '@emotion/react/jsx-runtime', 'next/router', 'next'],
     plugins: [autoExternal()],
   },
 }
@@ -28,6 +28,11 @@ export default defineConfig({
     logOverride: {
       // https://github.com/vitejs/vite/issues/8644
       'this-is-undefined-in-esm': 'silent',
+    },
+  },
+  resolve: {
+    alias: {
+      'next/router': 'wouter',
     },
   },
 })

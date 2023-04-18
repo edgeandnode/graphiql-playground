@@ -8,7 +8,7 @@ import {
   NewGDSDropdown as Dropdown,
   NewGDSInput as Input,
   Spacing,
-} from '@edgeandnode/components'
+} from '@edgeandnode/gds'
 
 import { DefaultQueryChip } from './DefaultQueryChip'
 import { smallDropdownMenuItemStyle } from './styles'

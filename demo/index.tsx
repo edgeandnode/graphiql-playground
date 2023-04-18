@@ -1,7 +1,8 @@
 import React, { StrictMode, useState } from 'react'
 import { createRoot } from 'react-dom/client'
+import { Link, Route } from 'wouter'
 
-import { ThemeProvider, Toast, ToastProvider, ToastViewport } from '@edgeandnode/components'
+import { GDSProvider, Toast, ToastProvider, ToastViewport } from '@edgeandnode/gds'
 
 import { GraphProtocolGraphiQL } from '../src'
 import { SavedQuery } from '../src/SavedQueriesToolbar/types'
@@ -113,8 +114,10 @@ function Demo() {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ThemeProvider>
-      <Demo />
-    </ThemeProvider>
+    <Route path="/">
+      <GDSProvider clientLink={Link}>
+        <Demo />
+      </GDSProvider>
+    </Route>
   </StrictMode>,
 )
