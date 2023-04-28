@@ -1,9 +1,10 @@
 /** @jsxImportSource theme-ui */
 
-import { useEditorContext, useQueryEditor } from '@graphiql/react'
-import { useDebugValue, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { Flex, Spacing } from '@edgeandnode/gds'
+
+import { useQuerySource } from '../useQuerySource'
 
 import { ActionsMenu } from './ActionsMenu'
 import { SnackbarMessageType, ToastMessage, toToastMessage } from './messages'
@@ -45,7 +46,7 @@ export interface SavedQueriesToolbarProps<TQuery extends SavedQuery>
 export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueriesToolbarProps<TQuery>) {
   const { currentQueryId, queries, setQuerySource } = useSavedQueriesContext<TQuery>()
 
-  const querySourceDraft = useQuerySourceDraft()
+  const querySourceDraft = useQuerySource()
 
   const findSavedQuery = (queryId: TQuery['id'] | null) => {
     // When we're editing a new query, the id is null.
@@ -175,17 +176,4 @@ export function SavedQueriesToolbar<TQuery extends SavedQuery>(props: SavedQueri
       )}
     </Flex>
   )
-}
-
-function useQuerySourceDraft() {
-  const { queryEditor } = useEditorContext()!
-  const [querySourceDraft, setQuerySourceDraft] = useState(queryEditor?.getValue() || '')
-
-  useEffect(() => {
-    if (queryEditor) {
-      queryEditor.on('change', (editor) => setQuerySourceDraft(editor.getValue()))
-    }
-  }, [queryEditor])
-
-  return querySourceDraft
 }
