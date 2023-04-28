@@ -8,6 +8,8 @@ If you're looking for the GraphiQL repository, go to https://github.com/graphql/
 
 _Configuration, styling and extensions for the GraphiQL Playground component embedded in The Graph Protocol applications_
 
+<img width="873" alt="image" src="https://user-images.githubusercontent.com/15332326/235132075-ae76cb33-b5f4-4127-8c8a-154d75095dd8.png">
+
 ## Usage
 
 Install `@edgeandnode/graphiql-playground` with your favorite package manager.
