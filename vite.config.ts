@@ -12,7 +12,7 @@ const libraryBuildOptions: BuildOptions = {
   },
   rollupOptions: {
     external: ['react/jsx-runtime', 'theme-ui/jsx-runtime', '@emotion/react/jsx-runtime', 'next/router', 'next'],
-    plugins: [autoExternal()],
+    plugins: [autoExternal() as any],
   },
 }
 

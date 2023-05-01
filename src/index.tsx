@@ -1,9 +1,9 @@
-import { useExplorerPlugin } from '@graphiql/plugin-explorer'
 import { GraphiQLProvider } from '@graphiql/react'
-import { type Storage as GraphiQLStorage, CreateFetcherOptions, createGraphiQLFetcher } from '@graphiql/toolkit'
+import { CreateFetcherOptions, createGraphiQLFetcher, type Storage as GraphiQLStorage } from '@graphiql/toolkit'
 import { GraphQLSchema } from 'graphql'
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 
+import { useExplorerPlugin } from './plugins/explorer/useExplorerPlugin'
 import { SavedQuery } from './SavedQueriesToolbar/types'
 import { GraphiQLInterface, GraphiQLToolbar } from './GraphiQLInterface'
 import {
@@ -15,7 +15,6 @@ import {
 import { extendFetcherWithValidations } from './validations'
 
 import '@graphiql/react/font/fira-code.css'
-import '@graphiql/plugin-explorer/dist/style.css'
 //
 // TODO: Should those two be merged?
 import './graphiql-styles.css'
@@ -78,11 +77,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentQueryId])
 
-  const explorerPlugin = useExplorerPlugin({
-    query: querySource,
-    onEdit: setQuerySource,
-    showAttribution: false,
-  })
+  const explorerPlugin = useExplorerPlugin({ showAttribution: false })
 
   return (
     <GraphiQLProvider
