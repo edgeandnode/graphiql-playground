@@ -54,9 +54,7 @@ declare module 'graphiql-explorer' {
     externalFragments?: FragmentDefinitionNode[]
   }
 
-  const GraphiQLExplorer: ComponentType<GraphiQLExplorerProps> & {
+  export const Explorer: ComponentType<GraphiQLExplorerProps> & {
     defaultValue: (arg: GraphQLLeafType) => ValueNode
   }
-
-  export default GraphiQLExplorer
 }

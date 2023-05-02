@@ -1,10 +1,10 @@
 import { GraphiQLPlugin, useEditorContext, useExecutionContext, useSchemaContext } from '@graphiql/react'
-import GraphiQLExplorer, { GraphiQLExplorerProps } from 'graphiql-explorer'
+import { Explorer, type GraphiQLExplorerProps } from 'graphiql-explorer'
 import { useRef } from 'react'
 
 import { useQuerySource } from '../../useQuerySource.js'
 
-import './graphiql-explorer.d.ts'
+import './graphiql-explorer'
 import './index.css'
 
 const arrowOpen = (
@@ -86,7 +86,7 @@ function ExplorerPlugin(props: ExplorerPluginProps) {
   const querySource = useQuerySource()
 
   return (
-    <GraphiQLExplorer
+    <Explorer
       query={querySource}
       onEdit={(query) => {
         if (queryEditor) queryEditor.setValue(query)
