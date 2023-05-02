@@ -33,7 +33,7 @@
     "lint": "eslint src/**/*.{ts,tsx}",
     "lint:fix": "eslint src/**/*.{ts,tsx}",
     "format": "prettier --write ./src/**/*.{ts,tsx}",
-    "ci": "pnpm typecheck && pnpm lint",
+    "check": "pnpm typecheck && pnpm lint",
     "test": "jest"
   },
   "dependencies": {
