@@ -1,14 +1,6 @@
-/** @jsxImportSource theme-ui */
-
 import { ReactNode } from 'react'
 
-import {
-  Icon,
-  NewGDSButton as Button,
-  NewGDSDropdown as Dropdown,
-  NewGDSDropdownMenuItemProps,
-  Spacing,
-} from '@edgeandnode/gds'
+import { Button, Dropdown, DropdownMenuItemProps, Icon, Spacing } from '@edgeandnode/gds'
 
 import { smallDropdownMenuItemStyle } from './styles'
 
@@ -34,6 +26,6 @@ export function ActionsMenu({ children }: ActionsMenuProps) {
   )
 }
 
-ActionsMenu.Item = (props: NewGDSDropdownMenuItemProps) => {
+ActionsMenu.Item = (props: DropdownMenuItemProps) => {
   return <Dropdown.Menu.Item {...props} sx={smallDropdownMenuItemStyle} />
 }

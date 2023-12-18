@@ -1,10 +1,9 @@
-/** @jsxImportSource theme-ui */
-
 import { BorderRadius, Chip, FontSize, FontWeight, Spacing } from '@edgeandnode/gds'
 
 export interface DefaultQueryChipProps {
   visible: boolean
 }
+
 export function DefaultQueryChip({ visible }: DefaultQueryChipProps) {
   return (
     /* We want to preserve the space for the chip even when it's not visible,

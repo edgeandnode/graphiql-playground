@@ -1,6 +1,4 @@
-/** @jsxImportSource theme-ui */
-
-import { Flex, NewGDSButton as Button, Spacing, Tooltip } from '@edgeandnode/gds'
+import { Button, Flex, Spacing, Tooltip } from '@edgeandnode/gds'
 
 import { SnackbarMessageType } from './messages'
 import { SavedQuery } from './types'

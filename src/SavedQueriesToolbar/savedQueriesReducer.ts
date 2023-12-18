@@ -6,6 +6,7 @@ interface SavedQueriesState<TQuery extends SavedQuery> {
   currentId: TQuery['id'] | null
   initialized: boolean
 }
+
 type SavedQueriesAction<TQuery extends SavedQuery> =
   | { type: 'init'; payload: TQuery[] }
   | { type: 'select'; payload: TQuery['id'] | null }

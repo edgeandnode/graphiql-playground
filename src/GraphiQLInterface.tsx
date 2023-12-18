@@ -198,12 +198,11 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
     }
   }
 
-  const modifier =
-    window.navigator.platform.toLowerCase().indexOf('mac') === 0 ? (
-      <code className="graphiql-key">Cmd</code>
-    ) : (
-      <code className="graphiql-key">Ctrl</code>
-    )
+  const modifier = window.navigator.platform.toLowerCase().startsWith('mac') ? (
+    <code className="graphiql-key">Cmd</code>
+  ) : (
+    <code className="graphiql-key">Ctrl</code>
+  )
 
   const editorToolsEnabled = isVariablesEditorEnabled || isHeadersEditorEnabled
 
@@ -366,7 +365,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
         <div className="graphiql-sidebar">
           <div>
             {pluginContext
-              ? pluginContext?.plugins.map((plugin) => {
+              ? pluginContext.plugins.map((plugin) => {
                   const isVisible = plugin === pluginContext.visiblePlugin
                   const label = `${isVisible ? 'Hide' : 'Show'} ${plugin.title}`
                   const Icon = plugin.icon
@@ -416,7 +415,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
           </div>
         </div>
       </div>
-      <Dialog isOpen={showDialog === 'short-keys'} onDismiss={() => setShowDialog(null)}>
+      <Dialog placeholder="Short Keys" isOpen={showDialog === 'short-keys'} onDismiss={() => setShowDialog(null)}>
         <div className="graphiql-dialog-header">
           <div className="graphiql-dialog-title">Short Keys</div>
           <Dialog.Close onClick={() => setShowDialog(null)} />
@@ -550,6 +549,7 @@ function _UnusedSettingsDialog({
 
   return (
     <Dialog
+      placeholder="Settings"
       isOpen={showDialog === 'settings'}
       onDismiss={() => {
         setShowDialog(null)
@@ -597,7 +597,7 @@ function _UnusedSettingsDialog({
               disabled={clearStorageStatus === 'success'}
               onClick={() => {
                 try {
-                  storageContext?.clear()
+                  storageContext.clear()
                   setClearStorageStatus('success')
                 } catch {
                   setClearStorageStatus('error')
@@ -607,8 +607,8 @@ function _UnusedSettingsDialog({
               {clearStorageStatus === 'success'
                 ? 'Cleared data'
                 : clearStorageStatus === 'error'
-                ? 'Failed'
-                : 'Clear data'}
+                  ? 'Failed'
+                  : 'Clear data'}
             </Button>
           </div>
         </div>
