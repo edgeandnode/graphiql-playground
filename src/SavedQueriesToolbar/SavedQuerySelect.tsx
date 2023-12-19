@@ -1,14 +1,4 @@
-/** @jsxImportSource theme-ui */
-
-import {
-  BorderRadius,
-  Flex,
-  Icon,
-  NewGDSButton as Button,
-  NewGDSDropdown as Dropdown,
-  NewGDSInput as Input,
-  Spacing,
-} from '@edgeandnode/gds'
+import { BorderRadius, Button, Dropdown, Flex, Icon, Input, Spacing } from '@edgeandnode/gds'
 
 import { DefaultQueryChip } from './DefaultQueryChip'
 import { smallDropdownMenuItemStyle } from './styles'

@@ -1,5 +1,3 @@
-/** @jsxImportSource theme-ui */
-
 import { useEffect, useRef, useState } from 'react'
 
 import { Flex, Spacing } from '@edgeandnode/gds'

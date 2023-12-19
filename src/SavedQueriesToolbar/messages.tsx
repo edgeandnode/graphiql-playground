@@ -1,4 +1,3 @@
-/** @jsxImportSource theme-ui */
 import { Text, ToastProps } from '@edgeandnode/gds'
 
 import { ValidationError } from './validation'
