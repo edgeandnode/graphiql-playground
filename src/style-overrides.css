@@ -200,8 +200,8 @@ button.graphiql-execute-button {
     content: '';
     position: absolute;
     inset: 0;
-    border-radius: 999px;
-    background: linear-gradient(315deg, var(--theme-ui-colors-Purple), var(--theme-ui-colors-Purple48));
+    border-radius: 4px;
+    background: var(--theme-ui-colors-Purple);
   }
 }
 
