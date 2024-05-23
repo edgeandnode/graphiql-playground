@@ -28,7 +28,6 @@ import {
   ResponseEditor,
   Spinner,
   ToolbarButton,
-  Tooltip,
   UnStyledButton,
   useCopyQuery,
   useDragResize,
@@ -49,7 +48,7 @@ import {
 } from '@graphiql/react'
 import React, { ComponentType, PropsWithChildren, ReactNode, useState } from 'react'
 
-import { Spacing } from '@edgeandnode/gds'
+import { Spacing, Tooltip } from '@edgeandnode/gds'
 
 export type GraphiQLToolbarConfig = {
   /**
@@ -281,7 +280,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                           ) : null}
                         </div>
                         <Tooltip
-                          label={
+                          content={
                             editorToolsResize.hiddenElement === 'second' ? 'Show editor tools' : 'Hide editor tools'
                           }
                         >
@@ -367,10 +366,10 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
             {pluginContext
               ? pluginContext.plugins.map((plugin) => {
                   const isVisible = plugin === pluginContext.visiblePlugin
-                  const label = `${isVisible ? 'Hide' : 'Show'} ${plugin.title}`
+                  const content = `${isVisible ? 'Hide' : 'Show'} ${plugin.title}`
                   const Icon = plugin.icon
                   return (
-                    <Tooltip key={plugin.title} label={label}>
+                    <Tooltip key={plugin.title} content={content}>
                       <UnStyledButton
                         type="button"
                         className={isVisible ? 'active' : ''}
@@ -383,7 +382,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                             pluginResize.setHiddenElement(null)
                           }
                         }}
-                        aria-label={label}
+                        aria-label={content}
                       >
                         <Icon aria-hidden="true" />
                       </UnStyledButton>
@@ -393,7 +392,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
               : null}
           </div>
           <div>
-            <Tooltip label="Re-fetch GraphQL schema">
+            <Tooltip content="Re-fetch GraphQL schema">
               <UnStyledButton
                 type="button"
                 disabled={schemaContext.isFetching}
@@ -403,7 +402,7 @@ export function GraphiQLInterface(props: GraphiQLInterfaceProps) {
                 <ReloadIcon className={schemaContext.isFetching ? 'graphiql-spin' : ''} aria-hidden="true" />
               </UnStyledButton>
             </Tooltip>
-            <Tooltip label="Open short keys dialog">
+            <Tooltip content="Open short keys dialog">
               <UnStyledButton
                 type="button"
                 onClick={() => setShowDialog('short-keys')}
