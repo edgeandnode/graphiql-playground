@@ -136,6 +136,7 @@ button.graphiql-tab-button.graphiql-tab-button {
 
 .graphiql-container .graphiql-toolbar.graphiql-toolbar {
   margin-left: 0;
+  margin-right: 20px;
 }
 
 .graphiql-explorer-node select {
