@@ -46,10 +46,6 @@ reach-portal {
   border-bottom: 1px solid var(--theme-ui-colors-White8);
 }
 
-.graphiql-horizontal-drag-bar {
-  border-left: 1px solid var(--theme-ui-colors-White8);
-}
-
 .graphiql-doc-explorer-header.graphiql-doc-explorer-header {
   height: 48px;
   margin-top: -7px;
@@ -94,7 +90,7 @@ reach-portal {
 }
 
 .graphiql-container .graphiql-sidebar.graphiql-sidebar {
-  padding: 10px 2px 8px 4px;
+  padding: 10px 2px 8px 14px;
   overflow: visible;
 }
 
@@ -220,14 +216,6 @@ button.graphiql-execute-button {
   border-left: none;
 }
 
-.graphiql-sidebar.graphiql-sidebar {
-  border-left: 1px solid var(--theme-ui-colors-White8);
-}
-
-.graphiql-session > div {
-  border-top: 1px solid var(--theme-ui-colors-White8);
-}
-
 .graphiql-session-header {
   padding-top: 8px;
   padding-bottom: 8px;
@@ -236,6 +224,11 @@ button.graphiql-execute-button {
 
 .CodeMirror-scroll {
   padding-top: 16px;
+  border-radius: 8px;
+}
+
+.graphiql-response .CodeMirror-scroll {
+  background: var(--White-8, rgba(255, 255, 255, 0.02));
 }
 
 .graphiql-query-editor.graphiql-query-editor {
