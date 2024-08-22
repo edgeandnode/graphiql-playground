@@ -1,6 +1,6 @@
 import { GraphiQLProvider } from '@graphiql/react'
 import { CreateFetcherOptions, createGraphiQLFetcher, type Storage as GraphiQLStorage } from '@graphiql/toolkit'
-import { GraphQLSchema } from 'graphql'
+import { DocumentNode, GraphQLSchema } from 'graphql'
 import { ReactNode, useEffect, useMemo, useState } from 'react'
 
 import { useExplorerPlugin } from './plugins/explorer/useExplorerPlugin'
@@ -44,6 +44,7 @@ export interface GraphProtocolGraphiQLProps<TQuery extends SavedQuery>
   header?: ReactNode
   className?: string
   graphqlValidations?: boolean
+  onEditQuery?: (value: string, documentAST?: DocumentNode) => void
 }
 
 export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
@@ -55,6 +56,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
   defaultQuery = '',
   className,
   graphqlValidations = true,
+  onEditQuery,
 }: GraphProtocolGraphiQLProps<TQuery>) {
   const [schema, setSchema] = useState<GraphQLSchema | undefined>(
     // `undefined` will trigger introspection for the schema when given to `GraphiQLProvider`
@@ -101,6 +103,7 @@ export function GraphProtocolGraphiQL<TQuery extends SavedQuery>({
           isVariablesEditorEnabled={false}
           header={header}
           className={className}
+          onEditQuery={onEditQuery}
         >
           {TOOLBAR_HIDDEN}
         </GraphiQLInterface>
